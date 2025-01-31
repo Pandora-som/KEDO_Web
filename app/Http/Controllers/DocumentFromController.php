@@ -10,5 +10,6 @@ class DocumentFromController extends Controller
     public function index(){
         $w = DocumentFrom::all();
         return view("mainsreen", compact("w"));
+        //dump($w);
     }
 }
