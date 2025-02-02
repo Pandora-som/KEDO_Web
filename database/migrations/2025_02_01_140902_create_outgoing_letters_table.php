@@ -36,6 +36,8 @@ return new class extends Migration
             $table->foreign('performer_id', 'outgoing_letter_performer_fk')->on('performers')->references('id');
 
             $table->unsignedBigInteger('incoming_number');
+
+            $table->softDeletes();
         });
     }
 

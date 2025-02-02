@@ -38,6 +38,8 @@ return new class extends Migration
             $table->unsignedBigInteger('status_id');
             $table->index('status_id', 'incoming_letter_status_idx');
             $table->foreign('status_id', 'incoming_letter_status_fk')->on('statuses')->references('id');
+
+            $table->softDeletes();
         });
     }
 
