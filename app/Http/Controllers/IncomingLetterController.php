@@ -19,8 +19,20 @@ class IncomingLetterController extends Controller
         return view('incoming_letter.create', compact(['document_froms', 'document_names', 'performers', 'statuses']));
     }
 
-    public function store(IncomingLetter $incomingLetter) {
-
-        redirect()->route('mainsreen');
+    public function store() {
+        $data = request()->validate([
+            'registration_date' => 'date',
+            'document_from_id' => 'integer',
+            'document_name_id' => 'integer',
+            'document_number' => 'integer',
+            'document_date' => 'date',
+            'document_subject' => 'string',
+            'resolution' => 'string',
+            'performer_id' => 'integer',
+            'deadline' => 'date',
+            'status_id' => 'integer'
+        ]);
+        IncomingLetter::create($data);
+        dd($data);
     }
 }
