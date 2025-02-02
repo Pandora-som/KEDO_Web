@@ -16,8 +16,91 @@
             <a href="#" class="link">Исходящие документы</a>
             <a href="#" class="link">Входящие документы</a>
         </nav>
-        <div class="circle"></div>
     </div>
+    <div class="circle">
+        <img src="img/User.svg" height="35px" width="35px" alt="user">
+    </div>
+    <h1>Реестр регистрации исходящих документов</h1>
+
+    <!--<div class="class-choice">
+    <input list="organisationName" type="text" name="choiser" placeholder="Классификация" class="choiser">
+    <datalist id="organisationName">
+        <option value="Все">
+        <option value="УрФУ">
+        <option value="МИНОБРНАУКИ">
+        <option value="НТИ(филиал)">
+        <option value="Сторонние">
+    </datalist>
+    </div>-->
+
+    <div class="func-block">
+        <input list="organisationName" type="text" name="choiser" placeholder="  Классификация" class="choiser">
+    <datalist id="organisationName">
+        <option value="Все">
+        <option value="УрФУ">
+        <option value="МИНОБРНАУКИ">
+        <option value="НТИ(филиал)">
+        <option value="Сторонние">
+    </datalist>
+        <p><img src="img/search.svg" height="35px" width="35px" alt="search"><input type="text" name="search" placeholder="              Поиск по параметру"></p>
+        <button class="filter-btn"><img src="img/filter.svg">фильтры</button>
+        <button class="create-btn"><img src="img/plus (1).svg">Создать</button>
+    </div>
+
+    <table class="table-info">
+        <tbody>
+          <tr>
+            <td class="title-table">Регистрационный номер</td>
+            <td class="title-table">Дата регистрации</td>
+            <td class="title-table">Кому адресован документ</td>
+            <td class="title-table">Наименование документа</td>
+            <td class="title-table">Тема документа</td>
+            <td class="title-table">Подписант</td>
+            <td class="title-table">Исполнитель</td>
+            <td class="title-table">Отметка об исполнении (на вх. №)</td>
+          </tr>
+          <tr>
+            <td>09v4j</td>
+            <td>r2fr5o</td>
+            <td>2miqt</td>
+            <td>y0d0xp</td>
+            <td>5anfd</td>
+            <td>2miqt</td>
+            <td>y0d0xp</td>
+            <td>5anfd<img src="img/edit-img.svg"><img src="img/delete-imf.svg"></td>
+          </tr>
+          <tr>
+            <td>09v4j</td>
+            <td>r2fr5o</td>
+            <td>2miqt</td>
+            <td>y0d0xp</td>
+            <td>5anfd</td>
+            <td>2miqt</td>
+            <td>y0d0xp</td>
+            <td>5anfd</td>
+          </tr>
+          <tr>
+            <td>09v4j</td>
+            <td>r2fr5o</td>
+            <td>2miqt</td>
+            <td>y0d0xp</td>
+            <td>5anfd</td>
+            <td>2miqt</td>
+            <td>y0d0xp</td>
+            <td>5anfd</td>
+          </tr>
+          <tr>
+            <td>09v4j</td>
+            <td>r2fr5o</td>
+            <td>2miqt</td>
+            <td>y0d0xp</td>
+            <td>5anfd</td>
+            <td>2miqt</td>
+            <td>y0d0xp</td>
+            <td>5anfd</td>
+          </tr>
+        </tbody>
+      </table>
 
 </body>
 </html>
