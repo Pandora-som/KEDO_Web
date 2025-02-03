@@ -44,7 +44,7 @@
     </datalist>
         <p><img src="img/search.svg" height="35px" width="35px" alt="search"><input type="text" name="search" placeholder="              Поиск по параметру"></p>
         <button class="filter-btn"><img src="img/filter.svg">фильтры</button>
-        <button class="create-btn"><img src="img/plus (1).svg">Создать</button>
+        <a class="create-btn" href="{{route('outgoing_letter.create')}}"><img src="img/plus (1).svg">Создать</a>
     </div>
 
     <table class="table-info">
@@ -59,46 +59,18 @@
             <td class="title-table">Исполнитель</td>
             <td class="title-table">Отметка об исполнении (на вх. №)</td>
           </tr>
-          <tr>
-            <td>09v4j</td>
-            <td>r2fr5o</td>
-            <td>2miqt</td>
-            <td>y0d0xp</td>
-            <td>5anfd</td>
-            <td>2miqt</td>
-            <td>y0d0xp</td>
-            <td>5anfd<img src="img/edit-img.svg"><img src="img/delete-imf.svg"></td>
-          </tr>
-          <tr>
-            <td>09v4j</td>
-            <td>r2fr5o</td>
-            <td>2miqt</td>
-            <td>y0d0xp</td>
-            <td>5anfd</td>
-            <td>2miqt</td>
-            <td>y0d0xp</td>
-            <td>5anfd</td>
-          </tr>
-          <tr>
-            <td>09v4j</td>
-            <td>r2fr5o</td>
-            <td>2miqt</td>
-            <td>y0d0xp</td>
-            <td>5anfd</td>
-            <td>2miqt</td>
-            <td>y0d0xp</td>
-            <td>5anfd</td>
-          </tr>
-          <tr>
-            <td>09v4j</td>
-            <td>r2fr5o</td>
-            <td>2miqt</td>
-            <td>y0d0xp</td>
-            <td>5anfd</td>
-            <td>2miqt</td>
-            <td>y0d0xp</td>
-            <td>5anfd</td>
-          </tr>
+          @foreach ($outgoingLetters as $outgoingLetter)
+            <tr>
+                <td>{{$outgoingLetter->id}}</td>
+                <td>{{$outgoingLetter->registarion_date}}</td>
+                <td>{{$outgoingLetter->destination_id}}</td>
+                <td>{{$outgoingLetter->document_name_id}}</td>
+                <td>{{$outgoingLetter->document_subject}}</td>
+                <td>{{$outgoingLetter->signer_id}}</td>
+                <td>{{$outgoingLetter->performer_id}}</td>
+                <td>{{$outgoingLetter->incoming_number}}</td>
+            </tr>
+          @endforeach
         </tbody>
       </table>
 
