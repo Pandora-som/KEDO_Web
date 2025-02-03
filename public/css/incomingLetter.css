@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+.incoming_letter_container {
+    width: 90%;
+    background-color: lightgray;
+    margin: 0 auto;
+}
+
+.incoming_letter_form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.incoming_letter_form input, .incoming_letter_form textarea, .incoming_letter_form select, .incoming_letter_form button {
+    width: 10%;
+}
