@@ -63,16 +63,25 @@
             <tr>
                 <td>{{$outgoingLetter->id}}</td>
                 <td>{{$outgoingLetter->registarion_date}}</td>
-                <td>{{$outgoingLetter->destination_id}}</td>
-                <td>{{$outgoingLetter->document_name_id}}</td>
+                <td>{{$outgoingLetter->destination->destination_name}}</td>
+                <td>{{$outgoingLetter->document_name->name}}</td>
                 <td>{{$outgoingLetter->document_subject}}</td>
-                <td>{{$outgoingLetter->signer_id}}</td>
-                <td>{{$outgoingLetter->performer_id}}</td>
-                <td>{{$outgoingLetter->incoming_number}}</td>
+                <td>{{$outgoingLetter->signer->signer_name}}</td>
+                <td>{{$outgoingLetter->performer->performer_name}}</td>
+                <td>
+                    {{$outgoingLetter->incoming_number}}
+                    <div>
+                        <a href="{{ route('outgoing_letter.edit', $outgoingLetter->id) }}"><img src="/img/edit-img.svg" alt="edit"></a>
+                        <form action="{{ route('outgoing_letter.delete', $outgoingLetter->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit"><img src="/img/delete-imf.svg" alt="delete"></button>
+                        </form>
+                    </div>
+                </td>
             </tr>
           @endforeach
         </tbody>
       </table>
-
 </body>
 </html>
