@@ -4,10 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ asset(path: 'css/main.css') }}">
 </head>
 <body>
-    @foreach ($w as $i)
+    {{--@foreach ($w as $i)
         {{$i->organisation_name}}
-    @endforeach
+    @endforeach--}}
+
+    <div class="header_line">
+        <nav class="nav">
+            <a href="#" class="link">Исходящие документы</a>
+            <a href="#" class="link">Входящие документы</a>
+        </nav>
+    </div>
+    <div class="circle">
+        <img src="img/User.svg" height="35px" width="35px" alt="user">
+    </div>
+    <h1>Реестр регистрации исходящих документов</h1>
+
+    <!--<div class="class-choice">
+    <input list="organisationName" type="text" name="choiser" placeholder="Классификация" class="choiser">
+    <datalist id="organisationName">
+        <option value="Все">
+        <option value="УрФУ">
+        <option value="МИНОБРНАУКИ">
+        <option value="НТИ(филиал)">
+        <option value="Сторонние">
+    </datalist>
+    </div>-->
+
+    <div class="func-block">
+        <input list="organisationName" type="text" name="choiser" placeholder="  Классификация" class="choiser">
+    <datalist id="organisationName">
+        <option value="Все">
+        <option value="УрФУ">
+        <option value="МИНОБРНАУКИ">
+        <option value="НТИ(филиал)">
+        <option value="Сторонние">
+    </datalist>
+        <p><img src="img/search.svg" height="35px" width="35px" alt="search"><input type="text" name="search" placeholder="              Поиск по параметру"></p>
+        <button class="filter-btn"><img src="img/filter.svg">фильтры</button>
+        <a class="create-btn" href="{{route('outgoing_letter.create')}}"><img src="img/plus (1).svg">Создать</a>
+    </div>
+
+    <table class="table-info">
+        <tbody>
+          <tr>
+            <td class="title-table">Регистрационный номер</td>
+            <td class="title-table">Дата регистрации</td>
+            <td class="title-table">Кому адресован документ</td>
+            <td class="title-table">Наименование документа</td>
+            <td class="title-table">Тема документа</td>
+            <td class="title-table">Подписант</td>
+            <td class="title-table">Исполнитель</td>
+            <td class="title-table">Отметка об исполнении (на вх. №)</td>
+          </tr>
+          @foreach ($outgoingLetters as $outgoingLetter)
+            <tr>
+                <td>{{$outgoingLetter->id}}</td>
+                <td>{{$outgoingLetter->registarion_date}}</td>
+                <td>{{$outgoingLetter->destination_id}}</td>
+                <td>{{$outgoingLetter->document_name_id}}</td>
+                <td>{{$outgoingLetter->document_subject}}</td>
+                <td>{{$outgoingLetter->signer_id}}</td>
+                <td>{{$outgoingLetter->performer_id}}</td>
+                <td>{{$outgoingLetter->incoming_number}}</td>
+            </tr>
+          @endforeach
+        </tbody>
+      </table>
+
 </body>
 </html>
