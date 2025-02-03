@@ -61,4 +61,9 @@ class OutgoingLetterController extends Controller
         $outgoingLetter->update($data);
         return redirect()->route('index');
     }
+
+    public function destroy(OutgoingLetter $outgoingLetter) {
+        $outgoingLetter->delete();
+        return redirect()->route('index');
+    }
 }
