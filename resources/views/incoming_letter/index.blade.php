@@ -7,22 +7,18 @@
     <link rel="stylesheet" href="{{ asset(path: 'css/main.css') }}">
 </head>
 <body>
-    {{--@foreach ($w as $i)
-        {{$i->organisation_name}}
-    @endforeach--}}
-
     <div class="header_line">
         <nav class="nav">
-            <a href="#" class="link">Исходящие документы</a>
-            <a href="#" class="link">Входящие документы</a>
+            <a href="{{route('incoming_letter.index')}}" class="link">Исходящие документы</a>
+            <a href="{{route('outgoing_letter.index')}}" class="link">Входящие документы</a>
         </nav>
     </div>
     <div class="circle">
         <img src="img/User.svg" height="35px" width="35px" alt="user">
     </div>
-    <h1>Реестр регистрации исходящих документов</h1>
+    <h1>Реестр регистрации входящих документов</h1>
 
-    <div class="func-block">
+    {{--<div class="func-block">
         <input list="organisationName" type="text" name="choiser" placeholder="  Классификация" class="choiser">
     <datalist id="organisationName">
         <option value="Все">
@@ -71,6 +67,6 @@
             </tr>
           @endforeach
         </tbody>
-      </table>
+      </table>--}}
 </body>
 </html>

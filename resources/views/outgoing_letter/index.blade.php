@@ -7,10 +7,6 @@
     <link rel="stylesheet" href="{{ asset(path: 'css/main.css') }}">
 </head>
 <body>
-    {{--@foreach ($w as $i)
-        {{$i->organisation_name}}
-    @endforeach--}}
-
     <div class="header_line">
         <nav class="nav">
             <a href="#" class="link">Исходящие документы</a>

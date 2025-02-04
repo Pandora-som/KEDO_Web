@@ -16,7 +16,7 @@ class OutgoingLetterController extends Controller
 {
     public function index() {
         $outgoingLetters = OutgoingLetter::all();
-        return view('mainsreen', compact("outgoingLetters"));
+        return view('outgoing_letter.index', compact("outgoingLetters"));
     }
     public function create() {
         $destinations = Destination::all();

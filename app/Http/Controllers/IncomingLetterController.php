@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class IncomingLetterController extends Controller
 {
     public function index() {
-        return view('mainsreen');
+        return view('incoming_letter.index');
     }
     public function create() {
         $document_froms = DocumentFrom::all();

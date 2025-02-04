@@ -21,3 +21,7 @@ Route::get('/outgoing_letters/{outgoing_letter}/edit', [OutgoingLetterController
 Route::patch('/outgoing_letters/{outgoing_letter}', [OutgoingLetterController::class, 'update'])->name('outgoing_letter.update');
 
 Route::delete('/outgoing_letters/{outgoing_letter}', [OutgoingLetterController::class, 'destroy'])->name('outgoing_letter.delete');
+
+Route::get('/', [IncomingLetterController::class, "index"])->name('incoming_letter.index');
+
+Route::get('/', [OutgoingLetterController::class, "index"])->name('outgoing_letter.index');
