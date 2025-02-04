@@ -9,8 +9,8 @@
 <body>
     <div class="header_line">
         <nav class="nav">
-            <a href="#" class="link">Исходящие документы</a>
-            <a href="#" class="link">Входящие документы</a>
+            <a href="{{route('outgoing_letter.index')}}" class="link">Исходящие документы</a>
+            <a href="{{route('incoming_letter.index')}}" class="link">Входящие документы</a>
         </nav>
     </div>
     <div class="circle">

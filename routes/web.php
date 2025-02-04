@@ -4,7 +4,7 @@ use App\Http\Controllers\IncomingLetterController;
 use App\Http\Controllers\OutgoingLetterController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [OutgoingLetterController::class, "index"])->name("index");
+//Route::get('/', [OutgoingLetterController::class, "index"])->name("index");
 
 Route::get('/incoming_letters/create', [IncomingLetterController::class, 'create'])->name('incoming_letter.create');
 Route::post('/incoming_letters', [IncomingLetterController::class, 'store'])->name('incoming_letter.store');
@@ -24,4 +24,4 @@ Route::delete('/outgoing_letters/{outgoing_letter}', [OutgoingLetterController::
 
 Route::get('/', [IncomingLetterController::class, "index"])->name('incoming_letter.index');
 
-Route::get('/', [OutgoingLetterController::class, "index"])->name('outgoing_letter.index');
+Route::get('/outgoing_letter', [OutgoingLetterController::class, "index"])->name('outgoing_letter.index');

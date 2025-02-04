@@ -37,7 +37,7 @@ class OutgoingLetterController extends Controller
             'incoming_number' => 'integer'
         ]);
         OutgoingLetter::create($data);
-        return redirect()->route('index');
+        return redirect()->route('outgoing_letter.index');
     }
 
     public function edit(OutgoingLetter $outgoingLetter) {
@@ -59,11 +59,11 @@ class OutgoingLetterController extends Controller
             'incoming_number' => 'integer'
         ]);
         $outgoingLetter->update($data);
-        return redirect()->route('index');
+        return redirect()->route('outgoing_letter.index');
     }
 
     public function destroy(OutgoingLetter $outgoingLetter) {
         $outgoingLetter->delete();
-        return redirect()->route('index');
+        return redirect()->route('outgoing_letter.index');
     }
 }

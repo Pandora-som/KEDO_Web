@@ -12,7 +12,8 @@ use Illuminate\Http\Request;
 class IncomingLetterController extends Controller
 {
     public function index() {
-        return view('incoming_letter.index');
+        $incomingLetters = IncomingLetter::all();
+        return view('incoming_letter.index', compact("incomingLetters"));
     }
     public function create() {
         $document_froms = DocumentFrom::all();
@@ -36,7 +37,7 @@ class IncomingLetterController extends Controller
             'status_id' => 'integer'
         ]);
         IncomingLetter::create($data);
-        return redirect()->route('index');
+        return redirect()->route('incoming_letter.index');
     }
 
     public function edit(IncomingLetter $incomingLetter) {
@@ -65,6 +66,10 @@ class IncomingLetterController extends Controller
         $document_names = DocumentName::all();
         $performers = Performer::all();
         $statuses = Status::all();
-        return redirect()->route('incoming_letter.create', compact(['document_froms', 'document_names', 'performers', 'statuses']));
+        return redirect()->route('incoming_letter.index', compact(['document_froms', 'document_names', 'performers', 'statuses']));
+    }
+    public function destroy(IncomingLetter $incomingLetter) {
+        $incomingLetter->delete();
+        return redirect()->route('incoming_letter.index');
     }
 }
