@@ -27,7 +27,7 @@
         <option value="НТИ(филиал)">
         <option value="Сторонние">
     </datalist>
-        <p><img src="img/search.svg" height="35px" width="35px" alt="search"><input type="text" name="search" placeholder="              Поиск по параметру"></p>
+    <p><img src="img/search.svg" height="35px" width="35px" alt="search" class="img-search"><input type="text" name="search" placeholder=" Поиск по параметру"></p>
         <button class="filter-btn"><img src="img/filter.svg">фильтры</button>
         <a class="create-btn" href="{{route('incoming_letter.create')}}"><img src="img/plus (1).svg">Создать</a>
     </div>
