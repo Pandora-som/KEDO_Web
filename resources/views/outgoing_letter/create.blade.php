@@ -8,11 +8,13 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Регистрация исходящего документа</h1>
+    <p>Заполните все поля для регистрации документа</p>
     <div class="incoming_letter_container">
         <form action="{{ route('outgoing_letter.store') }}" method="post" class="incoming_letter_form">
             @csrf
             <label for="registarion_date">Дата регистрации</label>
-            <input type="date" name="registarion_date" id="registarion_date">
+            <input type="datetime-local" name="registarion_date" id="registarion_date">
 
             <label for="destination_id">Кому поступил документ</label>
             <select name="destination_id" id="destination_id">
@@ -47,6 +49,13 @@
 
             <label for="incoming_number">Отметка об исполнении (на вх. №)</label>
             <input type="number" name="incoming_number" id="incoming_number">
+
+            <label for="classificator_id">Классификатор</label>
+            <select name="classificator_id" id="classificator_id">
+                @foreach ($classificators as $classificator)
+                    <option value="{{ $classificator->id }}">{{ $classificator->classificator_name }}</option>
+                @endforeach
+            </select>
 
             <button type="submit">Создать</button>
         </form>

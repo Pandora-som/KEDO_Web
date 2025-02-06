@@ -7,14 +7,10 @@
     <link rel="stylesheet" href="{{ asset(path: 'css/main.css') }}">
 </head>
 <body>
-    {{--@foreach ($w as $i)
-        {{$i->organisation_name}}
-    @endforeach--}}
-
     <div class="header_line">
         <nav class="nav">
-            <a href="#" class="link">Исходящие документы</a>
-            <a href="#" class="link">Входящие документы</a>
+            <a href="{{route('outgoing_letter.index')}}" class="link">Исходящие документы</a>
+            <a href="{{route('incoming_letter.index')}}" class="link">Входящие документы</a>
         </nav>
     </div>
     <div class="circle">
@@ -31,7 +27,7 @@
         <option value="НТИ(филиал)">
         <option value="Сторонние">
     </datalist>
-        <p><img src="img/search.svg" height="35px" width="35px" alt="search"><input type="text" name="search" placeholder="              Поиск по параметру"></p>
+        <p><img src="img/search.svg" height="35px" width="35px" alt="search"><input type="text" name="search" placeholder=" Поиск по параметру"></p>
         <button class="filter-btn"><img src="img/filter.svg">фильтры</button>
         <a class="create-btn" href="{{route('outgoing_letter.create')}}"><img src="img/plus (1).svg">Создать</a>
     </div>

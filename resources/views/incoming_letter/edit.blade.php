@@ -8,6 +8,8 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Изменение сведений входящего документа</h1>
+    <p>Заполните все поля для изменения сведений</p>
     <div class="incoming_letter_container">
         <form action="{{ route('incoming_letter.update', $incomingLetter->id) }}" method="post" class="incoming_letter_form">
             @csrf
@@ -18,14 +20,18 @@
             <label for="document_from_id">От кого поступил документ</label>
             <select name="document_from_id" id="document_from_id">
                 @foreach ($document_froms as $document_from)
-                    <option value="{{ $document_from->id }}">{{ $document_from->organisation_name }}</option>
+                    <option
+                    {{ $document_from->id === $incomingLetter->document_from->id ? ' selected' : '' }}
+                    value="{{ $document_from->id }}">{{ $document_from->organisation_name }}</option>
                 @endforeach
             </select>
 
             <label for="document_name_id">Наименование документа</label>
             <select name="document_name_id" id="document_name_id">
                 @foreach ($document_names as $document_name)
-                    <option value="{{ $document_name->id }}">{{ $document_name->name }}</option>
+                <option
+                {{ $document_name->id === $incomingLetter->document_name->id ? ' selected' : '' }}
+                value="{{ $document_name->id }}">{{ $document_name->name }}</option>
                 @endforeach
             </select>
 
@@ -44,7 +50,9 @@
             <label for="performer_id">Ответственный исполнитель</label>
             <select name="performer_id" id="performer_id">
                 @foreach ($performers as $performer)
-                    <option value="{{ $performer->id }}">{{ $performer->performer_name }}</option>
+                <option
+                {{ $performer->id === $incomingLetter->performer->id ? ' selected' : '' }}
+                value="{{ $performer->id }}">{{ $performer->performer_name }}</option>
                 @endforeach
             </select>
 
@@ -54,7 +62,18 @@
             <label for="status_id">Статус</label>
             <select name="status_id" id="status_id">
                 @foreach ($statuses as $status)
-                    <option value="{{ $status->id }}">{{ $status->status_name }}</option>
+                <option
+                {{ $status->id === $incomingLetter->status->id ? ' selected' : '' }}
+                value="{{ $status->id }}">{{ $status->status_name }}</option>
+                @endforeach
+            </select>
+
+            <label for="classificator_id">Классификатор</label>
+            <select name="classificator_id" id="classificator_id">
+                @foreach ($classificators as $classificator)
+                <option
+                {{ $classificator->id === $incomingLetter->classificator->id ? ' selected' : '' }}
+                value="{{ $classificator->id }}">{{ $classificator->classificator_name }}</option>
                 @endforeach
             </select>
 

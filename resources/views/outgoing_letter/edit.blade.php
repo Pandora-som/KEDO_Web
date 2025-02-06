@@ -8,6 +8,8 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Изменение сведений исходящего документа</h1>
+    <p>Заполните все поля для изменения сведений</p>
     <div class="incoming_letter_container">
         <form action="{{ route('outgoing_letter.update', $outgoingLetter->id) }}" method="post" class="incoming_letter_form">
             @csrf
@@ -48,6 +50,13 @@
 
             <label for="incoming_number">Отметка об исполнении (на вх. №)</label>
             <input type="number" name="incoming_number" id="incoming_number" value="{{$outgoingLetter->incoming_number}}">
+
+            <label for="classificator_id">Классификатор</label>
+            <select name="classificator_id" id="classificator_id">
+                @foreach ($classificators as $classificator)
+                    <option value="{{ $classificator->id }}">{{ $classificator->classificator_name }}</option>
+                @endforeach
+            </select>
 
             <button type="submit">Изменить</button>
         </form>
