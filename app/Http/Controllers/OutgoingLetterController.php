@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classificators;
 use App\Models\Destination;
 use App\Models\DocumentFrom;
 use App\Models\DocumentName;
@@ -23,7 +24,8 @@ class OutgoingLetterController extends Controller
         $document_names = DocumentName::all();
         $performers = Performer::all();
         $signers = Signer::all();
-        return view('outgoing_letter.create', compact(['destinations', 'document_names', 'performers', 'signers']));
+        $classificators = Classificators::all();
+        return view('outgoing_letter.create', compact(['destinations', 'document_names', 'performers', 'signers', 'classificators']));
     }
 
     public function store() {
@@ -34,7 +36,8 @@ class OutgoingLetterController extends Controller
             'document_subject' => 'string',
             'performer_id' => 'integer',
             'signer_id' => 'integer',
-            'incoming_number' => 'integer'
+            'incoming_number' => 'integer',
+            'classificator_id' => 'integer'
         ]);
         OutgoingLetter::create($data);
         return redirect()->route('outgoing_letter.index');
@@ -45,7 +48,8 @@ class OutgoingLetterController extends Controller
         $document_names = DocumentName::all();
         $performers = Performer::all();
         $signers = Signer::all();
-        return view('outgoing_letter.edit', compact(['outgoingLetter','destinations', 'document_names', 'performers', 'signers']));
+        $classificators = Classificators::all();
+        return view('outgoing_letter.edit', compact(['outgoingLetter','destinations', 'document_names', 'performers', 'signers', 'classificators']));
     }
 
     public function update(OutgoingLetter $outgoingLetter) {
@@ -56,7 +60,8 @@ class OutgoingLetterController extends Controller
             'document_subject' => 'string',
             'performer_id' => 'integer',
             'signer_id' => 'integer',
-            'incoming_number' => 'integer'
+            'incoming_number' => 'integer',
+            'classificator_id' => 'integer'
         ]);
         $outgoingLetter->update($data);
         return redirect()->route('outgoing_letter.index');

@@ -25,4 +25,8 @@ class IncomingLetter extends Model
     public function status() {
         return $this->belongsTo(Status::class, 'status_id', 'id');
     }
+
+    public function classificator() {
+        return $this->belongsTo(Classificators::class, 'classificator_id', 'id');
+    }
 }

@@ -20,14 +20,17 @@
 
     <div class="func-block">
         <input list="organisationName" type="text" name="choiser" placeholder="  Классификация" class="choiser">
-    <datalist id="organisationName">
-        <option value="Все">
-        <option value="УрФУ">
-        <option value="МИНОБРНАУКИ">
-        <option value="НТИ(филиал)">
-        <option value="Сторонние">
-    </datalist>
-    <p><img src="img/search.svg" height="35px" width="35px" alt="search" class="img-search"><input type="text" name="search" placeholder=" Поиск по параметру"></p>
+        <form action="{{ route('incoming_letter.index') }}" method="POST">
+            @csrf
+            <select name="classificator_id" id="classificator_id">
+                <option value="0">Все</option>
+                @foreach ($classificators as $classificator)
+                    <option value="{{ $classificator->id }}">{{ $classificator->classificator_name }}</option>
+                @endforeach
+            </select>
+            <button type="submit"><img src="/img/search.svg" alt="search"></button>
+        </form>
+        <p><img src="img/search.svg" height="35px" width="35px" alt="search"><input type="text" name="search" placeholder="              Поиск по параметру"></p>
         <button class="filter-btn"><img src="img/filter.svg">фильтры</button>
         <a class="create-btn" href="{{route('incoming_letter.create')}}"><img src="img/plus (1).svg">Создать</a>
     </div>

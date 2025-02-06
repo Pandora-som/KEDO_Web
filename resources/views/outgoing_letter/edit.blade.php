@@ -51,6 +51,13 @@
             <label for="incoming_number">Отметка об исполнении (на вх. №)</label>
             <input type="number" name="incoming_number" id="incoming_number" value="{{$outgoingLetter->incoming_number}}">
 
+            <label for="classificator_id">Классификатор</label>
+            <select name="classificator_id" id="classificator_id">
+                @foreach ($classificators as $classificator)
+                    <option value="{{ $classificator->id }}">{{ $classificator->classificator_name }}</option>
+                @endforeach
+            </select>
+
             <button type="submit">Изменить</button>
         </form>
     </div>
