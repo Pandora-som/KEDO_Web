@@ -8,6 +8,8 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Регистрация исходящего документа</h1>
+    <p>Заполните все поля для регистрации документа</p>
     <div class="incoming_letter_container">
         <form action="{{ route('outgoing_letter.store') }}" method="post" class="incoming_letter_form">
             @csrf
@@ -48,7 +50,7 @@
             <label for="incoming_number">Отметка об исполнении (на вх. №)</label>
             <input type="number" name="incoming_number" id="incoming_number">
 
-            <button type="submit">Создать</button>
+           <button type="submit">Создать</button>
         </form>
     </div>
 </body>

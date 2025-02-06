@@ -8,6 +8,8 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Изменение сведений исходящего документа</h1>
+    <p>Заполните все поля для изменения сведений</p>
     <div class="incoming_letter_container">
         <form action="{{ route('outgoing_letter.update', $outgoingLetter->id) }}" method="post" class="incoming_letter_form">
             @csrf

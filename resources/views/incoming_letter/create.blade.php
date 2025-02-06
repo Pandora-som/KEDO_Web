@@ -8,6 +8,8 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Регистрация входящего документа</h1>
+    <p>Заполните все поля для регистрации документа</p>
     <div class="incoming_letter_container">
         <form action="{{ route('incoming_letter.store') }}" method="post" class="incoming_letter_form">
             @csrf
