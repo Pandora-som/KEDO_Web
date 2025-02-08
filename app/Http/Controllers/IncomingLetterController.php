@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Filters\IncomingLetterFilter;
+use App\Http\Requests\IncomingLetter\FilterRequest;
 use App\Models\Classificators;
 use App\Models\DocumentFrom;
 use App\Models\DocumentName;
@@ -12,9 +14,13 @@ use Illuminate\Http\Request;
 
 class IncomingLetterController extends Controller
 {
-    public function index() {
+    public function index(FilterRequest $request) {
         $classificators = Classificators::all();
-        $incomingLetters = IncomingLetter::all();
+
+        $data = $request->validated();
+        $filter = app()->make(IncomingLetterFilter::class, ['queryParams' => array_filter($data)]);
+        $incomingLetters = IncomingLetter::filter($filter)->get();
+
         return view('incoming_letter.index', compact(['incomingLetters', 'classificators']));
     }
 
