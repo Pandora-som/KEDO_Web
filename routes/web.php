@@ -22,6 +22,6 @@ Route::patch('/outgoing_letters/{outgoing_letter}', [OutgoingLetterController::c
 
 Route::delete('/outgoing_letters/{outgoing_letter}', [OutgoingLetterController::class, 'destroy'])->name('outgoing_letter.delete');
 
-Route::get('/', [IncomingLetterController::class, "index"])->name('incoming_letter.index');
+Route::get('/incoming_letter', [IncomingLetterController::class, "index"])->name('incoming_letter.index');
 
-Route::get('/outgoing_letter', [OutgoingLetterController::class, "index"])->name('outgoing_letter.index');
+Route::get('/', [OutgoingLetterController::class, "index"])->name('outgoing_letter.index');

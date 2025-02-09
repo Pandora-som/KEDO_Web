@@ -58,12 +58,11 @@ h1 {
     font-size: 32px;
     font-family: interRegular;
 }
-input {
-    width: 354px;
-    height: 60px;
+.search__input {
+    width: 350px;
+    height: 45px;
     font-family: interExtraLight;
     font-size: 16px;
-    /*margin-top: 34px;*/
 }
 p img{
     margin-bottom: -10px;
@@ -113,6 +112,7 @@ p {
 .choiser {
     width: 237px;
     height: 48px;
+    background-color: transparent;
     font-family: interRegular;
     font-size: 20px;
 }

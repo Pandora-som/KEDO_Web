@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Filters\IncomingLetterFilter;
+use App\Http\Requests\IncomingLetter\FilterRequest;
 use App\Models\Classificators;
 use App\Models\DocumentFrom;
 use App\Models\DocumentName;
@@ -12,10 +14,27 @@ use Illuminate\Http\Request;
 
 class IncomingLetterController extends Controller
 {
-    public function index() {
+    public function index(FilterRequest $request) {
         $classificators = Classificators::all();
-        $incomingLetters = IncomingLetter::all();
-        return view('incoming_letter.index', compact(['incomingLetters', 'classificators']));
+
+        $data = $request->validated();
+        // $filter = app()->make(IncomingLetterFilter::class, ['queryParams' => array_filter($data)]);
+        // $incomingLetters = IncomingLetter::filter($filter)->get();
+        $query = IncomingLetter::query();
+        if (isset($data['start_date']) and isset($data['end_date'])) {
+            $query->whereDate('registration_date', '>=', $data['start_date'])
+            ->whereDate('registration_date', '<=', $data['end_date']);
+
+        } elseif (isset($data['end_date']) and isset($data['start_date']) and ($data['start_date'] > $data['end_date'])) {
+            $data['end_date'] = $data['start_date'];
+            $query->whereDate('registration_date', '=', $data['start_date']);
+        };
+
+        if (isset($data['classificator_id'])) {
+            $query->where('classificator_id', '=', $data['classificator_id']);
+        }
+        $incomingLetters = $query->get();
+        return view('incoming_letter.index', compact(['request', 'incomingLetters', 'classificators']));
     }
 
     public function create() {
