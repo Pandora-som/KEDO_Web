@@ -25,9 +25,6 @@ class IncomingLetterController extends Controller
             $query->whereDate('registration_date', '>=', $data['start_date'])
             ->whereDate('registration_date', '<=', $data['end_date']);
 
-        } elseif (isset($data['start_date']) and !isset($data['end_date'])) {
-            $query->whereDate('registration_date', '>=', $data['start_date']);
-
         } elseif (isset($data['end_date']) and isset($data['start_date']) and ($data['start_date'] > $data['end_date'])) {
             $data['end_date'] = $data['start_date'];
             $query->whereDate('registration_date', '=', $data['start_date']);
@@ -37,7 +34,6 @@ class IncomingLetterController extends Controller
             $query->where('classificator_id', '=', $data['classificator_id']);
         }
         $incomingLetters = $query->get();
-
         return view('incoming_letter.index', compact(['request', 'incomingLetters', 'classificators']));
     }
 
