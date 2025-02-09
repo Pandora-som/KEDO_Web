@@ -25,28 +25,20 @@
             <div class="dropdown__content">
                 <form action="{{ url()->full() }}" method="GET">
                     <h3>Классификация</h3>
-                    <fieldset>
-                        @foreach ($classificators as $classificator)
-                        <input type="radio" id="{{ $classificator->classificator_name }}"
-                            {{ $request->query('classificator_id') == $classificator->id ? ' checked' : '' }} name="classificator_id" value="{{ $classificator->id }}">
+                    @foreach ($classificators as $classificator)
+                    <input type="radio" id="{{ $classificator->classificator_name }}"
+                        {{ $request->query('classificator_id') == $classificator->id ? ' checked' : '' }} name="classificator_id"
+                        value="{{ $classificator->id }}">
                         <label for="{{ $classificator->classificator_name }}">{{ $classificator->classificator_name }}</label>
-                        @endforeach
-                        <a href="{{ request()->fullUrlWithoutQuery('classificator_id') }}">Очистить классификацию</a>
-                    </fieldset>
-
-                    <div>
-                        <input type="checkbox" name="document_from_id" {{ $request->query('document_from_id') ? ' checked' : '' }} id="first" value="1">
-                        <label for="first">first</label>
-                    </div>
-
-                    <div>
-                        <input type="checkbox" name="document_name_id" {{ $request->query('document_from_id') ? ' checked' : '' }} id="second" value="1">
-                        <label for="second">second</label>
-                    </div>
+                    @endforeach
+                    <a href="{{ request()->fullUrlWithoutQuery('classificator_id') }}">Очистить классификацию</a>
 
                     <div class="date__filter">
                         <label for="start_date">Дата с:</label>
-                        <input id="start_date" type="date" name="start_date">
+                        <input id="start_date" type="date" name="start_date" value="{{ $request->query('start_date') ? $request->query('start_date') : date('Y-m-d', strtotime('last month'))}}">
+
+                        <label for="end_date">по:</label>
+                        <input id="end_date" type="date" name="end_date" value="{{ $request->query('end_date') ? $request->query('end_date') : now()->format('Y-m-d') }}">
                     </div>
 
                     <button>Отфильтровать</button>
