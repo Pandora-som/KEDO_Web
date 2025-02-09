@@ -22,7 +22,14 @@ class FilterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'registarion_date' => 'date',
+            'destination_id' => 'integer',
+            'document_name_id' => 'integer',
+            'document_subject' => 'string',
+            'performer_id' => 'integer',
+            'signer_id' => 'integer',
+            'incoming_number' => 'integer',
+            'classificator_id' => 'integer'
         ];
     }
 }

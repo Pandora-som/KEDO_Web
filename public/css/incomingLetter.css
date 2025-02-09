@@ -40,7 +40,7 @@ label {
     font-family: interRegular;
     font-size: 18px;
 }
-input {
+.search__input {
     width: 350px;
     height: 45px;
     font-family: interExtraLight;

@@ -6,14 +6,12 @@ namespace App\Http\Filters;
 
 use Illuminate\Database\Eloquent\Builder;
 
-class IncomingLetterFilter extends AbstractFilter
+class OutGoingLetterFilter extends AbstractFilter
 {
     public const DOCUMENT_FROM_ID = 'document_from_id';
     public const DOCUMENT_NAME_ID = 'document_name_id';
     public const DOCUMENT_SUBJECT = 'document_subject';
     public const CLASSIFICATOR_ID = 'classificator_id';
-    public const DATE_START = 'date_start';
-    public const DATE_END = 'date_end';
 
 
     protected function getCallbacks(): array
@@ -41,8 +39,7 @@ class IncomingLetterFilter extends AbstractFilter
         $builder->where('document_subject', 'like', "%{$value}%");
     }
 
-    public function classificatorId(Builder $builder, $value)
-    {
+    public function classificatorId(Builder $builder, $value) {
         $builder->where('classificator_id', '=', $value);
     }
 }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{{ asset(path: 'css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dropdown.css') }}">
 </head>
 <body>
     <div class="header_line">
@@ -19,19 +20,40 @@
     <h1>Реестр регистрации входящих документов</h1>
 
     <div class="func-block">
-        <input list="organisationName" type="text" name="choiser" placeholder="  Классификация" class="choiser">
-        <form action="{{ route('incoming_letter.index') }}" method="POST">
-            @csrf
-            <select name="classificator_id" id="classificator_id">
-                <option value="0">Все</option>
-                @foreach ($classificators as $classificator)
-                    <option value="{{ $classificator->id }}">{{ $classificator->classificator_name }}</option>
-                @endforeach
-            </select>
-            <button type="submit"><img src="/img/search.svg" alt="search"></button>
-        </form>
-        <p><img src="img/search.svg" height="35px" width="35px" alt="search"><input type="text" name="search" placeholder="              Поиск по параметру"></p>
-        <button class="filter-btn"><img src="img/filter.svg">фильтры</button>
+        <div class="dropdown">
+            <button name="choiser" class="choiser dropbtn">Фильтры⮟</button>
+            <div class="dropdown__content">
+                <form action="{{ url()->full() }}" method="GET">
+                    <h3>Классификация</h3>
+                    <fieldset>
+                        @foreach ($classificators as $classificator)
+                        <input type="radio" id="{{ $classificator->classificator_name }}"
+                            {{ $request->query('classificator_id') == $classificator->id ? ' checked' : '' }} name="classificator_id" value="{{ $classificator->id }}">
+                        <label for="{{ $classificator->classificator_name }}">{{ $classificator->classificator_name }}</label>
+                        @endforeach
+                        <a href="{{ request()->fullUrlWithoutQuery('classificator_id') }}">Очистить классификацию</a>
+                    </fieldset>
+
+                    <div>
+                        <input type="checkbox" name="document_from_id" {{ $request->query('document_from_id') ? ' checked' : '' }} id="first" value="1">
+                        <label for="first">first</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" name="document_name_id" {{ $request->query('document_from_id') ? ' checked' : '' }} id="second" value="1">
+                        <label for="second">second</label>
+                    </div>
+
+                    <div class="date__filter">
+
+                    </div>
+
+                    <button>Отфильтровать</button>
+                </form>
+            </div>
+        </div>
+        <p><img src="img/search.svg" height="35px" width="35px" alt="search"><input class="search__input" type="text" name="search" placeholder="              Поиск по параметру"></p>
+
         <a class="create-btn" href="{{route('incoming_letter.create')}}"><img src="img/plus (1).svg">Создать</a>
     </div>
 

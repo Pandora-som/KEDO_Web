@@ -21,7 +21,7 @@ class IncomingLetterController extends Controller
         $filter = app()->make(IncomingLetterFilter::class, ['queryParams' => array_filter($data)]);
         $incomingLetters = IncomingLetter::filter($filter)->get();
 
-        return view('incoming_letter.index', compact(['incomingLetters', 'classificators']));
+        return view('incoming_letter.index', compact(['request', 'incomingLetters', 'classificators']));
     }
 
     public function create() {

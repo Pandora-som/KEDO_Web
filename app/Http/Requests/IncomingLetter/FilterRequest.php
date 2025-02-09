@@ -32,7 +32,7 @@ class FilterRequest extends FormRequest
             'performer_id' => 'integer',
             'deadline' => 'date',
             'status_id' => 'integer',
-            'classificator_id' => 'integer'
+            'classificator_id' => 'integer',
         ];
     }
 }
