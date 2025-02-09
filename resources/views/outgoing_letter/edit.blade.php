@@ -11,9 +11,10 @@
     <h1>Изменение сведений исходящего документа</h1>
     <p>Заполните все поля для изменения сведений</p>
     <div class="incoming_letter_container">
-        <form action="{{ route('outgoing_letter.update', $outgoingLetter->id) }}" method="post" class="incoming_letter_form">
+        <form action="{{ route('outgoing_letter.update', $outgoingLetter->id) }}" method="post" class="form-div">
             @csrf
             @method('patch')
+            <div class="incoming_letter_form">
             <label for="registarion_date">Дата регистрации</label>
             <input type="date" name="registarion_date" id="registarion_date" value="{{$outgoingLetter->registarion_date}}">
 
@@ -32,8 +33,9 @@
             </select>
 
             <label for="document_subject">Тема документа</label>
-            <textarea name="document_subject" id="document_subject">{{$outgoingLetter->document_subject}}</textarea>
+            <textarea name="document_subject" id="document_subject">{{$outgoingLetter->document_subject}}</textarea></div>
 
+            <div class="incoming_letter_form">
             <label for="signer_id">Подписант</label>
             <select name="signer_id" id="signer_id">
                 @foreach ($signers as $signer)
@@ -56,9 +58,9 @@
                 @foreach ($classificators as $classificator)
                     <option value="{{ $classificator->id }}">{{ $classificator->classificator_name }}</option>
                 @endforeach
-            </select>
+            </select></div>
 
-            <button type="submit">Изменить</button>
+            <div class="btn-div"><button type="submit">Изменить</button></div>
         </form>
     </div>
 </body>

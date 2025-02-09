@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ asset('css/incomingLetter.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/outcomingLetter.css') }}">
     <title>Document</title>
 </head>
 <body>
     <h1>Изменение сведений входящего документа</h1>
     <p>Заполните все поля для изменения сведений</p>
-    <div class="incoming_letter_container">
-        <form action="{{ route('incoming_letter.update', $incomingLetter->id) }}" method="post" class="incoming_letter_form">
+    <div class="outgoing_letter_container">
+        <form action="{{ route('incoming_letter.update', $incomingLetter->id) }}" method="post" class="form-div">
             @csrf
             @method('patch')
+            <div class="incoming_letter_form">
             <label for="registration_date">Дата регистрации</label>
             <input type="date" name="registration_date" id="registration_date" value="{{ $incomingLetter->registration_date }}">
 
@@ -42,8 +43,9 @@
             <input type="date" name="document_date" id="document_date" value="{{ $incomingLetter->document_date }}">
 
             <label for="document_subject">Тема документа</label>
-            <textarea name="document_subject" id="document_subject">{{ $incomingLetter->document_subject }}</textarea>
+            <textarea name="document_subject" id="document_subject">{{ $incomingLetter->document_subject }}</textarea></div>
 
+            <div class="incoming_letter_form">
             <label for="resolution">Резолюция</label>
             <textarea name="resolution" id="resolution">{{ $incomingLetter->resolution }}</textarea>
 
@@ -75,9 +77,9 @@
                 {{ $classificator->id === $incomingLetter->classificator->id ? ' selected' : '' }}
                 value="{{ $classificator->id }}">{{ $classificator->classificator_name }}</option>
                 @endforeach
-            </select>
+            </select></div>
 
-            <button type="submit">Изменить</button>
+            <div class="btn-div"><button type="submit">Изменить</button></div>
         </form>
     </div>
 </body>
