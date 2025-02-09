@@ -45,7 +45,8 @@
                     </div>
 
                     <div class="date__filter">
-
+                        <label for="start_date">Дата с:</label>
+                        <input id="start_date" type="date" name="start_date">
                     </div>
 
                     <button>Отфильтровать</button>
