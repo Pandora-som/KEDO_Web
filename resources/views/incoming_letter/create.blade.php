@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ asset('css/incomingLetter.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/outcomingLetter.css') }}">
     <title>Document</title>
 </head>
 <body>
     <h1>Регистрация входящего документа</h1>
     <p>Заполните все поля для регистрации документа</p>
-    <div class="incoming_letter_container">
-        <form action="{{ route('incoming_letter.store') }}" method="post" class="incoming_letter_form">
+    <div class="outgoing_letter_container">
+        <form action="{{ route('incoming_letter.store') }}" method="post" class="form-div">
             @csrf
+            <div class="incoming_letter_form">
             <label for="registration_date">Дата регистрации</label>
             <input type="datetime-local" name="registration_date" id="registration_date">
 
@@ -37,8 +38,9 @@
             <input type="datetime-local" name="document_date" id="document_date">
 
             <label for="document_subject">Тема документа</label>
-            <textarea name="document_subject" id="document_subject"></textarea>
+            <textarea name="document_subject" id="document_subject"></textarea></div>
 
+            <div class="incoming_letter_form">
             <label for="resolution">Резолюция</label>
             <textarea name="resolution" id="resolution"></textarea>
 
@@ -64,9 +66,9 @@
                 @foreach ($classificators as $classificator)
                     <option value="{{ $classificator->id }}">{{ $classificator->classificator_name }}</option>
                 @endforeach
-            </select>
+            </select></div>
 
-            <button type="submit">Создать</button>
+            <div class="btn-div"><button type="submit">Создать</button></div>
         </form>
     </div>
 </body>
