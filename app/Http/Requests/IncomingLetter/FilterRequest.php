@@ -33,6 +33,8 @@ class FilterRequest extends FormRequest
             'deadline' => 'date',
             'status_id' => 'integer',
             'classificator_id' => 'integer',
+            'start_date' => 'date',
+            'end_date' => 'date|after_or_equal:start_date'
         ];
     }
 }

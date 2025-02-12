@@ -16,7 +16,7 @@
             @method('patch')
             <div class="incoming_letter_form">
             <label for="registarion_date">Дата регистрации</label>
-            <input type="date" name="registarion_date" id="registarion_date" value="{{$outgoingLetter->registarion_date}}">
+            <input type="datetime-local" name="registarion_date" id="registarion_date" value="{{$outgoingLetter->registarion_date}}">
 
             <label for="destination_id">Кому поступил документ</label>
             <select name="destination_id" id="destination_id">
