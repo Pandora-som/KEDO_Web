@@ -6,6 +6,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="{{ asset(path: 'css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dropdown.css') }}">
+    <link rel="stylesheet" href="/autocomplete/css/autoComplete.css">
+
 </head>
 <body>
     <div class="header_line">
@@ -45,8 +47,8 @@
                 </form>
             </div>
         </div>
-        <p><img src="img/search.svg" height="35px" width="35px" alt="search"><input class="search__input" type="text" name="search" placeholder="              Поиск по параметру"></p>
-
+        <p><img src="img/search.svg" height="35px" width="35px" alt="search"><input id="autoComplete" class="search__input" type="text" name="search" placeholder="              Поиск по параметру"></p>
+        <input id="incomingLettersForJs" type="text" style="display: none" value="{{ $incomingLetters }}">
         <a class="create-btn" href="{{route('incoming_letter.create')}}"><img src="img/plus (1).svg">Создать</a>
     </div>
 
@@ -92,5 +94,7 @@
           @endforeach
         </tbody>
       </table>
+      <script src="/autocomplete/autoComplete.min.js"></script>
+      <script src="/js/search.js"></script>
 </body>
 </html>
