@@ -16,9 +16,9 @@
             <a href="#" class="link">Исходящие документы</a>
             <a href="#" class="link">Входящие документы</a>
         </nav>
-    </div>
-    <div class="circle">
-        <img src="img/User.svg" height="35px" width="35px" alt="user">
+        <div class="circle">
+            <img src="img/User.svg" height="35px" width="35px" alt="user">
+        </div>
     </div>
     <h1>Реестр регистрации исходящих документов</h1>
 

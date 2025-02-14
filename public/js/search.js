@@ -8,7 +8,7 @@ for (let i of incomingLetters) {
 
 const autoCompleteJS = new autoComplete({
     selector: "#autoComplete",
-    placeHolder: "Search for Food...",
+    placeHolder: "Поиск по параметру",
     data: {
         src: incomingLettersSearchOn,
         cache: true,
