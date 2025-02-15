@@ -52,6 +52,7 @@ textarea {
     height: 45px;
     font-family: interExtraLight;
     font-size: 16px;
+    background-color: #55ADD6;
 }
 select {
     width: 350px;
