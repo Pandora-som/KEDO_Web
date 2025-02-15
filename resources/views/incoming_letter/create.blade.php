@@ -10,9 +10,10 @@
 <body>
     <h1>Регистрация входящего документа</h1>
     <p>Заполните все поля для регистрации документа</p>
-    <div class="outgoing_letter_container">
+
         <form action="{{ route('incoming_letter.store') }}" method="post" class="form-div">
             @csrf
+            <div class="outgoing_letter_container">
             <div class="incoming_letter_form">
             <label for="registration_date">Дата регистрации</label>
             <input type="datetime-local" name="registration_date" id="registration_date">
@@ -69,7 +70,8 @@
             </select></div>
 
             <div class="btn-div"><button type="submit">Создать</button></div>
+        </div>
         </form>
-    </div>
+    
 </body>
 </html>
