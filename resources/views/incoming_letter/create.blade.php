@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/outcomingLetter.css') }}">
+    <link rel="stylesheet" href="{{ asset('autocomplete/css/autoComplete.css') }}">
     <title>Document</title>
 </head>
 <body>
@@ -14,62 +15,57 @@
         <form action="{{ route('incoming_letter.store') }}" method="post" class="form-div">
             @csrf
             <div class="incoming_letter_form">
-            <label for="registration_date">Дата регистрации</label>
-            <input type="datetime-local" name="registration_date" id="registration_date">
+                <label for="registration_date">Дата регистрации</label>
+                <input type="datetime-local" name="registration_date" id="registration_date">
 
-            <label for="document_from_id">От кого поступил документ</label>
-            <select name="document_from_id" id="document_from_id">
-                @foreach ($document_froms as $document_from)
-                    <option value="{{ $document_from->id }}">{{ $document_from->organisation_name }}</option>
-                @endforeach
-            </select>
+                <label for="document_from">От кого поступил документ</label>
+                <input name="document_from" id="document_from">
+                <input id="document_from_for_js" name="document_from_for_js" style="display: none" value="{{ $document_froms }}">
 
-            <label for="document_name_id">Наименование документа</label>
-            <select name="document_name_id" id="document_name_id">
-                @foreach ($document_names as $document_name)
-                    <option value="{{ $document_name->id }}">{{ $document_name->name }}</option>
-                @endforeach
-            </select>
+                <label for="document_name">Наименование документа</label>
+                <input name="document_name" id="document_name">
+                <input id="document_name_for_js" name="document_name_for_js" style="display: none" value="{{ $document_names }}">
 
-            <label for="document_number">Номер документа</label>
-            <input type="number" name="document_number" id="document_number">
+                <label for="document_number">Номер документа</label>
+                <input type="number" name="document_number" id="document_number">
 
-            <label for="document_date">Дата документа</label>
-            <input type="datetime-local" name="document_date" id="document_date">
+                <label for="document_date">Дата документа</label>
+                <input type="datetime-local" name="document_date" id="document_date">
 
-            <label for="document_subject">Тема документа</label>
-            <textarea name="document_subject" id="document_subject"></textarea></div>
+                <label for="document_subject">Тема документа</label>
+                <textarea name="document_subject" id="document_subject"></textarea>
+            </div>
 
             <div class="incoming_letter_form">
-            <label for="resolution">Резолюция</label>
-            <textarea name="resolution" id="resolution"></textarea>
+                <label for="resolution">Резолюция</label>
+                <textarea name="resolution" id="resolution"></textarea>
 
-            <label for="performer_id">Ответственный исполнитель</label>
-            <select name="performer_id" id="performer_id">
-                @foreach ($performers as $performer)
-                    <option value="{{ $performer->id }}">{{ $performer->performer_name }}</option>
-                @endforeach
-            </select>
+                <label for="performer">Ответственный исполнитель</label>
+                <input name="performer" id="performer">
+                <input id="performer_for_js" name="performer_for_js" style="display: none" value="{{ $performers }}">
 
-            <label for="deadline">Срок исполнения</label>
-            <input type="date" name="deadline" id="deadline">
+                <label for="deadline">Срок исполнения</label>
+                <input type="date" name="deadline" id="deadline">
 
-            <label for="status_id">Статус</label>
-            <select name="status_id" id="status_id">
-                @foreach ($statuses as $status)
+                <label for="status_id">Статус</label>
+                <select name="status_id" id="status_id">
+                    @foreach ($statuses as $status)
                     <option value="{{ $status->id }}">{{ $status->status_name }}</option>
-                @endforeach
-            </select>
+                    @endforeach
+                </select>
 
-            <label for="classificator_id">Классификатор</label>
-            <select name="classificator_id" id="classificator_id">
-                @foreach ($classificators as $classificator)
+                <label for="classificator_id">Классификатор</label>
+                <select name="classificator_id" id="classificator_id">
+                    @foreach ($classificators as $classificator)
                     <option value="{{ $classificator->id }}">{{ $classificator->classificator_name }}</option>
-                @endforeach
-            </select></div>
+                    @endforeach
+                </select>
+            </div>
 
             <div class="btn-div"><button type="submit">Создать</button></div>
         </form>
     </div>
+    <script src="/autocomplete/autoComplete.min.js"></script>
+    <script src="/js/incoming_letter/search_fields.js"></script>
 </body>
 </html>
