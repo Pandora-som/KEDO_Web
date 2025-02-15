@@ -60,6 +60,37 @@ class IncomingLetterController extends Controller
             'status_id' => 'integer',
             'classificator_id' => 'integer'
         ]);
+
+        $document_from = request()->validate([
+            'document_from' => 'string'
+        ]);
+
+        $document_name = request()->validate([
+            'document_name' => 'string'
+        ]);
+
+        $performer = request()->validate([
+            'performer' => 'string'
+        ]);
+
+        DocumentFrom::firstOrCreate([
+            'organisation_name' => $document_from['document_from']
+        ], [
+            'organisation_name' => $document_from['document_from']
+        ]);
+
+        DocumentName::firstOrCreate([
+            'name' => $document_name['document_name']
+        ], [
+            'name' => $document_name['document_name']
+        ]);
+
+        Performer::firstOrCreate([
+            'performer_name' => $performer['performer']
+        ], [
+            'performer_name' => $performer['performer']
+        ]);
+
         IncomingLetter::create($data);
         return redirect()->route('incoming_letter.index');
     }
