@@ -11,19 +11,20 @@
 </head>
 <body>
     <div class="header_line">
+        <div class="logo-nav"><img src="img/logo.svg">
         <nav class="nav">
             <a href="{{route('outgoing_letter.index')}}" class="link">Исходящие документы</a>
             <a href="{{route('incoming_letter.index')}}" class="link">Входящие документы</a>
-        </nav>
-    </div>
-    <div class="circle">
-        <img src="img/User.svg" height="35px" width="35px" alt="user">
+        </nav></div>
+        <div class="circle">
+            <img src="img/User.svg" height="35px" width="35px" alt="user">
+        </div>
     </div>
     <h1>Реестр регистрации входящих документов</h1>
 
     <div class="func-block">
         <div class="dropdown">
-            <button name="choiser" class="choiser dropbtn">Фильтры⮟</button>
+            <button name="choiser" class="choiser dropbtn">Фильтры  ⮟</button>
             <div class="dropdown__content">
                 <form action="{{ url()->full() }}" method="GET">
                     <h3>Классификация</h3>
@@ -47,8 +48,9 @@
                 </form>
             </div>
         </div>
-        <p><img src="img/search.svg" height="35px" width="35px" alt="search"><input id="autoComplete" class="search__input" type="text" name="search" placeholder="              Поиск по параметру"></p>
+        <input id="autoComplete" type="text" name="search">
         <input id="incomingLettersForJs" type="text" style="display: none" value="{{ $incomingLetters }}">
+        <a class="bin-btn" href="#"><img src="img/bin.svg">корзина</a>
         <a class="create-btn" href="{{route('incoming_letter.create')}}"><img src="img/plus (1).svg">Создать</a>
     </div>
 

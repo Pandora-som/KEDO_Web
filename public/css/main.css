@@ -1,13 +1,17 @@
-* {
+body {
     margin: 0;
-    padding: 0;
+    min-width: 320px;
 }
 
 /* body {
     margin: 0;
 } */
 .header_line {
-    height: 86px;
+    min-height: 86px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     background-color: #D9D9D9;
     margin: 0 auto;
     position: relative; /* для позиционирования элемента .circle */
@@ -21,13 +25,12 @@
     text-decoration: none;
 }
 .nav {
-    max-width: 636px;
-    width: 100%;
+    width: 636px;
     display: flex;
     align-items: center;
     padding-top: 30px;
-    grid-auto-flow: column;
-    justify-content: space-around;
+
+    justify-content: space-between;
 }
 .link:hover {
     color: #3F7CF5;
@@ -90,17 +93,38 @@ p {
     box-shadow: 0 4px 4px 0 #00000025;
     transition: all 500ms ease;
     border: 0;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0 17px;
 }
 .create-btn:hover {
     cursor: pointer;
     transform: scale(1.1);
 }
+.bin-btn {
+    height: 60px;
+    width: 131px;
+    font-family: interExtraLight;
+    font-size: 16px;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #716E6E;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0 7px;
+}
 .func-block {
     margin: 0 auto;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    position: relative;
+    justify-content: flex-end;
+    gap: 0 30px;
+    padding: 0 52px;
+    align-items: center;
     margin-top: 34px;
 }
 .choiser {
@@ -117,7 +141,7 @@ p {
 .table-info {
     margin-top: 116px;
     margin-left: 41px;
-    width: 1820px;
+    /*max-width: 1820px;*/
     height: 432px;
     background-color: #E9E8E8;
     overflow-x: auto; /* для горизонтальной прокрутки на маленьких экранах */
