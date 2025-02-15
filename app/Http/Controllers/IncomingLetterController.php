@@ -49,17 +49,48 @@ class IncomingLetterController extends Controller
     public function store() {
         $data = request()->validate([
             'registration_date' => 'date',
-            'document_from_id' => 'integer',
-            'document_name_id' => 'integer',
+            'document_from' => 'string',
+            'document_name' => 'string',
             'document_number' => 'integer',
             'document_date' => 'date',
             'document_subject' => 'string',
             'resolution' => 'string',
-            'performer_id' => 'integer',
+            'performer' => 'string',
             'deadline' => 'date',
             'status_id' => 'integer',
             'classificator_id' => 'integer'
         ]);
+
+        $document_from = request()->validate([
+            'document_from' => 'string'
+        ]);
+
+        $document_name = request()->validate([
+            'document_name' => 'string'
+        ]);
+
+        $performer = request()->validate([
+            'performer' => 'string'
+        ]);
+
+        DocumentFrom::firstOrCreate([
+            'organisation_name' => $document_from['document_from']
+        ], [
+            'organisation_name' => $document_from['document_from']
+        ]);
+
+        DocumentName::firstOrCreate([
+            'name' => $document_name['document_name']
+        ], [
+            'name' => $document_name['document_name']
+        ]);
+
+        Performer::firstOrCreate([
+            'performer_name' => $performer['performer']
+        ], [
+            'performer_name' => $performer['performer']
+        ]);
+
         IncomingLetter::create($data);
         return redirect()->route('incoming_letter.index');
     }
