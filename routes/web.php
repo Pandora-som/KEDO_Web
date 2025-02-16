@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\IncomingLetterController;
 use App\Http\Controllers\OutgoingLetterController;
+use App\Http\Controllers\AutorizationController;
 use Illuminate\Support\Facades\Route;
 
 //Route::get('/', [OutgoingLetterController::class, "index"])->name("index");
@@ -25,3 +26,5 @@ Route::delete('/outgoing_letters/{outgoing_letter}', [OutgoingLetterController::
 Route::get('/incoming_letters', [IncomingLetterController::class, "index"])->name('incoming_letter.index');
 
 Route::get('/', [OutgoingLetterController::class, "index"])->name('outgoing_letter.index');
+
+Route::get('/autorization', [AutorizationController::class, "index"])->name('autorization');

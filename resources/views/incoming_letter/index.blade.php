@@ -16,9 +16,9 @@
             <a href="{{route('outgoing_letter.index')}}" class="link">Исходящие документы</a>
             <a href="{{route('incoming_letter.index')}}" class="link">Входящие документы</a>
         </nav></div>
-        <div class="circle">
+        <a href="{{route('autorization')}}"><div class="circle">
             <img src="img/User.svg" height="35px" width="35px" alt="user">
-        </div>
+        </div></a>
     </div>
     <h1>Реестр регистрации входящих документов</h1>
 
