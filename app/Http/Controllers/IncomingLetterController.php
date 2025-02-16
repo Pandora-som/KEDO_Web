@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Filters\IncomingLetterFilter;
 use App\Http\Requests\IncomingLetter\FilterRequest;
+use App\Http\Requests\IncomingLetter\StoreRequestFilter;
 use App\Models\Classificators;
 use App\Models\DocumentFrom;
 use App\Models\DocumentName;
@@ -46,20 +47,8 @@ class IncomingLetterController extends Controller
         return view('incoming_letter.create', compact(['document_froms', 'document_names', 'performers', 'statuses', 'classificators']));
     }
 
-    public function store() {
-        $data = request()->validate([
-            'registration_date' => 'date',
-            'document_from' => 'string',
-            'document_name' => 'string',
-            'document_number' => 'integer',
-            'document_date' => 'date',
-            'document_subject' => 'string',
-            'resolution' => 'string',
-            'performer' => 'string',
-            'deadline' => 'date',
-            'status_id' => 'integer',
-            'classificator_id' => 'integer'
-        ]);
+    public function store(StoreRequestFilter $request) {
+        $data = $request->validated();
 
         $document_from = request()->validate([
             'document_from' => 'string'
@@ -104,20 +93,8 @@ class IncomingLetterController extends Controller
         return view('incoming_letter.edit', compact(['incomingLetter', 'document_froms', 'document_names', 'performers', 'statuses', 'classificators']));
     }
 
-    public function update(IncomingLetter $incomingLetter) {
-        $data = request()->validate([
-            'registration_date' => 'date',
-            'document_from' => 'string',
-            'document_name' => 'string',
-            'document_number' => 'integer',
-            'document_date' => 'date',
-            'document_subject' => 'string',
-            'resolution' => 'string',
-            'performer' => 'string',
-            'deadline' => 'date',
-            'status_id' => 'integer',
-            'classificator_id' => 'integer'
-        ]);
+    public function update(IncomingLetter $incomingLetter, StoreRequestFilter $request) {
+        $data = $request->validated();
 
         $document_from = request()->validate([
             'document_from' => 'string'
