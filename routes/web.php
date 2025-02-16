@@ -25,6 +25,6 @@ Route::delete('/outgoing_letters/{outgoing_letter}', [OutgoingLetterController::
 
 Route::get('/incoming_letters', [IncomingLetterController::class, "index"])->name('incoming_letter.index');
 
-Route::get('/', [OutgoingLetterController::class, "index"])->name('outgoing_letter.index');
+Route::get('/outgoing_letters', [OutgoingLetterController::class, "index"])->name('outgoing_letter.index');
 
-Route::get('/autorization', [AutorizationController::class, "index"])->name('autorization');
+Route::get('/', [AutorizationController::class, "index"])->name('autorization');
