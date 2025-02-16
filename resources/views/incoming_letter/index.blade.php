@@ -73,13 +73,13 @@
             <tr>
                 <td>{{$incomingLetter->id}}</td>
                 <td>{{$incomingLetter->registration_date}}</td>
-                <td>{{$incomingLetter->document_from->organisation_name}}</td>
-                <td>{{$incomingLetter->document_name->name}}</td>
+                <td>{{$incomingLetter->document_from}}</td>
+                <td>{{$incomingLetter->document_name}}</td>
                 <td>{{$incomingLetter->document_number}}</td>
                 <td>{{$incomingLetter->document_date}}</td>
                 <td>{{$incomingLetter->document_subject}}</td>
                 <td>{{$incomingLetter->resolution}}</td>
-                <td>{{$incomingLetter->performer->performer_name}}</td>
+                <td>{{$incomingLetter->performer}}</td>
                 <td>{{$incomingLetter->deadline}}</td>
                 <td>
                     {{$incomingLetter->status->status_name}}
