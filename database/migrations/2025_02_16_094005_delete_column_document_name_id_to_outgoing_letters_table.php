@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('incoming_letters', function (Blueprint $table) {
-            $table->dropForeign('incoming_letter_document_name_fk');
-            $table->dropIndex('incoming_letter_document_name_idx');
+        Schema::table('outgoing_letters', function (Blueprint $table) {
+            $table->dropForeign('ougoing_letter_document_name_fk');
+            $table->dropIndex('outgoing_letter_document_name_idx');
             $table->dropColumn('document_name_id');
         });
     }
@@ -23,10 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('incoming_letters', function (Blueprint $table) {
+        Schema::table('outgoing_letters', function (Blueprint $table) {
             $table->unsignedBigInteger('document_name_id');
-            $table->index('document_name_id', 'incoming_letter_document_name_idx');
-            $table->foreign('document_name_id', 'incoming_letter_document_name_fk')->on('document_names')->references('id');
+            $table->index('document_name_id', 'outgoing_letter_document_name_idx');
+            $table->foreign('document_name_id', 'ougoing_letter_document_name_fk')->on('document_names')->references('id');
         });
     }
 };
