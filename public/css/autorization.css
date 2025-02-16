@@ -31,6 +31,7 @@ body {
     display: flex;
     align-items: center;
     padding-top: 30px;
+
     justify-content: space-between;
 }
 .link:hover {
@@ -50,35 +51,65 @@ body {
     justify-content: center;
 }
 h1 {
-    margin-top: 41px;
-    margin-left: 52px;
-    font-size: 32px;
-    font-family: interRegular;
-}
-.search__input {
-    width: 350px;
-    height: 45px;
-    font-family: interExtraLight;
-    font-size: 16px;
-}
-.filter-btn {
-    height: 60px;
-    width: 131px;
-    font-family: interExtraLight;
-    font-size: 16px;
+    font-family: interLight;
+    font-size: 22px;
+    margin-top: 61px;
     text-align: center;
-    background-color: #ffffff;
+}
+.autorization-block {
+    max-width: 901px;
+    min-height: 513px;
+    background-color: #E9E8E8;
     box-shadow: 0 4px 4px 0 #00000025;
-    border: solid 1px;
+    border: 0;
+    margin-top: 65px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
-.filter-btn:hover {
-    cursor: pointer;
+.all-div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 62px;
+    align-items: center;
+    justify-content: center;
 }
-.create-btn {
-    height: 60px;
-    width: 156px;
+.login-div {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
     font-family: interRegular;
     font-size: 17px;
+}
+.password-div {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    font-family: interRegular;
+    font-size: 17px;
+}
+.login-group {
+    display: flex;
+    gap: 0 18px;
+}
+.password-group {
+    display: flex;
+    gap: 0 18px;
+    margin-top: 30px;
+}
+.title-p {
+    font-family: interRegular;
+    font-size: 22px;
+    margin: 0 auto;
+    margin-top: 57px;
+}
+.enter-btn {
+    height: 63px;
+    width: 251px;
+    font-family: interRegular;
+    font-size: 16px;
     color: #ffffff;
     background-color: #55ADD6;
     box-shadow: 0 4px 4px 0 #00000025;
@@ -89,68 +120,44 @@ h1 {
     justify-content: center;
     align-items: center;
     gap: 0 17px;
+    margin-top: 34px;
 }
-.create-btn:hover {
+.enter-btn:hover {
     cursor: pointer;
     transform: scale(1.1);
 }
-.bin-btn {
-    height: 60px;
-    width: 131px;
-    font-family: interExtraLight;
-    font-size: 16px;
-    background-color: #fff;
-    color: #000;
-    border: 1px solid #716E6E;
-    text-decoration: none;
+.checkbox-div {
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    gap: 0 7px;
+    font-family: interLight;
+    font-size: 16px;
+    gap: 0 14px;
+    margin-top: 20px;
 }
-.func-block {
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    gap: 0 30px;
-    padding: 0 52px;
-    align-items: center;
-    margin-top: 34px;
-}
-.choiser {
-    width: 237px;
-    height: 48px;
-    background-color: transparent;
-    font-family: interRegular;
+.input-style {
+    font-family: interLight;
     font-size: 20px;
-}
-.class-choice {
-    margin-top: 51px;
-    margin-left: 93px;
-}
-.table-info {
-    margin-top: 116px;
-    margin-left: 41px;
-    /*max-width: 1820px;*/
-    height: 432px;
+    border: none;
+    border-bottom: 1px solid black;
     background-color: #E9E8E8;
 }
-td {
-    border: 1px solid #00000022;
+.input-pwd-style {
     font-family: interRegular;
-    font-size: 18px;
+    font-size: 20px;
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: #E9E8E8;
 }
-.title-table {
-    font-family: interExtraLight;
-    font-size: 18px;
-    text-align: center;
+.input-style:focus {
+    outline: none !important;
 }
-td img {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    margin-left: 400px;
+.input-pwd-style:focus {
+    outline: none !important;
+}
+.checkbox-style {
+    width: 20px;
+    height: 20px;
 }
 @font-face {
     font-family: interLight;
