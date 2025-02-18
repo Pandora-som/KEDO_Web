@@ -36,7 +36,7 @@ class OutgoingLetterController extends Controller
         if (isset($data['classificator_id'])) {
             $query->where('classificator_id', '=', $data['classificator_id']);
         }
-        $outgoingLetters = $query->get();
+        $outgoingLetters = $query->paginate(10);
         return view('outgoing_letter.index', compact(['request', "outgoingLetters", 'classificators']));
     }
     public function create() {

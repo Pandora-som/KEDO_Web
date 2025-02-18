@@ -2,7 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Classificators;
+use App\Models\IncomingLetter;
+use App\Models\OutgoingLetter;
 use App\Models\User;
+use App\Models\Status;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,9 +19,13 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
+        Status::factory(5)->create();
+        Classificators::factory(5)->create();
+        IncomingLetter::factory(100)->create();
+        OutgoingLetter::factory(100)->create();
     }
 }
