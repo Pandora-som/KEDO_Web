@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ asset(path: 'css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dropdown.css') }}">
     <link rel="stylesheet" href="/autocomplete/css/autoComplete.css">
-
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 </head>
 <body>
     <div class="header_line">
@@ -20,7 +20,7 @@
             <img src="img/User.svg" height="35px" width="35px" alt="user">
         </div></a>
     </div>
-    <h1>Реестр регистрации входящих документов</h1>
+    <h1 class="page__title">Реестр регистрации входящих документов</h1>
 
     <div class="func-block">
         <div class="dropdown">
@@ -54,10 +54,18 @@
         <a class="create-btn" href="{{route('incoming_letter.create')}}"><img src="img/plus (1).svg">Создать</a>
     </div>
 
-    <table class="table-info">
+    <div class="table__legend">
+        <p>
+            <button class="btn btn-danger"></button> - просроченный срок документа
+        </p>
+        <p>
+            <button class="btn btn-warning"></button> - срок документа выходит сегодня
+        </p>
+    </div>
+    <table class="table table-info table-info table-striped">
         <tbody>
           <tr>
-            <td class="title-table">Регистрационный номер</td>
+            <td class="title-table">№</td>
             <td class="title-table">Дата регистрации</td>
             <td class="title-table">От кого поступил документ</td>
             <td class="title-table">Наименование документа</td>
@@ -68,9 +76,10 @@
             <td class="title-table">Ответственный исполнитель </td>
             <td class="title-table">Срок исполнения</td>
             <td class="title-table">Отметка об исполнении</td>
+            <td class="title-table">Действия</td>
           </tr>
           @foreach ($incomingLetters as $incomingLetter)
-            <tr>
+            <tr {{ $incomingLetter->deadline < now()->format('Y-m-d') ? "class=table-danger" : ($incomingLetter->deadline === now()->format('Y-m-d') ? "class=table-warning" : '')}}>
                 <td>{{$incomingLetter->id}}</td>
                 <td>{{$incomingLetter->registration_date}}</td>
                 <td>{{$incomingLetter->document_from}}</td>
@@ -81,14 +90,16 @@
                 <td>{{$incomingLetter->resolution}}</td>
                 <td>{{$incomingLetter->performer}}</td>
                 <td>{{$incomingLetter->deadline}}</td>
+                <td>{{$incomingLetter->status->status_name}}</td>
                 <td>
-                    {{$incomingLetter->status->status_name}}
-                    <div>
+                    <div class="actions">
                         <a href="{{ route('incoming_letter.edit', $incomingLetter->id) }}"><img src="/img/edit-img.svg" alt="edit"></a>
                         <form action="{{ route('incoming_letter.delete', $incomingLetter->id) }}" method="post">
                             @csrf
                             @method('delete')
-                            <button type="submit"><img src="/img/delete-imf.svg" alt="delete"></button>
+                            <button class="btn btn-light delete_button" type="submit">
+                                <img src="/img/delete-imf.svg" alt="delete">
+                            </button>
                         </form>
                     </div>
                 </td>
@@ -97,6 +108,7 @@
         </tbody>
       </table>
       <script src="/autocomplete/autoComplete.min.js"></script>
+      <script src="/bootstrap/js/bootstrap.min.js"></script>
       <script src="/js/search.js"></script>
 </body>
 </html>
