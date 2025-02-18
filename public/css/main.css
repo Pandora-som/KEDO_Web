@@ -1,11 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     margin: 0;
     min-width: 320px;
 }
 
-/* body {
-    margin: 0;
-} */
 .header_line {
     min-height: 86px;
     display: flex;
@@ -13,8 +15,6 @@ body {
     align-items: center;
     justify-content: space-between;
     background-color: #D9D9D9;
-    margin: 0 auto;
-    position: relative; /* для позиционирования элемента .circle */
 }
 .logo-nav {
     display: flex;
@@ -39,24 +39,20 @@ body {
     justify-content: space-between;
 }
 .link:hover {
-    color: #3F7CF5;
+    color:#3F7CF5;
     border-bottom: 5px solid #3F7CF5;
     text-decoration: none;
+
 }
 .circle {
     height: 59px;
     width: 59px;
     border-radius: 50%;
     background-color: #8C8A8A;
+    margin-right: 50px;
     display: flex;
-    position: absolute;
-    right: 20px; /* вместо фиксированного margin-left */
-    top: 10px;   /* корректируем отступ сверху */
-}
-.circle img {
-    width: 100%;
-    margin-top: 10px;
-    object-fit: contain;
+    align-items: center;
+    justify-content: center;
 }
 h1 {
     margin-top: 41px;
@@ -64,17 +60,14 @@ h1 {
     font-size: 32px;
     font-family: interRegular;
 }
+.page__title {
+    margin-top: 35px;
+}
 .search__input {
     width: 350px;
     height: 45px;
     font-family: interExtraLight;
     font-size: 16px;
-}
-p img {
-    margin-bottom: -10px;
-}
-p {
-    margin-left: 633px;
 }
 .filter-btn {
     height: 60px;
@@ -144,29 +137,39 @@ p {
     margin-top: 51px;
     margin-left: 93px;
 }
-.table-info {
-    margin-top: 116px;
-    margin-left: 41px;
-    /*max-width: 1820px;*/
-    height: 432px;
-    background-color: #E9E8E8;
-    overflow-x: auto; /* для горизонтальной прокрутки на маленьких экранах */
+
+.table__legend {
+    margin-left: 52px;
 }
-td {
+
+.table-info {
+    max-width: 1400px;
+    margin: 15px auto 0;
+}
+/* td {
     border: 1px solid #00000022;
     font-family: interRegular;
     font-size: 18px;
-}
-.title-table {
+} */
+/* .title-table {
     font-family: interExtraLight;
     font-size: 18px;
     text-align: center;
-}
-td img {
+} */
+
+.delete_button {
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;
+    width: 40px;
+    height: 40px;
+}
+.actions {
+    display: flex;
     flex-direction: column;
-    margin-left: 400px;
+    align-items: center;
+    gap: 10px;
 }
 @font-face {
     font-family: interLight;
@@ -180,102 +183,3 @@ td img {
     font-family: interExtraLight;
     src: url("../Fonts/Inter-ExtraLight.otf");
 }
-
-/* Адаптивная верстка */
-
-/* Для экранов до 1200px */
-@media (max-width: 1200px) {
-    h1 {
-        margin-left: 30px;
-        font-size: 28px;
-    }
-    p {
-        margin-left: 30px;
-    }
-    .table-info {
-        margin-left: 20px;
-        width: calc(100% - 40px);
-    }
-}
-
-/* Для экранов до 992px */
-@media (max-width: 992px) {
-    .nav {
-        max-width: 100%;
-        padding: 20px;
-        flex-wrap: wrap;
-    }
-    .search__input {
-        width: 80%;
-        margin: 0 auto;
-    }
-    .func-block {
-        flex-direction: column;
-        align-items: center;
-    }
-    .filter-btn,
-    .create-btn {
-        width: 80%;
-        margin-bottom: 10px;
-    }
-    .class-choice {
-        margin-left: 0;
-        margin-top: 20px;
-    }
-    p {
-        margin-left: 20px;
-    }
-}
-
-/* Для экранов до 768px */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 24px;
-        margin-left: 20px;
-    }
-    .link {
-        font-size: 16px;
-        padding-bottom: 20px;
-    }
-    .search__input {
-        width: 90%;
-        height: 40px;
-    }
-    .circle {
-        right: 10px;
-        top: 5px;
-    }
-    .table-info {
-        width: 100%;
-        margin-left: 0;
-    }
-}
-
-/* Для экранов до 480px */
-@media (max-width: 480px) {
-    h1 {
-        font-size: 20px;
-        margin-left: 10px;
-    }
-    .link {
-        font-size: 14px;
-        padding-bottom: 10px;
-    }
-    .nav {
-        flex-direction: column;
-        align-items: center;
-        padding-top: 20px;
-    }
-    .search__input {
-        width: 95%;
-        height: 35px;
-    }
-    .filter-btn,
-    .create-btn {
-        width: 95%;
-    }
-    .func-block {
-        padding: 0 10px;
-    }
-}
-
