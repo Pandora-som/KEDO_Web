@@ -34,7 +34,7 @@ class IncomingLetterController extends Controller
         if (isset($data['classificator_id'])) {
             $query->where('classificator_id', '=', $data['classificator_id']);
         }
-        $incomingLetters = $query->get();
+        $incomingLetters = $query->paginate(10);
         return view('incoming_letter.index', compact(['request', 'incomingLetters', 'classificators']));
     }
 

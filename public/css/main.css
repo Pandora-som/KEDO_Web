@@ -142,6 +142,11 @@ h1 {
     margin-left: 52px;
 }
 
+.pagination__div {
+    margin: 0 auto;
+    width: fit-content;
+}
+
 .table-info {
     max-width: 1400px;
     margin: 15px auto 0;
