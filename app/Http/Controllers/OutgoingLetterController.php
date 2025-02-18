@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OutgoingLetter\FilterRequest;
+use App\Http\Requests\OutgoingLetter\StoreFilterRequest;
 use App\Models\Classificators;
 use App\Models\Destination;
 use App\Models\DocumentFrom;
@@ -47,17 +48,8 @@ class OutgoingLetterController extends Controller
         return view('outgoing_letter.create', compact(['destinations', 'document_names', 'performers', 'signers', 'classificators']));
     }
 
-    public function store() {
-        $data = request()->validate([
-            'registration_date' => 'date',
-            'destination' => 'string',
-            'document_name' => 'string',
-            'document_subject' => 'string',
-            'performer' => 'string',
-            'signer' => 'string',
-            'incoming_number' => 'integer',
-            'classificator_id' => 'integer'
-        ]);
+    public function store(StoreFilterRequest $request) {
+        $data = $request->validated();
 
         $destination = request()->validate([
             'destination' => 'string'
@@ -112,17 +104,8 @@ class OutgoingLetterController extends Controller
         return view('outgoing_letter.edit', compact(['outgoingLetter','destinations', 'document_names', 'performers', 'signers', 'classificators']));
     }
 
-    public function update(OutgoingLetter $outgoingLetter) {
-        $data = request()->validate([
-            'registarion_date' => 'date',
-            'destination' => 'string',
-            'document_name' => 'string',
-            'document_subject' => 'string',
-            'performer' => 'string',
-            'signer' => 'string',
-            'incoming_number' => 'integer',
-            'classificator_id' => 'integer'
-        ]);
+    public function update(OutgoingLetter $outgoingLetter, StoreFilterRequest $request) {
+        $data = $request->validated();
 
         $destination = request()->validate([
             'destination' => 'string'
