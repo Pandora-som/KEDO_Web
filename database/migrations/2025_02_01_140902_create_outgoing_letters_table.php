@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->dateTime('registarion_date');
+            $table->dateTime('registration_date');
 
             $table->unsignedBigInteger('destination_id');
             $table->index('destination_id', 'outgoing_letter_destination_idx');

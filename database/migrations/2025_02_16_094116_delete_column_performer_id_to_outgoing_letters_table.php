@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('incoming_letters', function (Blueprint $table) {
-            $table->dropForeign('incoming_letter_performer_fk');
-            $table->dropIndex('incoming_letter_performer_idx');
+        Schema::table('outgoing_letters', function (Blueprint $table) {
+            $table->dropForeign('outgoing_letter_performer_fk');
+            $table->dropIndex('outgoing_letter_performer_idx');
             $table->dropColumn('performer_id');
         });
     }
@@ -23,10 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('incoming_letters', function (Blueprint $table) {
+        Schema::table('outgoing_letters', function (Blueprint $table) {
             $table->unsignedBigInteger('performer_id');
-            $table->index('performer_id', 'incoming_letter_performer_idx');
-            $table->foreign('performer_id', 'incoming_letter_performer_fk')->on('performers')->references('id');
+            $table->index('performer_id', 'outgoing_letter_performer_idx');
+            $table->foreign('performer_id', 'outgoing_letter_performer_fk')->on('performers')->references('id');
         });
     }
 };

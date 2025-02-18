@@ -23,13 +23,6 @@ class FilterRequest extends FormRequest
     {
         return [
             'registration_date' => 'date',
-            'document_from_id' => 'integer',
-            'document_name_id' => 'integer',
-            'document_number' => 'integer',
-            'document_date' => 'date',
-            'document_subject' => 'string',
-            'resolution' => 'string',
-            'performer_id' => 'integer',
             'deadline' => 'date',
             'status_id' => 'integer',
             'classificator_id' => 'integer',

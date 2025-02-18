@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Filters\IncomingLetterFilter;
 use App\Http\Requests\IncomingLetter\FilterRequest;
+use App\Http\Requests\IncomingLetter\StoreRequestFilter;
 use App\Models\Classificators;
 use App\Models\DocumentFrom;
 use App\Models\DocumentName;
@@ -46,20 +47,8 @@ class IncomingLetterController extends Controller
         return view('incoming_letter.create', compact(['document_froms', 'document_names', 'performers', 'statuses', 'classificators']));
     }
 
-    public function store() {
-        $data = request()->validate([
-            'registration_date' => 'date',
-            'document_from' => 'string',
-            'document_name' => 'string',
-            'document_number' => 'integer',
-            'document_date' => 'date',
-            'document_subject' => 'string',
-            'resolution' => 'string',
-            'performer' => 'string',
-            'deadline' => 'date',
-            'status_id' => 'integer',
-            'classificator_id' => 'integer'
-        ]);
+    public function store(StoreRequestFilter $request) {
+        $data = $request->validated();
 
         $document_from = request()->validate([
             'document_from' => 'string'
@@ -104,26 +93,46 @@ class IncomingLetterController extends Controller
         return view('incoming_letter.edit', compact(['incomingLetter', 'document_froms', 'document_names', 'performers', 'statuses', 'classificators']));
     }
 
-    public function update(IncomingLetter $incomingLetter) {
-        $data = request()->validate([
-            'registration_date' => 'date',
-            'document_from_id' => 'integer',
-            'document_name_id' => 'integer',
-            'document_number' => 'integer',
-            'document_date' => 'date',
-            'document_subject' => 'string',
-            'resolution' => 'string',
-            'performer_id' => 'integer',
-            'deadline' => 'date',
-            'status_id' => 'integer',
-            'classificator_id' => 'integer'
+    public function update(IncomingLetter $incomingLetter, StoreRequestFilter $request) {
+        $data = $request->validated();
+
+        $document_from = request()->validate([
+            'document_from' => 'string'
         ]);
+
+        $document_name = request()->validate([
+            'document_name' => 'string'
+        ]);
+
+        $performer = request()->validate([
+            'performer' => 'string'
+        ]);
+
+        DocumentFrom::firstOrCreate([
+            'organisation_name' => $document_from['document_from']
+        ], [
+            'organisation_name' => $document_from['document_from']
+        ]);
+
+        DocumentName::firstOrCreate([
+            'name' => $document_name['document_name']
+        ], [
+            'name' => $document_name['document_name']
+        ]);
+
+        Performer::firstOrCreate([
+            'performer_name' => $performer['performer']
+        ], [
+            'performer_name' => $performer['performer']
+        ]);
+
         $incomingLetter->update($data);
         $document_froms = DocumentFrom::all();
         $document_names = DocumentName::all();
         $performers = Performer::all();
         $statuses = Status::all();
         $classificators = Classificators::all();
+
         return redirect()->route('incoming_letter.index', compact(['document_froms', 'document_names', 'performers', 'statuses', 'classificators']));
     }
     public function destroy(IncomingLetter $incomingLetter) {

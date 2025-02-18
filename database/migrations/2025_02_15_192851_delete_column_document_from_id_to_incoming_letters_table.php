@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('incoming_letters', function (Blueprint $table) {
             $table->dropForeign('incoming_letter_document_from_fk');
+            $table->dropIndex('incoming_letter_document_from_idx');
             $table->dropColumn('document_from_id');
         });
     }

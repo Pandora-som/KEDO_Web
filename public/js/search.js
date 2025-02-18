@@ -8,7 +8,7 @@ for (let i of incomingLetters) {
 
 const autoCompleteJS = new autoComplete({
     selector: "#autoComplete",
-    placeHolder: "Поиск по параметру",
+    placeHolder: "Поиск...",
     data: {
         src: incomingLettersSearchOn,
         cache: true,
@@ -31,4 +31,9 @@ const autoCompleteJS = new autoComplete({
     resultItem: {
         highlight: true,
     }
+});
+
+document.querySelector('#autoComplete').addEventListener("selection", function (event) {
+    // "event.detail" carries the autoComplete.js "feedback" object
+    document.querySelector('#autoComplete').value = event.detail.selection.value;
 });

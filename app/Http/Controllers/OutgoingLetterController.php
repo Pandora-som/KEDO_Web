@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OutgoingLetter\FilterRequest;
+use App\Http\Requests\OutgoingLetter\StoreFilterRequest;
 use App\Models\Classificators;
 use App\Models\Destination;
 use App\Models\DocumentFrom;
@@ -15,9 +17,27 @@ use Illuminate\Http\Request;
 
 class OutgoingLetterController extends Controller
 {
-    public function index() {
-        $outgoingLetters = OutgoingLetter::all();
-        return view('outgoing_letter.index', compact("outgoingLetters"));
+    public function index(FilterRequest $request) {
+        $classificators = Classificators::all();
+
+        $data = $request->validated();
+        // $filter = app()->make(IncomingLetterFilter::class, ['queryParams' => array_filter($data)]);
+        // $incomingLetters = IncomingLetter::filter($filter)->get();
+        $query = OutgoingLetter::query();
+        if (isset($data['start_date']) and isset($data['end_date'])) {
+            $query->whereDate('registration_date', '>=', $data['start_date'])
+            ->whereDate('registration_date', '<=', $data['end_date']);
+
+        } elseif (isset($data['end_date']) and isset($data['start_date']) and ($data['start_date'] > $data['end_date'])) {
+            $data['end_date'] = $data['start_date'];
+            $query->whereDate('registration_date', '=', $data['start_date']);
+        };
+
+        if (isset($data['classificator_id'])) {
+            $query->where('classificator_id', '=', $data['classificator_id']);
+        }
+        $outgoingLetters = $query->get();
+        return view('outgoing_letter.index', compact(['request', "outgoingLetters", 'classificators']));
     }
     public function create() {
         $destinations = Destination::all();
@@ -28,17 +48,49 @@ class OutgoingLetterController extends Controller
         return view('outgoing_letter.create', compact(['destinations', 'document_names', 'performers', 'signers', 'classificators']));
     }
 
-    public function store() {
-        $data = request()->validate([
-            'registarion_date' => 'date',
-            'destination_id' => 'integer',
-            'document_name_id' => 'integer',
-            'document_subject' => 'string',
-            'performer_id' => 'integer',
-            'signer_id' => 'integer',
-            'incoming_number' => 'integer',
-            'classificator_id' => 'integer'
+    public function store(StoreFilterRequest $request) {
+        $data = $request->validated();
+
+        $destination = request()->validate([
+            'destination' => 'string'
         ]);
+
+        $document_name = request()->validate([
+            'document_name' => 'string'
+        ]);
+
+        $performer = request()->validate([
+            'performer' => 'string'
+        ]);
+
+        $signer = request()->validate([
+            'signer' => 'string'
+        ]);
+
+        Destination::firstOrCreate([
+            'destination_name' => $destination['destination']
+        ], [
+            'destination_name' => $destination['destination']
+        ]);
+
+        DocumentName::firstOrCreate([
+            'name' => $document_name['document_name']
+        ], [
+            'name' => $document_name['document_name']
+        ]);
+
+        Performer::firstOrCreate([
+            'performer_name' => $performer['performer']
+        ], [
+            'performer_name' => $performer['performer']
+        ]);
+
+        Signer::firstOrCreate([
+            'signer_name' => $signer['signer']
+        ], [
+            'signer_name' => $signer['signer']
+        ]);
+
         OutgoingLetter::create($data);
         return redirect()->route('outgoing_letter.index');
     }
@@ -52,17 +104,49 @@ class OutgoingLetterController extends Controller
         return view('outgoing_letter.edit', compact(['outgoingLetter','destinations', 'document_names', 'performers', 'signers', 'classificators']));
     }
 
-    public function update(OutgoingLetter $outgoingLetter) {
-        $data = request()->validate([
-            'registarion_date' => 'date',
-            'destination_id' => 'integer',
-            'document_name_id' => 'integer',
-            'document_subject' => 'string',
-            'performer_id' => 'integer',
-            'signer_id' => 'integer',
-            'incoming_number' => 'integer',
-            'classificator_id' => 'integer'
+    public function update(OutgoingLetter $outgoingLetter, StoreFilterRequest $request) {
+        $data = $request->validated();
+
+        $destination = request()->validate([
+            'destination' => 'string'
         ]);
+
+        $document_name = request()->validate([
+            'document_name' => 'string'
+        ]);
+
+        $performer = request()->validate([
+            'performer' => 'string'
+        ]);
+
+        $signer = request()->validate([
+            'signer' => 'string'
+        ]);
+
+        Destination::firstOrCreate([
+            'destination_name' => $destination['destination']
+        ], [
+            'destination_name' => $destination['destination']
+        ]);
+
+        DocumentName::firstOrCreate([
+            'name' => $document_name['document_name']
+        ], [
+            'name' => $document_name['document_name']
+        ]);
+
+        Performer::firstOrCreate([
+            'performer_name' => $performer['performer']
+        ], [
+            'performer_name' => $performer['performer']
+        ]);
+
+        Signer::firstOrCreate([
+            'signer_name' => $signer['signer']
+        ], [
+            'signer_name' => $signer['signer']
+        ]);
+
         $outgoingLetter->update($data);
         return redirect()->route('outgoing_letter.index');
     }

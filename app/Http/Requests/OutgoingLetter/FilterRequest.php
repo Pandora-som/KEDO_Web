@@ -11,7 +11,7 @@ class FilterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,7 +29,9 @@ class FilterRequest extends FormRequest
             'performer_id' => 'integer',
             'signer_id' => 'integer',
             'incoming_number' => 'integer',
-            'classificator_id' => 'integer'
+            'classificator_id' => 'integer',
+            'start_date' => 'date',
+            'end_date' => 'date|after_or_equal:start_date'
         ];
     }
 }
