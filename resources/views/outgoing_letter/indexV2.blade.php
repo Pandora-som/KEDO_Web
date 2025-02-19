@@ -62,62 +62,61 @@
                 </div>
             </div>
         </div>
-        <input id="autoComplete" type="text" name="search">
+        <form class="search__form" action="">
+            <div>
+                <input type="email" class="form-control" id="searchInput" placeholder="Поиск...">
+            </div>
+            <button type="submit" class="btn btn-primary">Найти</button>
+        </form>
         <a class="btn btn-primary" href="#" role="button">Корзина</a>
         <a class="btn btn-primary" href="{{ route('outgoing_letter.create') }}" role="button">Создать</a>
     </div>
 
-    <div class="table__legend">
-        <p>
-            <button class="btn btn-danger"></button> - просроченный срок документа
-        </p>
-        <p>
-            <button class="btn btn-warning"></button> - срок документа выходит сегодня
-        </p>
-    </div>
     <div class="pagination__div">
         {{ $outgoingLetters->withQueryString()->links() }}
     </div>
-    <table class="table table-light table-striped" style="width: 100%">
-        <tbody>
-            <tr>
-                <th scope="row">№</th>
-                <th scope="row">Дата регистрации</th>
-                <th scope="row">Кому адресован документ</th>
-                <th scope="row">Наименование документа</th>
-                <th scope="row">Тема документа</th>
-                <th scope="row">Подписант</th>
-                <th scope="row">Исполнитель</h>
-                <th scope="row">Отметка об исполнении (на вх. №)</th>
-                <th scope="row">Действия</th>
-            </tr>
-            @foreach ($outgoingLetters as $outgoingLetter)
-            <tr>
-                <td>{{$outgoingLetter->id}}</td>
-                <td>{{$outgoingLetter->registration_date}}</td>
-                <td>{{$outgoingLetter->destination}}</td>
-                <td>{{$outgoingLetter->document_name}}</td>
-                <td>{{$outgoingLetter->document_subject}}</td>
-                <td>{{$outgoingLetter->signer}}</td>
-                <td>{{$outgoingLetter->performer}}</td>
-                <td>{{$outgoingLetter->incoming_number}}</td>
-                <td>
-                    <div class="actions">
-                        <a href="{{ route('outgoing_letter.edit', $outgoingLetter->id) }}"><img src="/img/edit-img.svg"
-                                alt="edit"></a>
-                        <form action="{{ route('outgoing_letter.delete', $outgoingLetter->id) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button class="btn btn-light delete_button" type="submit" onclick="return confirm('Вы уверны, что хотите удалить запись?')"><img src="/img/delete-imf.svg"
-                                    alt="delete">
-                            </button>
-                        </form>
-                    </div>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="table_container">
+        <table class="table table-light table-striped table-hover" style="width: 100%">
+            <tbody>
+                <tr>
+                    <th>№</th>
+                    <th>Дата регистрации</th>
+                    <th>Кому адресован документ</th>
+                    <th>Наименование документа</th>
+                    <th>Тема документа</th>
+                    <th>Подписант</th>
+                    <th>Исполнитель</h>
+                    <th>Отметка об исполнении (на вх. №)</th>
+                    <th>Действия</th>
+                </tr>
+                @foreach ($outgoingLetters as $outgoingLetter)
+                <tr>
+                    <td>{{$outgoingLetter->id}}</td>
+                    <td>{{$outgoingLetter->registration_date}}</td>
+                    <td>{{$outgoingLetter->destination}}</td>
+                    <td>{{$outgoingLetter->document_name}}</td>
+                    <td>{{$outgoingLetter->document_subject}}</td>
+                    <td>{{$outgoingLetter->signer}}</td>
+                    <td>{{$outgoingLetter->performer}}</td>
+                    <td>{{$outgoingLetter->incoming_number}}</td>
+                    <td>
+                        <div class="actions">
+                            <a href="{{ route('outgoing_letter.edit', $outgoingLetter->id) }}"><img src="/img/edit-img.svg"
+                                    alt="edit"></a>
+                            <form action="{{ route('outgoing_letter.delete', $outgoingLetter->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-light delete_button" type="submit" onclick="return confirm('Вы уверны, что хотите удалить запись?')"><img src="/img/delete-imf.svg"
+                                        alt="delete">
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
     <div class="pagination__div">
         {{ $outgoingLetters->withQueryString()->links() }}
     </div>
