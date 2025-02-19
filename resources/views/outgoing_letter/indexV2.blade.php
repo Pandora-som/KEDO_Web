@@ -63,7 +63,7 @@
             </div>
         </div>
         <input id="autoComplete" type="text" name="search">
-        <a class="btn btn-primary" href="#" role="button">Корзина</a>
+        <a class="btn btn-primary" href="{{route('bin')}}" role="button">Корзина</a>
         <a class="btn btn-primary" href="{{ route('outgoing_letter.create') }}" role="button">Создать</a>
     </div>
 
@@ -103,8 +103,8 @@
                 <td>{{$outgoingLetter->incoming_number}}</td>
                 <td>
                     <div class="actions">
-                        <a href="{{ route('outgoing_letter.edit', $outgoingLetter->id) }}"><img src="/img/edit-img.svg"
-                                alt="edit"></a>
+                        <button class="btn btn-light delete_button"><a href="{{ route('outgoing_letter.edit', $outgoingLetter->id) }}"><img src="/img/edit-img.svg"
+                                alt="edit"></a></button>
                         <form action="{{ route('outgoing_letter.delete', $outgoingLetter->id) }}" method="post">
                             @csrf
                             @method('delete')

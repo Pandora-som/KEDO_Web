@@ -64,7 +64,7 @@
             </div>
         </div>
         <input id="autoComplete" type="text" name="search">
-        <a class="btn btn-primary" href="#" role="button">Корзина</a>
+        <a class="btn btn-primary" href="{{route('bin')}}" role="button">Корзина</a>
         <a class="btn btn-primary" href="{{ route('incoming_letter.create') }}" role="button">Создать</a>
     </div>
 
@@ -111,8 +111,8 @@
                 <td>{{$incomingLetter->status->status_name}}</td>
                 <td>
                     <div class="actions">
-                        <a href="{{ route('incoming_letter.edit', $incomingLetter->id) }}"><img src="/img/edit-img.svg"
-                                alt="edit"></a>
+                        <button class="btn btn-light delete_button"><a href="{{ route('incoming_letter.edit', $incomingLetter->id) }}"><img src="/img/edit-img.svg"
+                                alt="edit"></a></button>
                         <form action="{{ route('incoming_letter.delete', $incomingLetter->id) }}" method="post">
                             @csrf
                             @method('delete')
