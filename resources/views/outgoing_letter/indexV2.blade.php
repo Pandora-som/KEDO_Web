@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ asset(path: 'css/main.css') }}">
+    <link rel="stylesheet" href="/autocomplete/css/autoComplete.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+</head>
+
+@extends('layouts.header')
+
+@section('content')
+<body>
+    <h1 class="page__title">Реестр регистрации исходящих документов</h1>
+    <div class="func-block">
+        <div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Фильтры
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Фильтры</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ url()->full() }}" method="GET">
+                                <h3>Классификация</h3>
+                                @foreach ($classificators as $classificator)
+                                <input type="checkbox" id="{{ $classificator->classificator_name }}"
+                                    {{ $request->query('classificator_id') == $classificator->id ? ' checked' : '' }}
+                                    name="classificator_id" value="{{ $classificator->id }}">
+                                <label
+                                    for="{{ $classificator->classificator_name }}">{{ $classificator->classificator_name }}</label>
+                                @endforeach
+
+                                <div class="date__filter">
+                                    <label for="start_date">Дата с:</label>
+                                    <input id="start_date" type="date" name="start_date"
+                                        value="{{ $request->query('start_date') ? $request->query('start_date') : date('Y-m-d', strtotime('last month'))}}">
+
+                                    <label for="end_date">по:</label>
+                                    <input id="end_date" type="date" name="end_date"
+                                        value="{{ $request->query('end_date') ? $request->query('end_date') : now()->format('Y-m-d') }}">
+                                </div>
+
+                                <a href="{{ route('outgoing_letter.index') }}">Очистить классификацию</a>
+                                <button>Отфильтровать</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input id="autoComplete" type="text" name="search">
+        <a class="btn btn-primary" href="#" role="button">Корзина</a>
+        <a class="btn btn-primary" href="{{ route('outgoing_letter.create') }}" role="button">Создать</a>
+    </div>
+
+    <div class="table__legend">
+        <p>
+            <button class="btn btn-danger"></button> - просроченный срок документа
+        </p>
+        <p>
+            <button class="btn btn-warning"></button> - срок документа выходит сегодня
+        </p>
+    </div>
+    <div class="pagination__div">
+        {{ $outgoingLetters->withQueryString()->links() }}
+    </div>
+    <table class="table table-light table-striped" style="width: 100%">
+        <tbody>
+            <tr>
+                <th scope="row">№</th>
+                <th scope="row">Дата регистрации</th>
+                <th scope="row">Кому адресован документ</th>
+                <th scope="row">Наименование документа</th>
+                <th scope="row">Тема документа</th>
+                <th scope="row">Подписант</th>
+                <th scope="row">Исполнитель</h>
+                <th scope="row">Отметка об исполнении (на вх. №)</th>
+                <th scope="row">Действия</th>
+            </tr>
+            @foreach ($outgoingLetters as $outgoingLetter)
+            <tr>
+                <td>{{$outgoingLetter->id}}</td>
+                <td>{{$outgoingLetter->registration_date}}</td>
+                <td>{{$outgoingLetter->destination}}</td>
+                <td>{{$outgoingLetter->document_name}}</td>
+                <td>{{$outgoingLetter->document_subject}}</td>
+                <td>{{$outgoingLetter->signer}}</td>
+                <td>{{$outgoingLetter->performer}}</td>
+                <td>{{$outgoingLetter->incoming_number}}</td>
+                <td>
+                    <div class="actions">
+                        <a href="{{ route('outgoing_letter.edit', $outgoingLetter->id) }}"><img src="/img/edit-img.svg"
+                                alt="edit"></a>
+                        <form action="{{ route('outgoing_letter.delete', $outgoingLetter->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-light delete_button" type="submit" onclick="return confirm('Вы уверны, что хотите удалить запись?')"><img src="/img/delete-imf.svg"
+                                    alt="delete">
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <div class="pagination__div">
+        {{ $outgoingLetters->withQueryString()->links() }}
+    </div>
+    <script src="/autocomplete/autoComplete.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/js/search.js"></script>
+</body>
+@endsection
+</html>

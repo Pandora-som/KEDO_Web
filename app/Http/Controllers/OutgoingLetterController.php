@@ -37,7 +37,7 @@ class OutgoingLetterController extends Controller
             $query->where('classificator_id', '=', $data['classificator_id']);
         }
         $outgoingLetters = $query->paginate(10);
-        return view('outgoing_letter.index', compact(['request', "outgoingLetters", 'classificators']));
+        return view('outgoing_letter.indexV2', compact(['request', "outgoingLetters", 'classificators']));
     }
     public function create() {
         $destinations = Destination::all();
