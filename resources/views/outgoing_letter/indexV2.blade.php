@@ -16,6 +16,7 @@
 <body>
     <h1 class="page__title">Реестр регистрации исходящих документов</h1>
     <div class="func-block">
+        <a href="{{ route('outgoing_letter.index') }}">Сбросить фильтры</a>
         <div>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Фильтры
@@ -51,8 +52,8 @@
                                         value="{{ $request->query('end_date') ? $request->query('end_date') : now()->format('Y-m-d') }}">
                                 </div>
 
-                                <a href="{{ route('outgoing_letter.index') }}">Очистить классификацию</a>
-                                <button>Отфильтровать</button>
+                                <button class="btn btn-primary">Отфильтровать</button>
+                                <a href="{{ route('outgoing_letter.index') }}">Сбросить</a>
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -62,9 +63,9 @@
                 </div>
             </div>
         </div>
-        <form class="search__form" action="">
+        <form class="search__form" action="{{ url()->full() }}" method="GET">
             <div>
-                <input type="email" class="form-control" id="searchInput" placeholder="Поиск...">
+                <input name="find" type="search" class="form-control" id="searchInput" placeholder="Поиск..." value="{{ $request->query('find') ? $request->query('find') : '' }}">
             </div>
             <button type="submit" class="btn btn-primary">Найти</button>
         </form>
