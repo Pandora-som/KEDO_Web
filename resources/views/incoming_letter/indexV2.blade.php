@@ -17,6 +17,7 @@
     <h1 class="page__title">Реестр регистрации входящих документов</h1>
 
     <div class="func-block">
+        <a href="{{ route('incoming_letter.index') }}">Сбросить фильтры</a>
         <div>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Фильтры
@@ -52,8 +53,8 @@
                                         value="{{ $request->query('end_date') ? $request->query('end_date') : now()->format('Y-m-d') }}">
                                 </div>
 
-                                <a href="{{ route('incoming_letter.index') }}">Очистить классификацию</a>
-                                <button>Отфильтровать</button>
+                                <button class="btn btn-primary">Отфильтровать</button>
+                                <a href="{{ route('incoming_letter.index') }}">Сбросить</a>
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -63,7 +64,12 @@
                 </div>
             </div>
         </div>
-        <input id="autoComplete" type="text" name="search">
+        <form class="search__form" action="{{ url()->full() }}" method="GET">
+            <div>
+                <input name="find" type="search" class="form-control" id="searchInput" placeholder="Поиск..." value="{{ $request->query('find') ? $request->query('find') : '' }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Найти</button>
+        </form>
         <a class="btn btn-primary" href="#" role="button">Корзина</a>
         <a class="btn btn-primary" href="{{ route('incoming_letter.create') }}" role="button">Создать</a>
     </div>
