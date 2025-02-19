@@ -16,6 +16,7 @@
 <body>
     <h1 class="page__title">Реестр регистрации исходящих документов</h1>
     <div class="func-block">
+        <a href="{{ route('outgoing_letter.index') }}">Сбросить фильтры</a>
         <div>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Фильтры
@@ -51,8 +52,8 @@
                                         value="{{ $request->query('end_date') ? $request->query('end_date') : now()->format('Y-m-d') }}">
                                 </div>
 
-                                <a href="{{ route('outgoing_letter.index') }}">Очистить классификацию</a>
-                                <button>Отфильтровать</button>
+                                <button class="btn btn-primary">Отфильтровать</button>
+                                <a href="{{ route('outgoing_letter.index') }}">Сбросить</a>
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -62,62 +63,61 @@
                 </div>
             </div>
         </div>
-        <input id="autoComplete" type="text" name="search">
-        <a class="btn btn-primary" href="{{route('bin')}}" role="button">Корзина</a>
+        <form class="search__form" action="{{ url()->full() }}" method="GET">
+            <div>
+                <input name="find" type="search" class="form-control" id="searchInput" placeholder="Поиск..." value="{{ $request->query('find') ? $request->query('find') : '' }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Найти</button>
+        </form>
+        <a class="btn btn-primary" href="#" role="button">Корзина</a>
         <a class="btn btn-primary" href="{{ route('outgoing_letter.create') }}" role="button">Создать</a>
     </div>
 
-    <div class="table__legend">
-        <p>
-            <button class="btn btn-danger"></button> - просроченный срок документа
-        </p>
-        <p>
-            <button class="btn btn-warning"></button> - срок документа выходит сегодня
-        </p>
-    </div>
     <div class="pagination__div">
         {{ $outgoingLetters->withQueryString()->links() }}
     </div>
-    <table class="table table-light table-striped" style="width: 100%">
-        <tbody>
-            <tr>
-                <th scope="row">№</th>
-                <th scope="row">Дата регистрации</th>
-                <th scope="row">Кому адресован документ</th>
-                <th scope="row">Наименование документа</th>
-                <th scope="row">Тема документа</th>
-                <th scope="row">Подписант</th>
-                <th scope="row">Исполнитель</h>
-                <th scope="row">Отметка об исполнении (на вх. №)</th>
-                <th scope="row">Действия</th>
-            </tr>
-            @foreach ($outgoingLetters as $outgoingLetter)
-            <tr>
-                <td>{{$outgoingLetter->id}}</td>
-                <td>{{$outgoingLetter->registration_date}}</td>
-                <td>{{$outgoingLetter->destination}}</td>
-                <td>{{$outgoingLetter->document_name}}</td>
-                <td>{{$outgoingLetter->document_subject}}</td>
-                <td>{{$outgoingLetter->signer}}</td>
-                <td>{{$outgoingLetter->performer}}</td>
-                <td>{{$outgoingLetter->incoming_number}}</td>
-                <td>
-                    <div class="actions">
-                        <button class="btn btn-light delete_button"><a href="{{ route('outgoing_letter.edit', $outgoingLetter->id) }}"><img src="/img/edit-img.svg"
-                                alt="edit"></a></button>
-                        <form action="{{ route('outgoing_letter.delete', $outgoingLetter->id) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button class="btn btn-light delete_button" type="submit" onclick="return confirm('Вы уверны, что хотите удалить запись?')"><img src="/img/delete-imf.svg"
-                                    alt="delete">
-                            </button>
-                        </form>
-                    </div>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="table_container">
+        <table class="table table-light table-striped table-hover" style="width: 100%">
+            <tbody>
+                <tr>
+                    <th>№</th>
+                    <th>Дата регистрации</th>
+                    <th>Кому адресован документ</th>
+                    <th>Наименование документа</th>
+                    <th>Тема документа</th>
+                    <th>Подписант</th>
+                    <th>Исполнитель</h>
+                    <th>Отметка об исполнении (на вх. №)</th>
+                    <th>Действия</th>
+                </tr>
+                @foreach ($outgoingLetters as $outgoingLetter)
+                <tr>
+                    <td>{{$outgoingLetter->id}}</td>
+                    <td>{{$outgoingLetter->registration_date}}</td>
+                    <td>{{$outgoingLetter->destination}}</td>
+                    <td>{{$outgoingLetter->document_name}}</td>
+                    <td>{{$outgoingLetter->document_subject}}</td>
+                    <td>{{$outgoingLetter->signer}}</td>
+                    <td>{{$outgoingLetter->performer}}</td>
+                    <td>{{$outgoingLetter->incoming_number}}</td>
+                    <td>
+                        <div class="actions">
+                            <a href="{{ route('outgoing_letter.edit', $outgoingLetter->id) }}"><img src="/img/edit-img.svg"
+                                    alt="edit"></a>
+                            <form action="{{ route('outgoing_letter.delete', $outgoingLetter->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-light delete_button" type="submit" onclick="return confirm('Вы уверны, что хотите удалить запись?')"><img src="/img/delete-imf.svg"
+                                        alt="delete">
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
     <div class="pagination__div">
         {{ $outgoingLetters->withQueryString()->links() }}
     </div>
