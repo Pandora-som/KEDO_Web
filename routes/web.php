@@ -3,28 +3,42 @@
 use App\Http\Controllers\IncomingLetterController;
 use App\Http\Controllers\OutgoingLetterController;
 use App\Http\Controllers\AutorizationController;
+use App\Http\Controllers\BinController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\Login;
 
-//Route::get('/', [OutgoingLetterController::class, "index"])->name("index");
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/incoming_letters', [IncomingLetterController::class, "index"])->name('incoming_letter.index');
+Route::get('/incoming_letters', [IncomingLetterController::class, "index"])->name('incoming_letter.index')->middleware('auth');
 
-Route::get('/outgoing_letters', [OutgoingLetterController::class, "index"])->name('outgoing_letter.index');
+Route::get('/outgoing_letters', [OutgoingLetterController::class, "index"])->name('outgoing_letter.index')->middleware('auth');
 
-Route::get('/incoming_letters/create', [IncomingLetterController::class, 'create'])->name('incoming_letter.create');
-Route::post('/incoming_letters', [IncomingLetterController::class, 'store'])->name('incoming_letter.store');
+Route::get('/incoming_letters/create', [IncomingLetterController::class, 'create'])->name('incoming_letter.create')->middleware('auth');
+Route::post('/incoming_letters', [IncomingLetterController::class, 'store'])->name('incoming_letter.store')->middleware('auth');
 
-Route::get('/incoming_letters/{incoming_letter}/edit', [IncomingLetterController::class, 'edit'])->name('incoming_letter.edit');
-Route::patch('/incoming_letters/{incoming_letter}', [IncomingLetterController::class, 'update'])->name('incoming_letter.update');
+Route::get('/incoming_letters/{incoming_letter}/edit', [IncomingLetterController::class, 'edit'])->name('incoming_letter.edit')->middleware('auth');
+Route::patch('/incoming_letters/{incoming_letter}', [IncomingLetterController::class, 'update'])->name('incoming_letter.update')->middleware('auth');
 
-Route::delete('/incoming_letters/{incoming_letter}', [IncomingLetterController::class, 'destroy'])->name('incoming_letter.delete');
+Route::delete('/incoming_letters/{incoming_letter}', [IncomingLetterController::class, 'destroy'])->name('incoming_letter.delete')->middleware('auth');
 
-Route::get('/outgoing_letters/create', [OutgoingLetterController::class, 'create'])->name('outgoing_letter.create');
-Route::post('/outgoing_letters', [OutgoingLetterController::class, 'store'])->name('outgoing_letter.store');
+Route::get('/outgoing_letters/create', [OutgoingLetterController::class, 'create'])->name('outgoing_letter.create')->middleware('auth');
+Route::post('/outgoing_letters', [OutgoingLetterController::class, 'store'])->name('outgoing_letter.store')->middleware('auth');
 
-Route::get('/outgoing_letters/{outgoing_letter}/edit', [OutgoingLetterController::class, 'edit'])->name('outgoing_letter.edit');
-Route::patch('/outgoing_letters/{outgoing_letter}', [OutgoingLetterController::class, 'update'])->name('outgoing_letter.update');
+Route::get('/outgoing_letters/{outgoing_letter}/edit', [OutgoingLetterController::class, 'edit'])->name('outgoing_letter.edit')->middleware('auth');
+Route::patch('/outgoing_letters/{outgoing_letter}', [OutgoingLetterController::class, 'update'])->name('outgoing_letter.update')->middleware('auth');
 
-Route::delete('/outgoing_letters/{outgoing_letter}', [OutgoingLetterController::class, 'destroy'])->name('outgoing_letter.delete');
+Route::delete('/outgoing_letters/{outgoing_letter}', [OutgoingLetterController::class, 'destroy'])->name('outgoing_letter.delete')->middleware('auth');
 
-Route::get('/', [AutorizationController::class, "index"])->name('autorization');
+Route::get('/bin', [BinController::class, "index"])->name('bin')->middleware('auth');
+
+Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route::get('/', function () {
+//     return redirect()->route("auth");
+//     })->name("home");
+
+//     Route::get('/login', [\App\Http\Controllers\Auth\Login::class, 'login'])->name("login");
+//     Route::post('/auth', [\App\Http\Controllers\Auth\Login::class, 'auth'])->name("auth");

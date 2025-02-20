@@ -19,7 +19,7 @@
                 <a href="{{route('incoming_letter.index')}}" class="link">Входящие документы</a>
             </nav>
         </div>
-        <a href="{{route('autorization')}}">
+        <a href="#">
             <div class="circle">
                 <img src="img/User.svg" height="35px" width="35px" alt="user">
             </div>

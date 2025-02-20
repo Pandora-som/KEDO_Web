@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/incomingLetter.css') }}">
     <link rel="stylesheet" href="{{ asset('autocomplete/css/autoComplete.css') }}">
-    <title>Document</title>
+    <title>СЭД УрФУ</title>
 </head>
 <body>
     <h1>Регистрация исходящего документа</h1>

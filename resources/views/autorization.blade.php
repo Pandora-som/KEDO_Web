@@ -11,14 +11,16 @@
     <div class="header_line">
         <div class="logo-nav"><img src="img/logo.svg"></div>
 
-        <a href="{{route('autorization')}}">
+        <a href="{{route('auth')}}">
             <div class="circle">
                 <img src="img/User.svg" height="35px" width="35px" alt="user">
             </div>
         </a>
     </div>
     <h1>СИСТЕМА РЕГИСТРАЦИИ ДОКУМЕНТОВ</h1>
-    <div class="autorization-block">
+    <form method="post" action="{{route("auth")}}">
+        @csrf
+        <div class="autorization-block">
         <p class="title-p">Вход</p>
     <div class="all-div">
         <div class="small-div">
@@ -42,8 +44,8 @@
         <div class="checkbox-div">
             <input type="checkbox" id="remember_me" class="checkbox-style"> <label for="remember_me">запомнить меня</label>
         </div>
-        <button class="enter-btn">ВОЙТИ</button>
+        <button class="enter-btn" type="submit">ВОЙТИ</button>
     </div>
-    </div>
+    </div></form>
 </body>
 </html>
