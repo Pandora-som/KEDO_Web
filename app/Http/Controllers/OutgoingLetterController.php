@@ -36,6 +36,10 @@ class OutgoingLetterController extends Controller
         if (isset($data['classificator_id'])) {
             $query->where('classificator_id', '=', $data['classificator_id']);
         }
+
+        if (isset($data['find'])) {
+            $query->whereAny(['destination', 'document_name', 'document_subject', 'incoming_number', 'performer', 'signer'], 'LIKE', "%{$data['find']}%");
+        }
         $outgoingLetters = $query->paginate(10);
         return view('outgoing_letter.indexV2', compact(['request', "outgoingLetters", 'classificators']));
     }
