@@ -30,7 +30,7 @@ class StoreRequestFilter extends FormRequest
             'document_subject' => 'required|string',
             'resolution' => 'required|string',
             'performer' => 'required|string',
-            'deadline' => 'required|date|after_or_equal:document_date',
+            'deadline' => 'date|after_or_equal:document_date',
             'status_id' => 'required|integer',
             'classificator_id' => 'required|integer'
         ];
@@ -50,7 +50,6 @@ class StoreRequestFilter extends FormRequest
             'document_subject.required' => 'Поле обязательно к заполнению!',
             'resolution.required' => 'Поле обязательно к заполнению!',
             'performer.required' => 'Поле обязательно к заполнению!',
-            'deadline.required' => 'Поле обязательно к заполнению!',
 
             'deadline.after_or_equal' => 'Срок исполнения не может быть раньше даты документа!',
         ];

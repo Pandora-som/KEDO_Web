@@ -104,7 +104,7 @@
                 </tr>
                 @foreach ($incomingLetters as $incomingLetter)
                 <tr
-                    {{ $incomingLetter->deadline < now()->format('Y-m-d') ? "class=table-danger" : (strtotime($incomingLetter->deadline) - strtotime(now()->format('Y-m-d')) === 3 * 86400 ? "class=table-warning" : '')}}>
+                    {{ $incomingLetter->deadline ? ($incomingLetter->deadline < now()->format('Y-m-d') ? "class=table-danger" : (strtotime($incomingLetter->deadline) - strtotime(now()->format('Y-m-d')) === 3 * 86400 ? "class=table-warning" : 'class=table-success')) : '' }}>
                     <td>{{$incomingLetter->id}}</td>
                     <td>{{$incomingLetter->registration_date}}</td>
                     <td>{{$incomingLetter->document_from}}</td>
