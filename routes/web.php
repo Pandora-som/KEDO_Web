@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\Login;
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/incoming_letters', [IncomingLetterController::class, "index"])->name('incoming_letter.index')->middleware('auth');
 

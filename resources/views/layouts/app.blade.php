@@ -77,6 +77,6 @@
             @yield('content')
         </main>
     </div>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ asset('/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 </body>
 </html>
