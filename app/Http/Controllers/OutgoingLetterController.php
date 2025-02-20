@@ -45,7 +45,7 @@ class OutgoingLetterController extends Controller
         $performers = Performer::all();
         $signers = Signer::all();
         $classificators = Classificators::all();
-        return view('outgoing_letter.create', compact(['destinations', 'document_names', 'performers', 'signers', 'classificators']));
+        return view('outgoing_letter.createV2', compact(['destinations', 'document_names', 'performers', 'signers', 'classificators']));
     }
 
     public function store(StoreFilterRequest $request) {
