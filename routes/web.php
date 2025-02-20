@@ -5,6 +5,10 @@ use App\Http\Controllers\OutgoingLetterController;
 use App\Http\Controllers\AutorizationController;
 use App\Http\Controllers\BinController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\HomeController;
+use App\Http\Controllers\Auth\Login;
+
+Route::get(uri: '/', action: 'HomeController@undex');
 
 //Route::get('/', [OutgoingLetterController::class, "index"])->name("index");
 
@@ -31,3 +35,14 @@ Route::delete('/outgoing_letters/{outgoing_letter}', [OutgoingLetterController::
 Route::get('/', [AutorizationController::class, "index"])->name('autorization');
 
 Route::get('/bin', [BinController::class, "index"])->name('bin');
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/', function () {
+    return redirect()->route("auth");
+    })->name("home");
+
+    Route::get('/login', [\App\Http\Controllers\Auth\Login::class, 'login'])->name("login");
+    Route::post('/auth', [\App\Http\Controllers\Auth\Login::class, 'auth'])->name("auth");
