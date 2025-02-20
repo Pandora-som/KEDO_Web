@@ -11,7 +11,7 @@
     <div class="header_line">
         <div class="logo-nav"><img src="img/logo.svg"></div>
 
-        <a href="{{route('autorization')}}">
+        <a href="{{route('auth')}}">
             <div class="circle">
                 <img src="img/User.svg" height="35px" width="35px" alt="user">
             </div>

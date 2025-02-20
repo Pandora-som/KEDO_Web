@@ -5,12 +5,10 @@ use App\Http\Controllers\OutgoingLetterController;
 use App\Http\Controllers\AutorizationController;
 use App\Http\Controllers\BinController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\HomeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\Login;
 
-Route::get(uri: '/', action: 'HomeController@undex');
-
-//Route::get('/', [OutgoingLetterController::class, "index"])->name("index");
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/incoming_letters', [IncomingLetterController::class, "index"])->name('incoming_letter.index');
 
@@ -32,17 +30,17 @@ Route::patch('/outgoing_letters/{outgoing_letter}', [OutgoingLetterController::c
 
 Route::delete('/outgoing_letters/{outgoing_letter}', [OutgoingLetterController::class, 'destroy'])->name('outgoing_letter.delete');
 
-Route::get('/', [AutorizationController::class, "index"])->name('autorization');
+// Route::get('/', [AutorizationController::class, "index"])->name('auth');
 
 Route::get('/bin', [BinController::class, "index"])->name('bin');
 
-// Auth::routes();
+Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/', function () {
-    return redirect()->route("auth");
-    })->name("home");
+// Route::get('/', function () {
+//     return redirect()->route("auth");
+//     })->name("home");
 
-    Route::get('/login', [\App\Http\Controllers\Auth\Login::class, 'login'])->name("login");
-    Route::post('/auth', [\App\Http\Controllers\Auth\Login::class, 'auth'])->name("auth");
+//     Route::get('/login', [\App\Http\Controllers\Auth\Login::class, 'login'])->name("login");
+//     Route::post('/auth', [\App\Http\Controllers\Auth\Login::class, 'auth'])->name("auth");
