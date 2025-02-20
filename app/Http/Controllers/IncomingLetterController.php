@@ -44,7 +44,7 @@ class IncomingLetterController extends Controller
         $performers = Performer::all();
         $statuses = Status::all();
         $classificators = Classificators::all();
-        return view('incoming_letter.create', compact(['document_froms', 'document_names', 'performers', 'statuses', 'classificators']));
+        return view('incoming_letter.createV2', compact(['document_froms', 'document_names', 'performers', 'statuses', 'classificators']));
     }
 
     public function store(StoreRequestFilter $request) {

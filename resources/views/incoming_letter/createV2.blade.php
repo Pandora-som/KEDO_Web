@@ -11,7 +11,7 @@
     <title>Document</title>
 </head>
 <body class="p-3 m-0 border-0 bd-example m-0 border-0">
-    <h1>Регистрация исходящего документа</h1>
+    <h1>Регистрация входящего документа</h1>
     <p>Заполните все поля для регистрации документа</p>
     <div class="incoming_letter_container">
         <form action="{{ route('outgoing_letter.store') }}" method="post" class="form-div">
@@ -20,41 +20,59 @@
                     <input type="datetime-local" class="form-control" id="floatingInput" placeholder="name@example.com">
                     <label for="floatingInput">Дата регистрации</label>
                 </div>
+
+                <div class="form-floating mb-3">
+                    <input type="datetime-local" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Дата документа</label>
+                </div>
            
                 <div class="form-floating">
                     <input class="form-control" placeholder="Docs">
-                    <label for="floatingPassword">Кому поступил документ</label>
+                    <label for="floatingPassword">От кого поступил документ</label>
                 </div>
 
                 <div class="form-floating">
                     <input class="form-control" placeholder="Namedocs">
-                    <label for="floatingPassword">Наименование документа</label>
-                </div>
-
-                <div class="form-floating">
-                    <input class="form-control" placeholder="Signature">
-                    <label for="floatingPassword">Подписан</label>
-                </div>
-
-                <div class="form-floating">
-                    <input class="form-control" placeholder="Executor">
                     <label for="floatingPassword">Ответственный исполнитель</label>
                 </div>
 
                 <div class="form-floating">
-                    <input class="form-control" placeholder="Executor">
-                    <label for="floatingPassword">Отметка об исполнении (на вх. №)</label>
+                    <input class="form-control" placeholder="Signature">
+                    <label for="floatingPassword">Наименование документа</label>
                 </div>
 
                 <div class="form-floating">
                     <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                        <option value="1">Dr.</option>
                         <option value="2">Prof.</option>
                         <option value="3">Ms.</option>
                         <option value="4">Mr.</option>
                         <option value="5">Mrs.</option>
                     </select>
                     <label for="floatingSelect">Классификатор</label>
+                </div>
+
+                <div class="form-floating">
+                    <input class="form-control" placeholder="Executor">
+                    <label for="floatingPassword">Номер документа</label>
+                </div>
+
+                <div class="form-floating">
+                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                        @foreach ($statuses as $status)
+                        <option value="{{ $status->id }}">{{ $status->status_name }}
+                        @endforeach
+                    </select>
+                    <label for="floatingSelect">Статус</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="datetime-local" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Срок исполнения</label>
+                </div>
+
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                    <label for="floatingTextarea">Резолюция</label>
                 </div>
 
                 <div class="form-floating">
@@ -66,7 +84,7 @@
             <div>
                 <div class="btn-div"><button type="submit">Создать</button></div>
             </div>
-
+            
     </div>
     <script src="/autocomplete/autoComplete.min.js"></script>
     <script src="/js/outgoing_letter/search_fields.js"></script>
