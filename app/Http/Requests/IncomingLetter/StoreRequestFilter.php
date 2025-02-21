@@ -30,7 +30,7 @@ class StoreRequestFilter extends FormRequest
             'document_subject' => 'required|string',
             'resolution' => 'required|string',
             'performer' => 'required|string',
-            'deadline' => 'date|after_or_equal:document_date',
+            'deadline' => 'nullable|date|after_or_equal:document_date',
             'status_id' => 'required|integer',
             'classificator_id' => 'required|integer'
         ];

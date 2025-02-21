@@ -19,8 +19,6 @@ class IncomingLetterController extends Controller
         $classificators = Classificators::all();
 
         $data = $request->validated();
-        // $filter = app()->make(IncomingLetterFilter::class, ['queryParams' => array_filter($data)]);
-        // $incomingLetters = IncomingLetter::filter($filter)->get();
         $query = IncomingLetter::query();
         if (isset($data['start_date']) and isset($data['end_date'])) {
             $query->whereDate('registration_date', '>=', $data['start_date'])
@@ -34,7 +32,7 @@ class IncomingLetterController extends Controller
         if (isset($data['classificator_id'])) {
             $query->where('classificator_id', '=', $data['classificator_id']);
         }
-        $incomingLetters = $query->paginate(10);
+        $incomingLetters = $query->whereDate('deadline', '>', now()->format('Y-m-d'))->orderBy('deadline', 'ASC')->paginate(10);
         return view('incoming_letter.indexV2', compact(['request', 'incomingLetters', 'classificators']));
     }
 
