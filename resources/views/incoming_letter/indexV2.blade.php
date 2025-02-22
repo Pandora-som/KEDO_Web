@@ -52,13 +52,13 @@
                                 @endforeach
 
                                 <div class="date__filter">
-                                    <label for="start_date">Дата с:</label>
+                                    <label for="start_date">Срок с:</label>
                                     <input id="start_date" type="date" name="start_date"
-                                        value="{{ $request->query('start_date') ? $request->query('start_date') : date('Y-m-d', strtotime('last month'))}}">
+                                        value="{{ $request->query('start_date') ? $request->query('start_date') : now()->format('Y-m-d') }}">
 
                                     <label for="end_date">по:</label>
                                     <input id="end_date" type="date" name="end_date"
-                                        value="{{ $request->query('end_date') ? $request->query('end_date') : now()->format('Y-m-d') }}">
+                                        value="{{ $request->query('end_date') ? $request->query('end_date') : date('Y-m-d', strtotime('next month'))}}">
                                 </div>
 
                                 <button class="btn btn-primary">Отфильтровать</button>

@@ -26,8 +26,8 @@ class FilterRequest extends FormRequest
             'deadline' => 'date',
             'status_id' => 'integer',
             'classificator_id' => 'integer',
-            'start_date' => 'date',
-            'end_date' => 'date|after_or_equal:start_date',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
             'expired' => '',
             'find' => 'nullable|string'
         ];
