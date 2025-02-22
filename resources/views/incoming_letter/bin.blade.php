@@ -48,9 +48,16 @@
                 <td>{{$incomingLetter->status->status_name}}</td>
                 <td>
                     <div class="actions">
-                        <button class="btn btn-light delete_button"><a href="{{ route('incoming_letter.edit', $incomingLetter->id) }}"><img src="/img/reset.svg"
-                                alt="edit"></a></button>
-                        <form action="{{ route('incoming_letter.delete', $incomingLetter->id) }}" method="post">
+                        <form action="{{ route('incoming_letter.restore', $incomingLetter->id) }}" method="post">
+                            @csrf
+                            <button type='submit' class="btn btn-light delete_button" onclick="return confirm('Вы уверны, что хотите восстановить запись?')">
+                                <img src="/img/reset.svg" alt="restore">
+                            </button>
+                        </form>
+                        {{-- <button class="btn btn-light delete_button"><a href="{{ route('incoming_letter.edit', $incomingLetter->id) }}"><img src="/img/reset.svg"
+                                alt="edit"></a>
+                        </button> --}}
+                        <form action="{{ route('incoming_letter.destroy', $incomingLetter->id) }}" method="post">
                             @csrf
                             @method('delete')
                             <button class="btn btn-light delete_button" type="submit" onclick="return confirm('Вы уверны, что хотите удалить запись?')">

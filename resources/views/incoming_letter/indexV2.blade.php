@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <a class="btn btn-primary" href="#" role="button">Корзина</a>
+            <a class="btn btn-primary" href="{{ route('incoming_letter.bin') }}" role="button">Корзина</a>
             <a class="btn btn-primary" href="{{ route('incoming_letter.create') }}" role="button">Создать</a>
             <div>
                 {{-- <input class="btn btn-danger" type="checkbox" name="expired"> --}}
