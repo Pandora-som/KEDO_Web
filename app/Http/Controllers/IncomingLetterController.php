@@ -32,7 +32,13 @@ class IncomingLetterController extends Controller
         if (isset($data['classificator_id'])) {
             $query->where('classificator_id', '=', $data['classificator_id']);
         }
-        $incomingLetters = $query->whereDate('deadline', '>', now()->format('Y-m-d'))->orderBy('deadline', 'ASC')->paginate(10);
+
+        if (isset($data['expired'])) {
+            $query->whereDate('deadline', '<', now()->format('Y-m-d'))->orderBy('deadline', 'ASC');
+        } else {
+            $query->whereDate('deadline', '>', now()->format('Y-m-d'))->orderBy('deadline', 'ASC');
+        }
+        $incomingLetters = $query->paginate(10);
         return view('incoming_letter.indexV2', compact(['request', 'incomingLetters', 'classificators']));
     }
 

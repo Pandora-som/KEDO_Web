@@ -72,6 +72,11 @@
         </form>
         <a class="btn btn-primary" href="#" role="button">Корзина</a>
         <a class="btn btn-primary" href="{{ route('incoming_letter.create') }}" role="button">Создать</a>
+        <div>
+            <form action="{{ url()->full() }}" method="GET">
+                <input class="btn btn-danger" type="submit" name="expired" value="Просроченные документы">
+            </form>
+        </div>
     </div>
 
     <div class="table__legend">
