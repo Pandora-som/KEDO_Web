@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\OutgoingLetter\FilterRequest;
-use App\Http\Requests\OutgoingLetter\StoreFilterRequest;
+use App\Http\Requests\IncomingLetter\FilterRequest;
 use App\Models\Classificators;
 use App\Models\Destination;
 use App\Models\DocumentFrom;
@@ -23,26 +22,26 @@ class IncomingLetterBinController extends Controller
         $data = $request->validated();
         $query = IncomingLetter::query();
         if (isset($data['start_date']) and isset($data['end_date'])) {
-            $query->onlyTrashed()->whereDate('deadline', '>=', $data['start_date'])
+            $query->whereDate('deadline', '>=', $data['start_date'])
             ->whereDate('deadline', '<=', $data['end_date']);
 
         };
 
         if (isset($data['classificator_id'])) {
-            $query->onlyTrashed()->where('classificator_id', '=', $data['classificator_id']);
+            $query->where('classificator_id', '=', $data['classificator_id']);
         }
 
         if (isset($data['expired'])) {
-            $query->onlyTrashed()->whereDate('deadline', '<', now()->format('Y-m-d'))->orderBy('deadline', 'ASC');
+            $query->whereDate('deadline', '<', now()->format('Y-m-d'))->orderBy('deadline', 'ASC');
         } else {
-            $query->onlyTrashed()->whereDate('deadline', '>', now()->format('Y-m-d'))->orderBy('deadline', 'ASC');
+            $query->whereDate('deadline', '>', now()->format('Y-m-d'))->orderBy('deadline', 'ASC');
         }
 
         if (isset($data['find'])) {
-            $query->onlyTrashed()->whereAny(['document_from', 'document_name', 'document_number', 'document_subject', 'performer', 'resolution'],
+            $query->whereAny(['document_from', 'document_name', 'document_number', 'document_subject', 'performer', 'resolution'],
             'like', "%{$data['find']}%");
         }
-        $incomingLetters = $query->paginate(10);
+        $incomingLetters = $query->onlyTrashed()->paginate(10);
         return view('incoming_letter.bin', compact(['request', 'incomingLetters', 'classificators']));
     }
 
