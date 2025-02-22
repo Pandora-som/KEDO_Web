@@ -28,7 +28,8 @@ class FilterRequest extends FormRequest
             'classificator_id' => 'integer',
             'start_date' => 'date',
             'end_date' => 'date|after_or_equal:start_date',
-            'expired' => ''
+            'expired' => '',
+            'find' => 'nullable|string'
         ];
     }
 }

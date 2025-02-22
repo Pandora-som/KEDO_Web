@@ -38,6 +38,11 @@ class IncomingLetterController extends Controller
         } else {
             $query->whereDate('deadline', '>', now()->format('Y-m-d'))->orderBy('deadline', 'ASC');
         }
+
+        if (isset($data['find'])) {
+            $query->whereAny(['document_from', 'document_name', 'document_number', 'document_subject', 'performer', 'resolution'],
+            'like', "%{$data['find']}%");
+        }
         $incomingLetters = $query->paginate(10);
         return view('incoming_letter.indexV2', compact(['request', 'incomingLetters', 'classificators']));
     }
