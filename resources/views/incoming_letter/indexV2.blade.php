@@ -13,27 +13,35 @@
 @extends('layouts.header')
 
 @section('content')
+
 <body>
     <h1 class="page__title">Реестр регистрации входящих документов</h1>
 
     <div class="func-block">
-        <a href="{{ route('incoming_letter.index') }}">Сбросить фильтры</a>
-        <div>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Фильтры
-            </button>
+        <form class="search__form" action="{{ url()->full() }}" method="GET">
+            <div>
+                <input name="find" type="search" class="form-control" id="searchInput" placeholder="Поиск..."
+                    value="{{ $request->query('find') ? $request->query('find') : '' }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Найти</button>
+            {{-- <a href="{{ route('incoming_letter.index') }}">Сбросить фильтры</a> --}}
+            <div>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Фильтры
+                </button>
 
-            <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Фильтры</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ url()->full() }}" method="GET">
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Фильтры</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                {{-- <form action="{{ url()->full() }}" method="GET"> --}}
                                 <h3>Классификация</h3>
                                 @foreach ($classificators as $classificator)
                                 <input type="checkbox" id="{{ $classificator->classificator_name }}"
@@ -44,34 +52,34 @@
                                 @endforeach
 
                                 <div class="date__filter">
-                                    <label for="start_date">Дата с:</label>
+                                    <label for="start_date">Срок с:</label>
                                     <input id="start_date" type="date" name="start_date"
-                                        value="{{ $request->query('start_date') ? $request->query('start_date') : date('Y-m-d', strtotime('last month'))}}">
+                                        value="{{ $request->query('start_date') ? $request->query('start_date') : now()->format('Y-m-d') }}">
 
                                     <label for="end_date">по:</label>
                                     <input id="end_date" type="date" name="end_date"
-                                        value="{{ $request->query('end_date') ? $request->query('end_date') : now()->format('Y-m-d') }}">
+                                        value="{{ $request->query('end_date') ? $request->query('end_date') : date('Y-m-d', strtotime('next month'))}}">
                                 </div>
 
                                 <button class="btn btn-primary">Отфильтровать</button>
                                 <a href="{{ route('incoming_letter.index') }}">Сбросить</a>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                {{-- </form> --}}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <form class="search__form" action="{{ url()->full() }}" method="GET">
+            <a class="btn btn-primary" href="#" role="button">Корзина</a>
+            <a class="btn btn-primary" href="{{ route('incoming_letter.create') }}" role="button">Создать</a>
             <div>
-                <input name="find" type="search" class="form-control" id="searchInput" placeholder="Поиск..." value="{{ $request->query('find') ? $request->query('find') : '' }}">
+                {{-- <input class="btn btn-danger" type="checkbox" name="expired"> --}}
+                <input type="checkbox" class="btn-check" id="isExpired" autocomplete="off" name="expired" {{ $request->query('expired') ? 'checked' : '' }}>
+                <label class="btn btn-outline-danger" for="isExpired">Просроченные документы</label>
             </div>
-            <button type="submit" class="btn btn-primary">Найти</button>
         </form>
-        <a class="btn btn-primary" href="#" role="button">Корзина</a>
-        <a class="btn btn-primary" href="{{ route('incoming_letter.create') }}" role="button">Создать</a>
     </div>
 
     <div class="table__legend">
@@ -104,7 +112,7 @@
                 </tr>
                 @foreach ($incomingLetters as $incomingLetter)
                 <tr
-                    {{ $incomingLetter->deadline < now()->format('Y-m-d') ? "class=table-danger" : (strtotime($incomingLetter->deadline) - strtotime(now()->format('Y-m-d')) === 3 * 86400 ? "class=table-warning" : '')}}>
+                    {{ $incomingLetter->deadline !== date('0000-00-00') ? ($incomingLetter->deadline < now()->format('Y-m-d') ? "class=table-danger" : (strtotime($incomingLetter->deadline) - strtotime(now()->format('Y-m-d')) < 3 * 86400 ? "class=table-warning" : 'class=table-success')) : '' }}>
                     <td>{{$incomingLetter->id}}</td>
                     <td>{{$incomingLetter->registration_date}}</td>
                     <td>{{$incomingLetter->document_from}}</td>
@@ -114,16 +122,17 @@
                     <td>{{$incomingLetter->document_subject}}</td>
                     <td>{{$incomingLetter->resolution}}</td>
                     <td>{{$incomingLetter->performer}}</td>
-                    <td>{{$incomingLetter->deadline}}</td>
+                    <td>{{$incomingLetter->deadline == date('0000-00-00') ? '' : $incomingLetter->deadline}}</td>
                     <td>{{$incomingLetter->status->status_name}}</td>
                     <td>
                         <div class="actions">
-                            <a href="{{ route('incoming_letter.edit', $incomingLetter->id) }}"><img src="/img/edit-img.svg"
-                                    alt="edit"></a>
+                            <a href="{{ route('incoming_letter.edit', $incomingLetter->id) }}"><img
+                                    src="/img/edit-img.svg" alt="edit"></a>
                             <form action="{{ route('incoming_letter.delete', $incomingLetter->id) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-light delete_button" type="submit" onclick="return confirm('Вы уверны, что хотите удалить запись?')">
+                                <button class="btn btn-light delete_button" type="submit"
+                                    onclick="return confirm('Вы уверны, что хотите удалить запись?')">
                                     <img src="/img/delete-imf.svg" alt="delete">
                                 </button>
                             </form>
