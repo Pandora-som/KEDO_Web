@@ -1,22 +1,18 @@
 <!DOCTYPE html>
-<html lang="ru">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>СЭД УрФУ</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset(path: 'css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/dropdown.css') }}">
-    <link rel="stylesheet" href="/autocomplete/css/autoComplete.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 </head>
 @extends('layouts.header')
 
 @section('content')
-
 <body>
-    <h1 class="page__title">Реестр регистрации входящих документов</h1>
-
+    <h1>Корзина</h1>
+    <p>Здесь отображаются удалённые записи о документах</p>
     <div class="func-block">
         <form class="search__form" action="{{ url()->full() }}" method="GET">
             <div>
@@ -62,7 +58,7 @@
                                 </div>
 
                                 <button class="btn btn-primary">Отфильтровать</button>
-                                <a href="{{ route('incoming_letter.index') }}">Сбросить</a>
+                                <a href="{{ route('incoming_letter.bin') }}">Сбросить</a>
                                 {{-- </form> --}}
                             </div>
                             <div class="modal-footer">
@@ -72,8 +68,6 @@
                     </div>
                 </div>
             </div>
-            <a class="btn btn-primary" href="{{ route('incoming_letter.bin') }}" role="button">Корзина</a>
-            <a class="btn btn-primary" href="{{ route('incoming_letter.create') }}" role="button">Создать</a>
             <div>
                 {{-- <input class="btn btn-danger" type="checkbox" name="expired"> --}}
                 <input type="checkbox" class="btn-check" id="isExpired" autocomplete="off" name="expired" {{ $request->query('expired') ? 'checked' : '' }}>
@@ -90,66 +84,69 @@
             <button class="btn btn-warning"></button> - срок документа выходит через 3 дня
         </p>
     </div>
+
     <div class="pagination__div">
         {{ $incomingLetters->withQueryString()->links() }}
     </div>
-    <div class="table_container">
-        <table class="table table-light table-striped table-hover table-sm">
-            <tbody>
-                <tr>
-                    <th>№</th>
-                    <th>Дата регистрации</th>
-                    <th>От кого поступил документ</th>
-                    <th>Наименование документа</th>
-                    <th>Номер документа</th>
-                    <th>Дата документа</th>
-                    <th>Тема документа</th>
-                    <th>Резолюция</th>
-                    <th>Ответственный исполнитель </th>
-                    <th>Срок исполнения</th>
-                    <th>Отметка об исполнении</th>
-                    <th>Действия</th>
-                </tr>
-                @foreach ($incomingLetters as $incomingLetter)
-                <tr
-                    {{ $incomingLetter->deadline !== date('0000-00-00') ? ($incomingLetter->deadline < now()->format('Y-m-d') ? "class=table-danger" : (strtotime($incomingLetter->deadline) - strtotime(now()->format('Y-m-d')) < 3 * 86400 ? "class=table-warning" : 'class=table-success')) : '' }}>
-                    <td>{{$incomingLetter->id}}</td>
-                    <td>{{$incomingLetter->registration_date}}</td>
-                    <td>{{$incomingLetter->document_from}}</td>
-                    <td>{{$incomingLetter->document_name}}</td>
-                    <td>{{$incomingLetter->document_number}}</td>
-                    <td>{{$incomingLetter->document_date}}</td>
-                    <td>{{$incomingLetter->document_subject}}</td>
-                    <td>{{$incomingLetter->resolution}}</td>
-                    <td>{{$incomingLetter->performer}}</td>
-                    <td>{{$incomingLetter->deadline == date('0000-00-00') ? '' : $incomingLetter->deadline}}</td>
-                    <td>{{$incomingLetter->status->status_name}}</td>
-                    <td>
-                        <div class="actions">
-                            <a href="{{ route('incoming_letter.edit', $incomingLetter->id) }}"><img
-                                    src="/img/edit-img.svg" alt="edit"></a>
-                            <form action="{{ route('incoming_letter.delete', $incomingLetter->id) }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button class="btn btn-light delete_button" type="submit"
-                                    onclick="return confirm('Вы уверны, что хотите удалить запись?')">
-                                    <img src="/img/delete-imf.svg" alt="delete">
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+    <table class="table table-light table-striped">
+        <tbody>
+            <tr>
+                <th scope="row">№</th>
+                <th scope="row">Дата регистрации</th>
+                <th scope="row">От кого поступил документ</th>
+                <th scope="row">Наименование документа</th>
+                <th scope="row">Номер документа</th>
+                <th scope="row">Дата документа</th>
+                <th scope="row">Тема документа</th>
+                <th scope="row">Резолюция</th>
+                <th scope="row">Ответственный исполнитель </th>
+                <th scope="row">Срок исполнения</th>
+                <th scope="row">Отметка об исполнении</th>
+                <th scope="row">Действия</th>
+            </tr>
+            @foreach ($incomingLetters as $incomingLetter)
+            <tr
+            {{ $incomingLetter->deadline !== date('0000-00-00') ? ($incomingLetter->deadline < now()->format('Y-m-d') ? "class=table-danger" : (strtotime($incomingLetter->deadline) - strtotime(now()->format('Y-m-d')) < 3 * 86400 ? "class=table-warning" : 'class=table-success')) : '' }}>
+                <td>{{$incomingLetter->id}}</td>
+                <td>{{$incomingLetter->registration_date}}</td>
+                <td>{{$incomingLetter->document_from}}</td>
+                <td>{{$incomingLetter->document_name}}</td>
+                <td>{{$incomingLetter->document_number}}</td>
+                <td>{{$incomingLetter->document_date}}</td>
+                <td>{{$incomingLetter->document_subject}}</td>
+                <td>{{$incomingLetter->resolution}}</td>
+                <td>{{$incomingLetter->performer}}</td>
+                <td>{{$incomingLetter->deadline}}</td>
+                <td>{{$incomingLetter->status->status_name}}</td>
+                <td>
+                    <div class="actions">
+                        <form action="{{ route('incoming_letter.restore', $incomingLetter->id) }}" method="post">
+                            @csrf
+                            <button type='submit' class="btn btn-light delete_button" onclick="return confirm('Вы уверны, что хотите восстановить запись?')">
+                                <img src="/img/reset.svg" alt="restore">
+                            </button>
+                        </form>
+                        {{-- <button class="btn btn-light delete_button"><a href="{{ route('incoming_letter.edit', $incomingLetter->id) }}"><img src="/img/reset.svg"
+                                alt="edit"></a>
+                        </button> --}}
+                        <form action="{{ route('incoming_letter.destroy', $incomingLetter->id) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-light delete_button" type="submit" onclick="return confirm('Вы уверны, что хотите удалить запись?')">
+                                <img src="/img/delete-imf.svg" alt="delete">
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
     <div class="pagination__div">
         {{ $incomingLetters->withQueryString()->links() }}
     </div>
     <script src="/autocomplete/autoComplete.min.js"></script>
-    {{-- <script src="/bootstrap/js/bootstrap.min.js"></script> --}}
-    <script src="/js/search.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>
 @endsection
-
 </html>

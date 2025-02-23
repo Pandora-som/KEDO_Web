@@ -24,9 +24,6 @@ class IncomingLetterController extends Controller
             $query->whereDate('deadline', '>=', $data['start_date'])
             ->whereDate('deadline', '<=', $data['end_date']);
 
-        } elseif (isset($data['end_date']) and isset($data['start_date']) and ($data['start_date'] > $data['end_date'])) {
-            $data['end_date'] = $data['start_date'];
-            $query->whereDate('deadline', '=', $data['start_date']);
         };
 
         if (isset($data['classificator_id'])) {

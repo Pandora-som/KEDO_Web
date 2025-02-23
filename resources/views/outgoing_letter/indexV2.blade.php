@@ -70,7 +70,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Найти</button>
         </form>
-        <a class="btn btn-primary" href="#" role="button">Корзина</a>
+        <a class="btn btn-primary" href="{{ route('outgoing_letter.bin') }}" role="button">Корзина</a>
         <a class="btn btn-primary" href="{{ route('outgoing_letter.create') }}" role="button">Создать</a>
     </div>
 
