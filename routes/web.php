@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\IncomingLetterController;
+use App\Http\Controllers\OutgoingLetterBinController;
 use App\Http\Controllers\OutgoingLetterController;
 use App\Http\Controllers\AutorizationController;
-use App\Http\Controllers\BinController;
+use App\Http\Controllers\IncomingLetterBinController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\Login;
@@ -30,7 +31,13 @@ Route::patch('/outgoing_letters/{outgoing_letter}', [OutgoingLetterController::c
 
 Route::delete('/outgoing_letters/{outgoing_letter}', [OutgoingLetterController::class, 'destroy'])->name('outgoing_letter.delete')->middleware('auth');
 
-Route::get('/bin', [BinController::class, "index"])->name('bin')->middleware('auth');
+Route::get('/incoming_letters/bin', [IncomingLetterBinController::class, "index"])->name('incoming_letter.bin')->middleware('auth');
+Route::post('/incoming_letters/bin/{incoming_letter}', [IncomingLetterBinController::class, "restore"])->name('incoming_letter.restore')->withTrashed()->middleware('auth');
+Route::delete('/incoming_letters/bin/{incoming_letter}', [IncomingLetterBinController::class, "destroy"])->name('incoming_letter.destroy')->withTrashed()->middleware('auth');
+
+Route::get('/outgoing_letters/bin', [OutgoingLetterBinController::class, "index"])->name('outgoing_letter.bin')->middleware('auth');
+Route::post('/outgoing_letters/bin/{outgoing_letter}', [OutgoingLetterBinController::class, "restore"])->name('outgoing_letter.restore')->withTrashed()->middleware('auth');
+Route::delete('/outgoing_letters/bin/{outgoing_letter}', [OutgoingLetterBinController::class, "destroy"])->name('outgoing_letter.destroy')->withTrashed()->middleware('auth');
 
 Auth::routes();
 
