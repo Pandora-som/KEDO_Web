@@ -104,7 +104,7 @@ class IncomingLetterController extends Controller
         $performers = Performer::all();
         $classificators = Classificators::all();
         $statuses = Status::all();
-        return view('incoming_letter.edit', compact(['incomingLetter', 'document_froms', 'document_names', 'performers', 'statuses', 'classificators']));
+        return view('incoming_letter.editV2', compact(['incomingLetter', 'document_froms', 'document_names', 'performers', 'statuses', 'classificators']));
     }
 
     public function update(IncomingLetter $incomingLetter, StoreRequestFilter $request) {

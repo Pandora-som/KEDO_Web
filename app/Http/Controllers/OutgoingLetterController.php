@@ -105,7 +105,7 @@ class OutgoingLetterController extends Controller
         $performers = Performer::all();
         $signers = Signer::all();
         $classificators = Classificators::all();
-        return view('outgoing_letter.edit', compact(['outgoingLetter','destinations', 'document_names', 'performers', 'signers', 'classificators']));
+        return view('outgoing_letter.editV2', compact(['outgoingLetter','destinations', 'document_names', 'performers', 'signers', 'classificators']));
     }
 
     public function update(OutgoingLetter $outgoingLetter, StoreFilterRequest $request) {

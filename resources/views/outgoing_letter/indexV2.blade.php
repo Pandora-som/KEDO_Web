@@ -17,7 +17,7 @@
 <body>
     <h1 class="page__title">Реестр регистрации исходящих документов</h1>
     <div class="func-block">
-        <a href="{{ route('outgoing_letter.index') }}">Сбросить фильтры</a>
+        {{-- <a href="{{ route('outgoing_letter.index') }}">Сбросить фильтры</a> --}}
         <form class="search__form" action="{{ url()->full() }}" method="GET">
             <div>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">

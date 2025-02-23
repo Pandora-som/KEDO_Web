@@ -4,7 +4,9 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
 }
-
+h1, p {
+    text-align: center;
+}
 .incoming_letter_container {
     display: flex;
     flex-direction: column;
@@ -40,11 +42,16 @@ textarea {
     resize: none;
 }
 
-.btn-div {
+.btns-div {
     display: flex;
     justify-content: center;
+    gap: 0 15px;
     margin-top: 40px;
     width: 100%;
+}
+.back-link {
+    color: #000;
+    text-decoration: none;
 }
 
 button {
@@ -57,7 +64,13 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
+.back-btn {
+    padding: 12px 25px;
+    font-size: 16px;
+    border: 1px solid black;
+    color: #000;
+    cursor: pointer;
+}
 button:hover {
     background-color: #0056b3;
 }
