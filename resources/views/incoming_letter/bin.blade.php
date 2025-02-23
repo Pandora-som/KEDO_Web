@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,10 +11,25 @@
 @extends('layouts.header')
 
 @section('content')
+
 <body>
     <h1>Корзина</h1>
     <p>Здесь отображаются удалённые записи о документах</p>
-    <div class="func-block">
+    <div class="func-block incoming_func_block">
+        <div class="table__legend">
+            <p>
+                <button class="btn btn-danger"></button> - просроченный срок документа
+            </p>
+            <p>
+                <button class="btn btn-warning"></button> - срок документа выходит через 3 дня
+            </p>
+            <p>
+                <button class="btn btn-success"></button> - документ со сроком
+            </p>
+            <p>
+                <button class="btn btn-secondary"></button> - документ без срока
+            </p>
+        </div>
         <form class="search__form" action="{{ url()->full() }}" method="GET">
             <div>
                 <input name="find" type="search" class="form-control" id="searchInput" placeholder="Поиск..."
@@ -68,26 +84,27 @@
                     </div>
                 </div>
             </div>
-            <div>
-                {{-- <input class="btn btn-danger" type="checkbox" name="expired"> --}}
-                <input type="checkbox" class="btn-check" id="isExpired" autocomplete="off" name="expired" {{ $request->query('expired') ? 'checked' : '' }}>
-                <label class="btn btn-outline-danger" for="isExpired">Просроченные документы</label>
-            </div>
-        </form>
     </div>
 
-    <div class="table__legend">
-        <p>
-            <button class="btn btn-danger"></button> - просроченный срок документа
-        </p>
-        <p>
-            <button class="btn btn-warning"></button> - срок документа выходит через 3 дня
-        </p>
-    </div>
+    <div class="letters_group_pagination_div">
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" id="isAll" autocomplete="off" name="lettersGroup" value='all' checked
+                {{ $request->query('lettersGroup') == 'all' ? 'checked' : '' }}>
+            <label class="btn btn-outline-primary" for="isAll">Все документы</label>
 
-    <div class="pagination__div">
-        {{ $incomingLetters->withQueryString()->links() }}
+            <input type="radio" class="btn-check" id="isExpired" autocomplete="off" name="lettersGroup" value='expired'
+                {{ $request->query('lettersGroup') == 'expired' ? 'checked' : '' }}>
+            <label class="btn btn-outline-danger" for="isExpired">Просроченные документы</label>
+
+            <input type="radio" class="btn-check" id="isEndless" autocomplete="off" name="lettersGroup" value='endless'
+                {{ $request->query('lettersGroup') == 'endless' ? 'checked' : '' }}>
+            <label class="btn btn-outline-secondary" for="isEndless">Бессрочные документы</label>
+        </div>
+        <div class="pagination__div">
+            {{ $incomingLetters->withQueryString()->links() }}
+        </div>
     </div>
+    </form>
     <table class="table table-light table-striped">
         <tbody>
             <tr>
@@ -106,7 +123,7 @@
             </tr>
             @foreach ($incomingLetters as $incomingLetter)
             <tr
-            {{ $incomingLetter->deadline !== date('0000-00-00') ? ($incomingLetter->deadline < now()->format('Y-m-d') ? "class=table-danger" : (strtotime($incomingLetter->deadline) - strtotime(now()->format('Y-m-d')) < 3 * 86400 ? "class=table-warning" : 'class=table-success')) : '' }}>
+                {{ $incomingLetter->deadline !== null ? ($incomingLetter->deadline < now()->format('Y-m-d') ? "class=table-danger" : (strtotime($incomingLetter->deadline) - strtotime(now()->format('Y-m-d')) < 3 * 86400 ? "class=table-warning" : 'class=table-success')) : '' }}>
                 <td>{{$incomingLetter->id}}</td>
                 <td>{{$incomingLetter->registration_date}}</td>
                 <td>{{$incomingLetter->document_from}}</td>
@@ -122,17 +139,19 @@
                     <div class="actions">
                         <form action="{{ route('incoming_letter.restore', $incomingLetter->id) }}" method="post">
                             @csrf
-                            <button type='submit' class="btn btn-light delete_button" onclick="return confirm('Вы уверны, что хотите восстановить запись?')">
+                            <button type='submit' class="btn btn-light delete_button"
+                                onclick="return confirm('Вы уверны, что хотите восстановить запись?')">
                                 <img src="/img/reset.svg" alt="restore">
                             </button>
                         </form>
-                        {{-- <button class="btn btn-light delete_button"><a href="{{ route('incoming_letter.edit', $incomingLetter->id) }}"><img src="/img/reset.svg"
-                                alt="edit"></a>
+                        {{-- <button class="btn btn-light delete_button"><a href="{{ route('incoming_letter.edit', $incomingLetter->id) }}"><img
+                            src="/img/reset.svg" alt="edit"></a>
                         </button> --}}
                         <form action="{{ route('incoming_letter.destroy', $incomingLetter->id) }}" method="post">
                             @csrf
                             @method('delete')
-                            <button class="btn btn-light delete_button" type="submit" onclick="return confirm('Вы уверны, что хотите удалить запись?')">
+                            <button class="btn btn-light delete_button" type="submit"
+                                onclick="return confirm('Вы уверны, что хотите удалить запись?')">
                                 <img src="/img/delete-imf.svg" alt="delete">
                             </button>
                         </form>
@@ -149,4 +168,5 @@
     <script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>
 @endsection
+
 </html>
