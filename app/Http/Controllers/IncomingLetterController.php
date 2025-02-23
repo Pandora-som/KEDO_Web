@@ -17,30 +17,38 @@ class IncomingLetterController extends Controller
 {
     public function index(FilterRequest $request) {
         $classificators = Classificators::all();
-
         $data = $request->validated();
+
         $query = IncomingLetter::query();
+        $queryEndless = IncomingLetter::query();
+        $queryEndless->where('deadline', '=', null);
+
         if (isset($data['start_date']) and isset($data['end_date'])) {
             $query->whereDate('deadline', '>=', $data['start_date'])
             ->whereDate('deadline', '<=', $data['end_date']);
+        };
 
+        if (isset($data['lettersGroup'])) {
+            if ($data['lettersGroup'] == 'expired') {
+                $query->whereDate('deadline', '<', now()->format('Y-m-d'));
+            } else if ($data['lettersGroup'] == 'endless') {
+                $query = $queryEndless;
+            } else {
+                $query->whereDate('deadline', '>', now()->format('Y-m-d'));
+            };
+        } else {
+            $query->whereDate('deadline', '>', now()->format('Y-m-d'));
         };
 
         if (isset($data['classificator_id'])) {
             $query->where('classificator_id', '=', $data['classificator_id']);
         }
 
-        if (isset($data['expired'])) {
-            $query->whereDate('deadline', '<', now()->format('Y-m-d'))->orderBy('deadline', 'ASC');
-        } else {
-            $query->whereDate('deadline', '>', now()->format('Y-m-d'))->orderBy('deadline', 'ASC');
-        }
-
         if (isset($data['find'])) {
             $query->whereAny(['document_from', 'document_name', 'document_number', 'document_subject', 'performer', 'resolution'],
             'like', "%{$data['find']}%");
         }
-        $incomingLetters = $query->paginate(10);
+        $incomingLetters = $query->orderBy('deadline', 'ASC')->paginate(10);
         return view('incoming_letter.indexV2', compact(['request', 'incomingLetters', 'classificators']));
     }
 
@@ -143,6 +151,6 @@ class IncomingLetterController extends Controller
     }
     public function destroy(IncomingLetter $incomingLetter) {
         $incomingLetter->delete();
-        return redirect()->route('incoming_letter.index');
+        return redirect()->back();
     }
 }

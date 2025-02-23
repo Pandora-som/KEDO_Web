@@ -17,7 +17,21 @@
 <body>
     <h1 class="page__title">Реестр регистрации входящих документов</h1>
 
-    <div class="func-block">
+    <div class="func-block incoming_func_block">
+        <div class="table__legend">
+            <p>
+                <button class="btn btn-danger"></button> - просроченный срок документа
+            </p>
+            <p>
+                <button class="btn btn-warning"></button> - срок документа выходит через 3 дня
+            </p>
+            <p>
+                <button class="btn btn-success"></button> - документ со сроком
+            </p>
+            <p>
+                <button class="btn btn-secondary"></button> - документ без срока
+            </p>
+        </div>
         <form class="search__form" action="{{ url()->full() }}" method="GET">
             <div>
                 <input name="find" type="search" class="form-control" id="searchInput" placeholder="Поиск..."
@@ -63,7 +77,6 @@
 
                                 <button class="btn btn-primary">Отфильтровать</button>
                                 <a href="{{ route('incoming_letter.index') }}">Сбросить</a>
-                                {{-- </form> --}}
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
@@ -74,25 +87,26 @@
             </div>
             <a class="btn btn-primary" href="{{ route('incoming_letter.bin') }}" role="button">Корзина</a>
             <a class="btn btn-primary" href="{{ route('incoming_letter.create') }}" role="button">Создать</a>
-            <div>
-                {{-- <input class="btn btn-danger" type="checkbox" name="expired"> --}}
-                <input type="checkbox" class="btn-check" id="isExpired" autocomplete="off" name="expired" {{ $request->query('expired') ? 'checked' : '' }}>
-                <label class="btn btn-outline-danger" for="isExpired">Просроченные документы</label>
-            </div>
-        </form>
     </div>
+    <div class="letters_group_pagination_div">
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" id="isAll" autocomplete="off" name="lettersGroup" value='all' checked
+                {{ $request->query('lettersGroup') == 'all' ? 'checked' : '' }}>
+            <label class="btn btn-outline-primary" for="isAll">Все документы</label>
 
-    <div class="table__legend">
-        <p>
-            <button class="btn btn-danger"></button> - просроченный срок документа
-        </p>
-        <p>
-            <button class="btn btn-warning"></button> - срок документа выходит через 3 дня
-        </p>
+            <input type="radio" class="btn-check" id="isExpired" autocomplete="off" name="lettersGroup" value='expired'
+                {{ $request->query('lettersGroup') == 'expired' ? 'checked' : '' }}>
+            <label class="btn btn-outline-danger" for="isExpired">Просроченные документы</label>
+
+            <input type="radio" class="btn-check" id="isEndless" autocomplete="off" name="lettersGroup" value='endless'
+                {{ $request->query('lettersGroup') == 'endless' ? 'checked' : '' }}>
+            <label class="btn btn-outline-secondary" for="isEndless">Бессрочные документы</label>
+        </div>
+        <div class="pagination__div">
+            {{ $incomingLetters->withQueryString()->links() }}
+        </div>
     </div>
-    <div class="pagination__div">
-        {{ $incomingLetters->withQueryString()->links() }}
-    </div>
+    </form>
     <div class="table_container">
         <table class="table table-light table-striped table-hover table-sm">
             <tbody>
@@ -112,7 +126,7 @@
                 </tr>
                 @foreach ($incomingLetters as $incomingLetter)
                 <tr
-                    {{ $incomingLetter->deadline !== date('0000-00-00') ? ($incomingLetter->deadline < now()->format('Y-m-d') ? "class=table-danger" : (strtotime($incomingLetter->deadline) - strtotime(now()->format('Y-m-d')) < 3 * 86400 ? "class=table-warning" : 'class=table-success')) : '' }}>
+                    {{ $incomingLetter->deadline !== null ? ($incomingLetter->deadline < now()->format('Y-m-d') ? "class=table-danger" : (strtotime($incomingLetter->deadline) - strtotime(now()->format('Y-m-d')) < 3 * 86400 ? "class=table-warning" : 'class=table-success')) : '' }}>
                     <td>{{$incomingLetter->id}}</td>
                     <td>{{$incomingLetter->registration_date}}</td>
                     <td>{{$incomingLetter->document_from}}</td>
@@ -122,7 +136,7 @@
                     <td>{{$incomingLetter->document_subject}}</td>
                     <td>{{$incomingLetter->resolution}}</td>
                     <td>{{$incomingLetter->performer}}</td>
-                    <td>{{$incomingLetter->deadline == date('0000-00-00') ? '' : $incomingLetter->deadline}}</td>
+                    <td>{{$incomingLetter->deadline}}</td>
                     <td>{{$incomingLetter->status->status_name}}</td>
                     <td>
                         <div class="actions">

@@ -18,6 +18,10 @@
     padding-right: 20px;
 }
 
+.incoming_func_block {
+    justify-content: space-between;
+}
+
 .search__form {
     display: flex;
     align-items: center;
@@ -26,6 +30,12 @@
 
 .table__legend {
     margin-left: 52px;
+}
+
+.letters_group_pagination_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .pagination__div {

@@ -18,22 +18,22 @@
     <h1 class="page__title">Реестр регистрации исходящих документов</h1>
     <div class="func-block">
         <a href="{{ route('outgoing_letter.index') }}">Сбросить фильтры</a>
-        <div>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Фильтры
-            </button>
+        <form class="search__form" action="{{ url()->full() }}" method="GET">
+            <div>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Фильтры
+                </button>
 
-            <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-                aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Фильтры</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="{{ url()->full() }}" method="GET">
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Фильтры</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
                                 <h3>Классификация</h3>
                                 @foreach ($classificators as $classificator)
                                 <input type="checkbox" id="{{ $classificator->classificator_name }}"
@@ -44,29 +44,28 @@
                                 @endforeach
 
                                 <div class="date__filter">
-                                    <label for="start_date">Дата с:</label>
+                                    <label for="start_date">Срок с:</label>
                                     <input id="start_date" type="date" name="start_date"
-                                        value="{{ $request->query('start_date') ? $request->query('start_date') : date('Y-m-d', strtotime('last month'))}}">
+                                        value="{{ $request->query('start_date') ? $request->query('start_date') : date('Y-m-d', strtotime('last month')) }}">
 
                                     <label for="end_date">по:</label>
                                     <input id="end_date" type="date" name="end_date"
-                                        value="{{ $request->query('end_date') ? $request->query('end_date') : now()->format('Y-m-d') }}">
+                                        value="{{ $request->query('end_date') ? $request->query('end_date') : date('Y-m-d', strtotime('next month'))}}">
                                 </div>
 
-                                <button class="btn btn-primary">Отфильтровать</button>
+                                <button type="submit" class="btn btn-primary">Отфильтровать</button>
                                 <a href="{{ route('outgoing_letter.index') }}">Сбросить</a>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <form class="search__form" action="{{ url()->full() }}" method="GET">
             <div>
-                <input name="find" type="search" class="form-control" id="searchInput" placeholder="Поиск..." value="{{ $request->query('find') ? $request->query('find') : '' }}">
+                <input name="find" type="search" class="form-control" id="searchInput" placeholder="Поиск..."
+                    value="{{ $request->query('find') ? $request->query('find') : '' }}">
             </div>
             <button type="submit" class="btn btn-primary">Найти</button>
         </form>
