@@ -39,7 +39,9 @@ Route::get('/outgoing_letters/bin', [OutgoingLetterBinController::class, "index"
 Route::post('/outgoing_letters/bin/{outgoing_letter}', [OutgoingLetterBinController::class, "restore"])->name('outgoing_letter.restore')->withTrashed()->middleware('auth');
 Route::delete('/outgoing_letters/bin/{outgoing_letter}', [OutgoingLetterBinController::class, "destroy"])->name('outgoing_letter.destroy')->withTrashed()->middleware('auth');
 
-Auth::routes();
+Auth::routes(['register' => false,
+'reset' => false,
+'verify' => false,]);
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

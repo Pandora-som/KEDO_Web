@@ -15,78 +15,87 @@
 @section('content')
 
 <body>
-    <h1 class="page__title">Реестр регистрации входящих документов</h1>
+    <div class="container">
+        <h1 class="page__title">Реестр регистрации входящих документов</h1>
 
-    <div class="func-block incoming_func_block">
-        <div class="table__legend">
-            <p>
-                <button class="btn btn-danger"></button> - просроченный срок документа
-            </p>
-            <p>
-                <button class="btn btn-warning"></button> - срок документа выходит через 3 дня
-            </p>
-            <p>
-                <button class="btn btn-success"></button> - документ со сроком
-            </p>
-            <p>
-                <button class="btn btn-secondary"></button> - документ без срока
-            </p>
-        </div>
-        <form class="search__form" action="{{ url()->full() }}" method="GET">
-            <div>
-                <input name="find" type="search" class="form-control" id="searchInput" placeholder="Поиск..."
-                    value="{{ $request->query('find') ? $request->query('find') : '' }}">
+        <div class="func-block incoming_func_block">
+            <div class="table__legend">
+                <p>
+                    <button class="btn btn-danger"></button> - просроченный срок документа
+                </p>
+                <p>
+                    <button class="btn btn-warning"></button> - срок документа выходит через 3 дня
+                </p>
+                <p>
+                    <button class="btn btn-success"></button> - документ со сроком
+                </p>
+                <p>
+                    <button class="btn btn-secondary"></button> - документ без срока
+                </p>
             </div>
-            <button type="submit" class="btn btn-primary">Найти</button>
-            {{-- <a href="{{ route('incoming_letter.index') }}">Сбросить фильтры</a> --}}
-            <div>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    Фильтры
-                </button>
+            <form class="search__form" action="{{ url()->full() }}" method="GET">
+                <div>
+                    <input name="find" type="search" class="form-control" id="searchInput" placeholder="Поиск..."
+                        value="{{ $request->query('find') ? $request->query('find') : '' }}">
+                </div>
+                <button type="submit" class="btn btn-primary">Найти</button>
+                {{-- <a href="{{ route('incoming_letter.index') }}">Сбросить фильтры</a> --}}
+                <div>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">
+                        Фильтры
+                    </button>
 
-                <!-- Modal -->
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Фильтры</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                {{-- <form action="{{ url()->full() }}" method="GET"> --}}
-                                <h3>Классификация</h3>
-                                @foreach ($classificators as $classificator)
-                                <input type="checkbox" id="{{ $classificator->classificator_name }}"
-                                    {{ $request->query('classificator_id') == $classificator->id ? ' checked' : '' }}
-                                    name="classificator_id" value="{{ $classificator->id }}">
-                                <label
-                                    for="{{ $classificator->classificator_name }}">{{ $classificator->classificator_name }}</label>
-                                @endforeach
-
-                                <div class="date__filter">
-                                    <label for="start_date">Срок с:</label>
-                                    <input id="start_date" type="date" name="start_date"
-                                        value="{{ $request->query('start_date') ? $request->query('start_date') : date('Y-m-d', strtotime('last month')) }}">
-
-                                    <label for="end_date">по:</label>
-                                    <input id="end_date" type="date" name="end_date"
-                                        value="{{ $request->query('end_date') ? $request->query('end_date') : date('Y-m-d', strtotime('next month'))}}">
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Фильтры</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
+                                <div class="modal-body">
+                                    {{-- <form action="{{ url()->full() }}" method="GET"> --}}
+                                    <h3>Классификация</h3>
 
-                                <button class="btn btn-primary">Отфильтровать</button>
-                                <a href="{{ route('incoming_letter.index') }}">Сбросить</a>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                    <div class="btn-group mb-4" role="group"
+                                        aria-label="Basic checkbox toggle button group">
+                                        @foreach ($classificators as $classificator)
+                                        <input type="checkbox" class="btn-check"
+                                            id="{{ $classificator->classificator_name }}"
+                                            {{ $request->query('classificator_id') == $classificator->id ? ' checked' : '' }}
+                                            name="classificator_id" value="{{ $classificator->id }}">
+                                        <label class="btn btn-outline-primary"
+                                            for="{{ $classificator->classificator_name }}">{{ $classificator->classificator_name }}</label>
+                                        @endforeach
+                                    </div>
+
+                                    <div class="date__filter">
+                                        <label for="start_date">Срок с:</label>
+                                        <input id="start_date" type="date" name="start_date"
+                                            value="{{ $request->query('start_date') ? $request->query('start_date') : date('Y-m-d', strtotime('last month')) }}">
+
+                                        <label for="end_date">по:</label>
+                                        <input id="end_date" type="date" name="end_date"
+                                            value="{{ $request->query('end_date') ? $request->query('end_date') : date('Y-m-d', strtotime('next month'))}}">
+                                    </div>
+
+                                    <button class="btn btn-primary">Отфильтровать</button>
+                                    <a href="{{ route('incoming_letter.index') }}">Сбросить</a>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Закрыть</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <a class="btn btn-primary" href="{{ route('incoming_letter.bin') }}" role="button">Корзина</a>
-            <a class="btn btn-primary" href="{{ route('incoming_letter.create') }}" role="button">Создать</a>
+                <a class="btn btn-primary" href="{{ route('incoming_letter.bin') }}" role="button">Корзина</a>
+                <a class="btn btn-primary" href="{{ route('incoming_letter.create') }}" role="button">Создать</a>
+        </div>
     </div>
     <div class="letters_group_pagination_div">
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
@@ -107,7 +116,7 @@
         </div>
     </div>
     </form>
-    <div class="table_container">
+    <div class="table_container container">
         <table class="table table-light table-striped table-hover table-sm">
             <tbody>
                 <tr>
@@ -128,15 +137,15 @@
                 <tr
                     {{ $incomingLetter->deadline !== null ? ($incomingLetter->deadline < now()->format('Y-m-d') ? "class=table-danger" : (strtotime($incomingLetter->deadline) - strtotime(now()->format('Y-m-d')) < 3 * 86400 ? "class=table-warning" : 'class=table-success')) : '' }}>
                     <td>{{$incomingLetter->id}}</td>
-                    <td>{{$incomingLetter->registration_date}}</td>
+                    <td>{{date('d-m-Y G:i ', strtotime($incomingLetter->registration_date))}}</td>
                     <td>{{$incomingLetter->document_from}}</td>
                     <td>{{$incomingLetter->document_name}}</td>
                     <td>{{$incomingLetter->document_number}}</td>
-                    <td>{{$incomingLetter->document_date}}</td>
+                    <td>{{date('d-m-Y', strtotime($incomingLetter->document_date))}}</td>
                     <td>{{$incomingLetter->document_subject}}</td>
                     <td>{{$incomingLetter->resolution}}</td>
                     <td>{{$incomingLetter->performer}}</td>
-                    <td>{{$incomingLetter->deadline}}</td>
+                    <td>{{date('d-m-Y', strtotime($incomingLetter->deadline))}}</td>
                     <td>{{$incomingLetter->status->status_name}}</td>
                     <td>
                         <div class="actions">

@@ -46,6 +46,9 @@
 .table_container {
     overflow-x: scroll;
 }
+.date__filter {
+    margin-bottom:10px ;
+}
 
 .delete_button {
     display: flex;

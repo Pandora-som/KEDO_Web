@@ -17,7 +17,7 @@ class ClassificatorsFactory extends Factory
     public function definition(): array
     {
         return [
-            'classificator_name' => $this->faker->title()
+            'classificator_name' => ['Сторонние', 'УрФУ', 'МИНОБРНАУКИ', 'НТИ(филиал)'],
         ];
     }
 }
