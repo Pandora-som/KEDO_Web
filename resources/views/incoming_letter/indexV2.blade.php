@@ -33,7 +33,7 @@
                     <button class="btn btn-secondary"></button> - документ без срока
                 </p>
             </div>
-            <form class="search__form" action="{{ url()->full() }}" method="GET">
+            <form name="filters_form" class="search__form" action="{{ url()->full() }}" method="GET">
                 <div>
                     <input name="find" type="search" class="form-control" id="searchInput" placeholder="Поиск..."
                         value="{{ $request->query('find') ? $request->query('find') : '' }}">
@@ -99,15 +99,15 @@
     </div>
     <div class="letters_group_pagination_div">
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-            <input type="radio" class="btn-check" id="isAll" autocomplete="off" name="lettersGroup" value='all' checked
+            <input onclick="filters_form.submit()" type="radio" class="btn-check" id="isAll" autocomplete="off" name="lettersGroup" value='all' checked
                 {{ $request->query('lettersGroup') == 'all' ? 'checked' : '' }}>
             <label class="btn btn-outline-primary" for="isAll">Все документы</label>
 
-            <input type="radio" class="btn-check" id="isExpired" autocomplete="off" name="lettersGroup" value='expired'
+            <input onclick="filters_form.submit()" type="radio" class="btn-check" id="isExpired" autocomplete="off" name="lettersGroup" value='expired'
                 {{ $request->query('lettersGroup') == 'expired' ? 'checked' : '' }}>
             <label class="btn btn-outline-danger" for="isExpired">Просроченные документы</label>
 
-            <input type="radio" class="btn-check" id="isEndless" autocomplete="off" name="lettersGroup" value='endless'
+            <input onclick="filters_form.submit()" type="radio" class="btn-check" id="isEndless" autocomplete="off" name="lettersGroup" value='endless'
                 {{ $request->query('lettersGroup') == 'endless' ? 'checked' : '' }}>
             <label class="btn btn-outline-secondary" for="isEndless">Бессрочные документы</label>
         </div>
