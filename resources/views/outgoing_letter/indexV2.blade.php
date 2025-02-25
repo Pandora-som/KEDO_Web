@@ -21,6 +21,7 @@
         <div class="func-block">
             {{-- <a href="{{ route('outgoing_letter.index') }}">Сбросить фильтры</a> --}}
             <form class="search__form" action="{{ url()->full() }}" method="GET">
+                <a class="btn btn-outline-primary btn-lg" href="{{ url()->current() }}" role="button">Обновить</a>
                 <div>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">
