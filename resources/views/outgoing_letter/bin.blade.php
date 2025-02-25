@@ -18,6 +18,7 @@
         <p>Здесь отображаются удалённые записи о документах</p>
         <div class="func-block">
             <form class="search__form" action="{{ url()->full() }}" method="GET">
+                <a class="btn btn-outline-primary btn-lg" href="{{ url()->current() }}" role="button">Обновить</a>
                 <div>
                     <input name="find" type="search" class="form-control" id="searchInput" placeholder="Поиск..."
                         value="{{ $request->query('find') ? $request->query('find') : '' }}">
