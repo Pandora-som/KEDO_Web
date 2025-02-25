@@ -35,8 +35,8 @@
                     </div>
 
                     <div class="form-floating">
-                        <input class="form-control" name="document_from" id="document_from"  value="{{ $incomingLetter->document_from }}">
-                        <label for="document_from">От кого поступил документ</label>
+                        <input class="form-control" name="document_from" id="document_from"  value="{{ $incomingLetter->document_from }}" autocomplete="off">
+                        {{-- <label for="document_from">От кого поступил документ</label> --}}
                         @error('document_from')
                         <div class="error">{{ $message }}</div>
                     @enderror
@@ -44,8 +44,8 @@
                     <input id="document_from_for_js" name="document_from_for_js" style="display: none" value="{{ $document_froms }}">
 
                     <div class="form-floating">
-                        <input class="form-control" name="performer" id="performer" value="{{ $incomingLetter->performer }}">
-                        <label for="performer">Ответственный исполнитель</label>
+                        <input class="form-control" name="performer" id="performer" value="{{ $incomingLetter->performer }}" autocomplete="off">
+                        {{-- <label for="performer">Ответственный исполнитель</label> --}}
                         @error('performer')
                         <div class="error">{{ $message }}</div>
                     @enderror
@@ -53,8 +53,8 @@
                     <input id="performer_for_js" name="performer_for_js" style="display: none" value="{{ $performers }}">
 
                     <div class="form-floating">
-                        <input class="form-control" name="document_name" id="document_name" value="{{ $incomingLetter->document_name }}">
-                        <label for="document_name">Наименование документа</label>
+                        <input class="form-control" name="document_name" id="document_name" value="{{ $incomingLetter->document_name }}" autocomplete="off">
+                        {{-- <label for="document_name">Наименование документа</label> --}}
                         @error('document_name')
                         <div class="error">{{ $message }}</div>
                     @enderror
@@ -114,14 +114,14 @@
                 </div>
 
                 <div class="btns-div">
-                    <div class="back-btn"><a href=" {{ url()->previous() }}" class="back-link">Назад</a></div>
-                    <button type="submit">Изменить</button>
+                    <a class="btn btn-outline-secondary" href=" {{ url()->previous() }}" class="back-link">Назад</a>
+                    <button class="btn btn-primary" type="submit">Изменить</button>
                 </div>
         </form>
 
     </div>
     <script src="/autocomplete/autoComplete.min.js"></script>
-    <script src="/js/outgoing_letter/search_fields.js"></script>
+    <script src="/js/incoming_letter/search_fields.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -27,26 +27,26 @@
                 </div>
 
                 <div class="form-floating">
-                    <input class="form-control" name="destination" id="destination">
-                    <label for="destination">Кому поступил документ</label>
+                    <input class="form-control" name="destination" id="destination" autocomplete="off">
+                    {{-- <label for="destination">Кому поступил документ</label> --}}
                     @error('destination')
                         <div class="error">{{ $message }}</div>
                     @enderror
                 </div>
-                <input id="destination_for_js" name="destination_for_js" style="display: none" value="{{ $destinations }}">
+                <input id="destination_for_js" name="destination_for_js" style="display: none" value="{{ $destinations }}" autocomplete="off">
 
                 <div class="form-floating">
                     <input class="form-control" name="document_name" id="document_name">
-                    <label for="document_name">Наименование документа</label>
+                    {{-- <label for="document_name">Наименование документа</label> --}}
                     @error('document_name')
                         <div class="error">{{ $message }}</div>
                     @enderror
                 </div>
-                <input id="document_name_for_js" name="document_name_for_js" style="display: none" value="{{ $document_names }}">
+                <input id="document_name_for_js" name="document_name_for_js" style="display: none" value="{{ $document_names }}" autocomplete="off">
 
                 <div class="form-floating">
                     <input class="form-control" name="performer" id="performer">
-                    <label for="performer">Ответственный исполнитель</label>
+                    {{-- <label for="performer">Ответственный исполнитель</label> --}}
                     @error('performer')
                     <div class="error">{{ $message }}</div>
                 @enderror
@@ -54,8 +54,8 @@
                 <input id="performer_for_js" name="performer_for_js" style="display: none" value="{{ $performers }}">
 
                 <div class="form-floating">
-                    <input class="form-control" name="signer" id="signer">
-                    <label for="signer">Подписан</label>
+                    <input class="form-control" name="signer" id="signer" autocomplete="off">
+                    {{-- <label for="signer">Подписан</label> --}}
                     @error('signer')
                         <div class="error">{{ $message }}</div>
                     @enderror
@@ -88,16 +88,14 @@
                 </div>
             </div>
 
-            <div class="btns-div">
-                {{-- <a href=" {{ url()->previous() }}" class="back-link"><img src="/img/back-img.svg" height="40px" width="40px">Назад</a> --}}
-                <div class="back-btn"><a href=" {{ url()->previous() }}" class="back-link">Назад</a></div>
-                <button type="submit">Создать</button>
+            <div class="btns-div mt-3">
+                <a class="btn btn-outline-secondary" href=" {{ url()->previous() }}" class="back-link">Назад</a>
+                <button class="btn btn-primary" type="submit">Создать</button>
             </div>
         </form>
     </div>
     <script src="/autocomplete/autoComplete.min.js"></script>
-    {{-- <script src="/js/outgoing_letter/search_fields.js"></script> --}}
-    <script src="/js/incoming_letter/search_fields.js"></script>
+    <script src="/js/outgoing_letter/search_fields.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

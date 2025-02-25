@@ -21,7 +21,7 @@ for (let i of performer_for_js) {
 
 const autoCompleteDocumentFrom = new autoComplete({
     selector: "#document_from",
-    placeHolder: "Отправитель...",
+    placeHolder: "От кого поступил документ",
     data: {
         src: document_from_for_search,
         cache: true,
@@ -53,7 +53,7 @@ document_from.addEventListener("selection", function (event) {
 
 const autoCompleteDocumentName = new autoComplete({
     selector: "#document_name",
-    placeHolder: "Наименование документа...",
+    placeHolder: "Наименование документа",
     data: {
         src: document_name_for_search,
         cache: true,
@@ -86,7 +86,7 @@ document_name.addEventListener("selection", function (event) {
 
 const autoCompletePerformer = new autoComplete({
     selector: "#performer",
-    placeHolder: "Ответственный исполнитель...",
+    placeHolder: "Ответственный исполнитель",
     data: {
         src: performer_for_search,
         cache: true,

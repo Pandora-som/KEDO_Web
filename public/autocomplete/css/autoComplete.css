@@ -1,11 +1,12 @@
 .autoComplete_wrapper {
+  width: 100%;
   display: inline-block;
   position: relative;
 }
 
 .autoComplete_wrapper > input {
   height: 60px;
-  width: 354px;
+  width: 100%;
   margin: 0;
   padding: 0 2rem 0 3.2rem;
   box-sizing: border-box;
@@ -48,11 +49,11 @@
 }
 
 .autoComplete_wrapper > input:focus::selection {
-  background-color: rgba(255, 122, 122, 0.15);
+  background-color: #0d6dfd42;
 }
 
 .autoComplete_wrapper > input::selection {
-  background-color: rgba(255, 122, 122, 0.15);
+  background-color: #0d6dfd42;
 }
 
 .autoComplete_wrapper > input:hover {
@@ -75,7 +76,7 @@
   right: 0;
   margin: 0.5rem 0 0 0;
   padding: 0;
-  z-index: 1;
+  z-index: 4;
   list-style: none;
   border-radius: 0.6rem;
   background-color: #fff;
@@ -110,17 +111,17 @@
 
 .autoComplete_wrapper > ul > li mark {
   background-color: transparent;
-  color: rgba(255, 122, 122, 1);
+  color: #0d6efd;
   font-weight: bold;
 }
 
 .autoComplete_wrapper > ul > li:hover {
   cursor: pointer;
-  background-color: rgba(255, 122, 122, 0.15);
+  background-color: #0d6dfd42;
 }
 
 .autoComplete_wrapper > ul > li[aria-selected="true"] {
-  background-color: rgba(255, 122, 122, 0.15);
+  background-color: #0d6dfd42;
 }
 
 @media only screen and (max-width: 600px) {
