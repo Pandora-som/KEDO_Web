@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#navbarDropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.func-block {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0 20px;
+    padding-right: 20px;
+}
+
+.incoming_func_block {
+    justify-content: space-between;
+}
+
+.search__form {
+    display: flex;
+    align-items: center;
+    gap: 0 20px;
+}
+
+.table__legend {
+    margin-left: 52px;
+}
+
+.letters_group_pagination_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pagination__div {
+    margin: 15px auto;
+    width: fit-content;
+}
+
+.table_container {
+    overflow-x: scroll;
+}
+.date__filter {
+    margin-bottom:10px ;
+}
+
+.delete_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 !important;
+    width: 40px;
+    height: 40px;
+    background-color: transparent !important;
+    border: none !important;
+}
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+@font-face {
+    font-family: interLight;
+    src: url("../Fonts/Inter-Light.otf");
+}
+@font-face {
+    font-family: interRegular;
+    src: url("../Fonts/Inter-Regular.otf");
+}
+@font-face {
+    font-family: interExtraLight;
+    src: url("../Fonts/Inter-ExtraLight.otf");
+}

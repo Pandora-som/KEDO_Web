@@ -33,7 +33,7 @@ return new class extends Migration
             $table->index('performer_id', 'incoming_letter_performer_idx');
             $table->foreign('performer_id', 'incoming_letter_performer_fk')->on('performers')->references('id');
 
-            $table->date('deadline');
+            $table->date('deadline')->nullable();
 
             $table->unsignedBigInteger('status_id');
             $table->index('status_id', 'incoming_letter_status_idx');

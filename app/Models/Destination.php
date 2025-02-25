@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Destination extends Model
 {
     use SoftDeletes;
+    protected $guarded = [];
 }
