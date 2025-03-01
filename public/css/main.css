@@ -66,6 +66,9 @@
     align-items: center;
     gap: 10px;
 }
+.help-img {
+    margin-bottom: 30px;
+}
 @font-face {
     font-family: interLight;
     src: url("../Fonts/Inter-Light.otf");

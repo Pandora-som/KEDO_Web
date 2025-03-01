@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <title>СЭД УрФУ</title>
 </head>
 <body class="main-header">
@@ -36,7 +37,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
                     <div class="container">
-                        <a class="me-5" title="Помощь" href="#"><img src="/img/help.svg" alt="help"></a>
+                        <a class="me-5" title="Помощь" href="#"><img src="/img/help.svg" alt="help" height="40px" width="40px" class="help-img"></a>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link text-light" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 <img src="/img/user-prof.svg" alt="Login:">{{ Auth::user()->name }}

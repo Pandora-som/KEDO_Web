@@ -21,7 +21,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <img src="/img/whitelogo.png">
+                <img src="/img/darklogo.png">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Вход') }}
                 </a>
