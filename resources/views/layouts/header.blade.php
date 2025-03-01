@@ -36,6 +36,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
                     <div class="container">
+                        <a class="me-5" title="Помощь" href="#"><img src="/img/help.svg" alt="help"></a>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link text-light" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 <img src="/img/user-prof.svg" alt="Login:">{{ Auth::user()->name }}
@@ -53,7 +54,6 @@
                                 </form>
                             </div>
                         </li>
-                        <a title="Помощь" href="#"><img src="/img/help.svg" alt="help"></a>
                     </div>
                 </ul>
             </div>
