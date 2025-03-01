@@ -150,12 +150,12 @@
                     <td>{{$incomingLetter->status->status_name}}</td>
                     <td>
                         <div class="actions">
-                            <a href="{{ route('incoming_letter.edit', $incomingLetter->id) }}"><img
+                            <a title="Изменить" href="{{ route('incoming_letter.edit', $incomingLetter->id) }}"><img
                                     src="/img/edit-img.svg" alt="edit"></a>
                             <form action="{{ route('incoming_letter.delete', $incomingLetter->id) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-light delete_button" type="submit"
+                                <button title="Удалить" class="btn btn-light delete_button" type="submit"
                                     onclick="return confirm('Вы уверны, что хотите удалить запись?')">
                                     <img src="/img/delete-imf.svg" alt="delete">
                                 </button>

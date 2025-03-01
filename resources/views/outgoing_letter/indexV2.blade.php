@@ -108,12 +108,12 @@
                     <td>{{$outgoingLetter->incoming_number}}</td>
                     <td>
                         <div class="actions">
-                            <a href="{{ route('outgoing_letter.edit', $outgoingLetter->id) }}"><img
+                            <a title="Изменить" href="{{ route('outgoing_letter.edit', $outgoingLetter->id) }}"><img
                                     src="/img/edit-img.svg" alt="edit"></a>
                             <form action="{{ route('outgoing_letter.delete', $outgoingLetter->id) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-light delete_button" type="submit"
+                                <button title="Удалить" class="btn btn-light delete_button" type="submit"
                                     onclick="return confirm('Вы уверны, что хотите удалить запись?')"><img
                                         src="/img/delete-imf.svg" alt="delete">
                                 </button>

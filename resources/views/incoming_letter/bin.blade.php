@@ -145,7 +145,7 @@
                         <div class="actions">
                             <form action="{{ route('incoming_letter.restore', $incomingLetter->id) }}" method="post">
                                 @csrf
-                                <button type='submit' class="btn btn-light delete_button"
+                                <button title="Восстановить" type='submit' class="btn btn-light delete_button"
                                     onclick="return confirm('Вы уверны, что хотите восстановить запись?')">
                                     <img src="/img/reset.svg" alt="restore">
                                 </button>
@@ -156,7 +156,7 @@
                             <form action="{{ route('incoming_letter.destroy', $incomingLetter->id) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <button class="btn btn-light delete_button" type="submit"
+                                <button title="Удалить" class="btn btn-light delete_button" type="submit"
                                     onclick="return confirm('Вы уверны, что хотите удалить запись?')">
                                     <img src="/img/delete-imf.svg" alt="delete">
                                 </button>
