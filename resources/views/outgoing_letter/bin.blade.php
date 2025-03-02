@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset(path: 'css/main.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/dropdown.css') }}"> --}}
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 </head>
 @extends('layouts.header')
@@ -111,7 +112,7 @@
                                 <form action="{{ route('outgoing_letter.restore', $outgoingLetter->id) }}"
                                     method="post">
                                     @csrf
-                                    <button type='submit' class="btn btn-light delete_button"
+                                    <button title="Восстановить" type='submit' class="btn btn-light delete_button"
                                         onclick="return confirm('Вы уверны, что хотите восстановить запись?')">
                                         <img src="/img/reset.svg" alt="restore">
                                     </button>
@@ -123,7 +124,7 @@
                                     method="post">
                                     @csrf
                                     @method('delete')
-                                    <button class="btn btn-light delete_button" type="submit"
+                                    <button title="Удалить" class="btn btn-light delete_button" type="submit"
                                         onclick="return confirm('Вы уверны, что хотите удалить запись?')">
                                         <img src="/img/delete-imf.svg" alt="delete">
                                     </button>
