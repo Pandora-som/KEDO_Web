@@ -88,7 +88,7 @@
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="date" class="form-control" name="deadline" id="deadline">
+                        <input type="date" class="form-control" name="deadline" id="deadline" value="{{ $incomingLetter->deadline }}">
                         <label for="deadline">Срок исполнения</label>
                         @error('deadline')
                         <div class="error">{{ $message }}</div>
