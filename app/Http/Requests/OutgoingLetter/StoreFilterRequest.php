@@ -33,20 +33,20 @@ class StoreFilterRequest extends FormRequest
         ];
     }
 
-    public function messages(): array
-    {
-        return [
-            'registration_date.required' => 'Поле обязательно к заполнению!',
-            'destination.required' => 'Поле обязательно к заполнению!',
-            'document_name.required' => 'Поле обязательно к заполнению!',
-            'document_subject.required' => 'Поле обязательно к заполнению!',
-            'performer.required' => 'Поле обязательно к заполнению!',
-            'signer.required' => 'Поле обязательно к заполнению!',
+    // public function messages(): array
+    // {
+    //     return [
+    //         'registration_date.required' => 'Поле обязательно к заполнению!',
+    //         'destination.required' => 'Поле обязательно к заполнению!',
+    //         'document_name.required' => 'Поле обязательно к заполнению!',
+    //         'document_subject.required' => 'Поле обязательно к заполнению!',
+    //         'performer.required' => 'Поле обязательно к заполнению!',
+    //         'signer.required' => 'Поле обязательно к заполнению!',
 
-            'incoming_number.required' => 'Поле обязательно к заполнению!',
-            'incoming_number.integer' => 'Номер должен содержать только целое число!',
+    //         'incoming_number.required' => 'Поле обязательно к заполнению!',
+    //         'incoming_number.integer' => 'Номер должен содержать только целое число!',
 
-            'classificator_id.required' => 'Поле обязательно к заполнению!',
-        ];
-    }
+    //         'classificator_id.required' => 'Поле обязательно к заполнению!',
+    //     ];
+    // }
 }
