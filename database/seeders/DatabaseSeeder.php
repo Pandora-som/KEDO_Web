@@ -25,20 +25,39 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        DB::table( 'classificators')->insert([
-            'classificator_name' => "Сторонние"
+        Classificators::firstOrCreate([
+            "classificator_name" => "Сторонние"
+        ],
+        [
+            "classificator_name" => "Сторонние"
         ]);
 
-        DB::table( 'classificators')->insert([
-            'classificator_name' => "УрФУ"
+        Classificators::firstOrCreate([
+            "classificator_name" => "Сторонние"
+        ],
+        [
+            "classificator_name" => "Сторонние"
         ]);
 
-        DB::table( 'classificators')->insert([
-            'classificator_name' => "МИНОБРНАУКИ"
+        Classificators::firstOrCreate([
+            "classificator_name" => "УрФУ"
+        ],
+        [
+            "classificator_name" => "УрФУ"
         ]);
 
-        DB::table( 'classificators')->insert([
-            'classificator_name' => 'НТИ(филиал)'
+        Classificators::firstOrCreate([
+            "classificator_name" => "МИНОБРНАУКИ"
+        ],
+        [
+            "classificator_name" => "МИНОБРНАУКИ"
+        ]);
+
+        Classificators::firstOrCreate([
+            "classificator_name" => "НТИ(филиал)"
+        ],
+        [
+            "classificator_name" => "НТИ(филиал)"
         ]);
         Status::factory(5)->create();
         // Classificators::factory(5)->create();
