@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dropdown.css') }}">
-    <title>СЭД УрФУ</title>
+    <title>{{ config('app.name', 'СЭД УрФУ') }}</title>
 </head>
 <body class="main-header">
     <nav class="navbar navbar-expand-md navbar-light bg-primary shadow-sm" data-bs-theme="dark">
@@ -38,7 +38,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ms-auto">
                     <div class="container">
-                        <a class="me-5" title="Помощь" href="#"><img src="/img/help.svg" alt="help" height="40px" width="40px" class="help-img"></a>
+                        <a class="me-5" title="Помощь" href="/img/Руководство пользователя.pdf"><img src="/img/help.svg" alt="help" height="40px" width="40px" class="help-img"></a>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link text-light" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 <img src="/img/user-prof.svg" alt="Login:">{{ Auth::user()->name }}
@@ -48,7 +48,7 @@
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
-                                    {{ __('Выйти') }}
+                                    {{ __('Logout') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

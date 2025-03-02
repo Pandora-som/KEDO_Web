@@ -7,8 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/create_edit.css') }}">
     <link rel="stylesheet" href="{{ asset('autocomplete/css/autoComplete.css') }}">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-
-    <title>Document</title>
+    <title>{{ config('app.name', 'СЭД УрФУ') }}</title>
 </head>
 <body class="p-3 m-0 border-0 bd-example m-0 border-0">
     <h1>Регистрация исходящего документа</h1>

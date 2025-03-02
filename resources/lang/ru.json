@@ -3,5 +3,6 @@
     "Email Address": "Логин",
     "Password": "Пароль",
     "Remember Me": "Запомнить меня",
-    "Forgot Your Password?": "Забыли пароль?"
+    "Forgot Your Password?": "Забыли пароль?",
+    "Logout": "Выход"
 }
