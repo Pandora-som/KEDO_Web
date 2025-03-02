@@ -23,6 +23,11 @@
             <form class="search__form" action="{{ url()->full() }}" method="GET">
                 <a class="btn btn-outline-primary btn-lg" href="{{ url()->current() }}" role="button">Обновить</a>
                 <div>
+                    <input name="find" type="search" class="form-control" id="searchInput" placeholder="Поиск..."
+                        value="{{ $request->query('find') ? $request->query('find') : '' }}">
+                </div>
+                <button type="submit" class="btn btn-primary">Найти</button>
+                <div>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">
                         Фильтры
@@ -39,14 +44,20 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
+                                    {{-- <form action="{{ url()->full() }}" method="GET"> --}}
                                     <h3>Классификация</h3>
-                                    @foreach ($classificators as $classificator)
-                                    <input type="checkbox" id="{{ $classificator->classificator_name }}"
-                                        {{ $request->query('classificator_id') == $classificator->id ? ' checked' : '' }}
-                                        name="classificator_id" value="{{ $classificator->id }}">
-                                    <label
-                                        for="{{ $classificator->classificator_name }}">{{ $classificator->classificator_name }}</label>
-                                    @endforeach
+
+                                    <div class="btn-group mb-4" role="group"
+                                        aria-label="Basic checkbox toggle button group">
+                                        @foreach ($classificators as $classificator)
+                                        <input type="checkbox" class="btn-check"
+                                            id="{{ $classificator->classificator_name }}"
+                                            {{ $request->query('classificator_id') ? (in_array($classificator->id, $request->query('classificator_id')) ? ' checked' : '' ) : ''}}
+                                            name="classificator_id[]" value="{{ $classificator->id }}">
+                                        <label class="btn btn-outline-primary"
+                                            for="{{ $classificator->classificator_name }}">{{ $classificator->classificator_name }}</label>
+                                        @endforeach
+                                    </div>
 
                                     <div class="date__filter">
                                         <label for="start_date">Срок с:</label>
@@ -58,7 +69,7 @@
                                             value="{{ $request->query('end_date') ? $request->query('end_date') : date('Y-m-d', strtotime('next month'))}}">
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">Отфильтровать</button>
+                                    <button class="btn btn-primary">Отфильтровать</button>
                                     <a href="{{ route('outgoing_letter.index') }}">Сбросить</a>
                                 </div>
                                 <div class="modal-footer">
@@ -69,11 +80,6 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <input name="find" type="search" class="form-control" id="searchInput" placeholder="Поиск..."
-                        value="{{ $request->query('find') ? $request->query('find') : '' }}">
-                </div>
-                <button type="submit" class="btn btn-primary">Найти</button>
             </form>
             <a class="btn btn-primary" href="{{ route('outgoing_letter.bin') }}" role="button">Корзина</a>
             <a class="btn btn-primary" href="{{ route('outgoing_letter.create') }}" role="button">Создать</a>

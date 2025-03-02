@@ -66,8 +66,8 @@
                                         @foreach ($classificators as $classificator)
                                         <input type="checkbox" class="btn-check"
                                             id="{{ $classificator->classificator_name }}"
-                                            {{ $request->query('classificator_id') == $classificator->id ? ' checked' : '' }}
-                                            name="classificator_id" value="{{ $classificator->id }}">
+                                            {{ $request->query('classificator_id') ? (in_array($classificator->id, $request->query('classificator_id')) ? ' checked' : '' ) : ''}}
+                                            name="classificator_id[]" value="{{ $classificator->id }}">
                                         <label class="btn btn-outline-primary"
                                             for="{{ $classificator->classificator_name }}">{{ $classificator->classificator_name }}</label>
                                         @endforeach

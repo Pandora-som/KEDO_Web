@@ -45,13 +45,18 @@
                                 <div class="modal-body">
                                     {{-- <form action="{{ url()->full() }}" method="GET"> --}}
                                     <h3>Классификация</h3>
-                                    @foreach ($classificators as $classificator)
-                                    <input type="checkbox" id="{{ $classificator->classificator_name }}"
-                                        {{ $request->query('classificator_id') == $classificator->id ? ' checked' : '' }}
-                                        name="classificator_id" value="{{ $classificator->id }}">
-                                    <label
-                                        for="{{ $classificator->classificator_name }}">{{ $classificator->classificator_name }}</label>
-                                    @endforeach
+
+                                    <div class="btn-group mb-4" role="group"
+                                        aria-label="Basic checkbox toggle button group">
+                                        @foreach ($classificators as $classificator)
+                                        <input type="checkbox" class="btn-check"
+                                            id="{{ $classificator->classificator_name }}"
+                                            {{ $request->query('classificator_id') ? (in_array($classificator->id, $request->query('classificator_id')) ? ' checked' : '' ) : ''}}
+                                            name="classificator_id[]" value="{{ $classificator->id }}">
+                                        <label class="btn btn-outline-primary"
+                                            for="{{ $classificator->classificator_name }}">{{ $classificator->classificator_name }}</label>
+                                        @endforeach
+                                    </div>
 
                                     <div class="date__filter">
                                         <label for="start_date">Срок с:</label>
@@ -65,7 +70,6 @@
 
                                     <button class="btn btn-primary">Отфильтровать</button>
                                     <a href="{{ route('outgoing_letter.bin') }}">Сбросить</a>
-                                    {{-- </form> --}}
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"

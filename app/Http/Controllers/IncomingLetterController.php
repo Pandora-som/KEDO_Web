@@ -41,7 +41,7 @@ class IncomingLetterController extends Controller
         };
 
         if (isset($data['classificator_id'])) {
-            $query->where('classificator_id', '=', $data['classificator_id']);
+            $query->whereIn('classificator_id', $data['classificator_id']);
         }
 
         if (isset($data['find'])) {
