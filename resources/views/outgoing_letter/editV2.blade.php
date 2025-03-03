@@ -91,7 +91,7 @@
             </div>
 
             <div class="btns-div">
-                <a class="btn btn-outline-secondary" href=" {{ url()->previous() }}" class="back-link">Назад</a>
+                <a class="btn btn-outline-secondary" href=" {{ route('outgoing_letter.index') }}" class="back-link">Назад</a>
                 <button class="btn btn-primary" type="submit">Изменить</button>
             </div>
         </form>

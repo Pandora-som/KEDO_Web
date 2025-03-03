@@ -36,22 +36,22 @@ class StoreRequestFilter extends FormRequest
         ];
     }
 
-    public function messages(): array
-    {
-        return [
-            'registration_date.required' => 'Поле обязательно к заполнению!',
-            'document_from.required' => 'Поле обязательно к заполнению!',
-            'document_name.required' => 'Поле обязательно к заполнению!',
+    // public function messages(): array
+    // {
+    //     return [
+    //         'registration_date.required' => 'Поле обязательно к заполнению!',
+    //         'document_from.required' => 'Поле обязательно к заполнению!',
+    //         'document_name.required' => 'Поле обязательно к заполнению!',
 
-            'document_number.required' => 'Поле обязательно к заполнению!',
-            'document_number.integer' => 'Номер должен содержать только числа!',
+    //         'document_number.required' => 'Поле обязательно к заполнению!',
+    //         'document_number.integer' => 'Номер должен содержать только числа!',
 
-            'document_date.required' => 'Поле обязательно к заполнению!',
-            'document_subject.required' => 'Поле обязательно к заполнению!',
-            'resolution.required' => 'Поле обязательно к заполнению!',
-            'performer.required' => 'Поле обязательно к заполнению!',
+    //         'document_date.required' => 'Поле обязательно к заполнению!',
+    //         'document_subject.required' => 'Поле обязательно к заполнению!',
+    //         'resolution.required' => 'Поле обязательно к заполнению!',
+    //         'performer.required' => 'Поле обязательно к заполнению!',
 
-            'deadline.after_or_equal' => 'Срок исполнения не может быть раньше даты документа!',
-        ];
-    }
+    //         'deadline.after_or_equal' => 'Срок исполнения не может быть раньше даты документа!',
+    //     ];
+    // }
 }
