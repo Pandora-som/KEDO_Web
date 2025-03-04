@@ -27,11 +27,11 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page"
-                            href="{{ route('incoming_letter.index') }}">Входящие письма</a>
+                            href="{{ route('incoming_letter.index') }}">Входящие документы</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page"
-                            href="{{ route('outgoing_letter.index') }}">Исходящие письма</a>
+                            href="{{ route('outgoing_letter.index') }}">Исходящие документы</a>
                     </li>
                 </ul>
 

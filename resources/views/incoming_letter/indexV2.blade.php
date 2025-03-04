@@ -155,7 +155,7 @@
                                 @csrf
                                 @method('delete')
                                 <button title="Удалить" class="btn btn-light delete_button" type="submit"
-                                    onclick="return confirm('Вы уверны, что хотите удалить запись?')">
+                                    onclick="return confirm('Вы уверены, что хотите удалить запись?')">
                                     <img src="/img/delete-imf.svg" alt="delete">
                                 </button>
                             </form>
