@@ -3,7 +3,7 @@
 return [
     'attributes' => ['registration_date' => 'Дата регистрации',
         'document_date' => 'Дата документа',
-        'document_from' => 'Отправитель',
+        'document_from' => 'От кого поступил документ',
         'performer' => 'Ответственный исполнитель',
         'document_name' => 'Наименование документа',
         'classificator_id' => 'Классификатор',
