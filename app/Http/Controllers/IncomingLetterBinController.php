@@ -35,10 +35,10 @@ class IncomingLetterBinController extends Controller
             } else if ($data['lettersGroup'] == 'endless') {
                 $query = $queryEndless;
             } else {
-                $query->whereDate('deadline', '>', now()->format('Y-m-d'));
+                $query->whereDate('deadline', '>=', now()->format('Y-m-d'));
             };
         } else {
-            $query->whereDate('deadline', '>', now()->format('Y-m-d'));
+            $query->whereDate('deadline', '>=', now()->format('Y-m-d'));
         };
 
         if (isset($data['classificator_id'])) {

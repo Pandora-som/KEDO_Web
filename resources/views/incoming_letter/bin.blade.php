@@ -144,7 +144,7 @@
                     <td>{{$incomingLetter->document_subject}}</td>
                     <td>{{$incomingLetter->resolution}}</td>
                     <td>{{$incomingLetter->performer}}</td>
-                    <td>{{date('d-m-Y', strtotime($incomingLetter->deadline))}}</td>
+                    <td>{{$incomingLetter->deadline ? date('d-m-Y', strtotime($incomingLetter->deadline)) : ''}}</td>
                     <td>{{$incomingLetter->status->status_name}}</td>
                     <td>
                         <div class="actions">
