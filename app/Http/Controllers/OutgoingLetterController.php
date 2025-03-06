@@ -28,17 +28,15 @@ class OutgoingLetterController extends Controller
             $query->whereDate('registration_date', '>=', $data['start_date'])
             ->whereDate('registration_date', '<=', $data['end_date']);
 
-        } elseif (isset($data['end_date']) and isset($data['start_date']) and ($data['start_date'] > $data['end_date'])) {
-            $data['end_date'] = $data['start_date'];
-            $query->whereDate('registration_date', '=', $data['start_date']);
         };
 
         if (isset($data['classificator_id'])) {
-            $query->where('classificator_id', '=', $data['classificator_id']);
+            $query->whereIn('classificator_id', $data['classificator_id']);
         }
 
         if (isset($data['find'])) {
-            $query->whereAny(['destination', 'document_name', 'document_subject', 'incoming_number', 'performer', 'signer'], 'LIKE', "%{$data['find']}%");
+            $query->whereAny(['destination', 'document_name', 'document_subject', 'incoming_number', 'performer', 'signer'],
+            'LIKE', "%{$data['find']}%");
         }
         $outgoingLetters = $query->paginate(10);
         return view('outgoing_letter.indexV2', compact(['request', "outgoingLetters", 'classificators']));
