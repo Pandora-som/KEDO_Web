@@ -15,9 +15,15 @@ class EnsureIsUserBanned
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user()["isbanned"] == 1) {
-            return redirect()->back();
+        // dd(auth()->user());
+        if (auth()->check()) {
+            if (auth()->user()->isbanned != 0) {
+                $message = 'Ваш учётная запись заблокирована!';
+                auth()->logout();
+                return redirect()->route('home')->withErrors(["error" => $message]);
+            }
         }
+
         return $next($request);
     }
 }

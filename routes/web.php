@@ -14,7 +14,7 @@ use App\Http\Controllers\Auth\Login;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/incoming_letters', [IncomingLetterController::class, "index"])->name('incoming_letter.index')->middleware('auth');
+Route::get('/incoming_letters', [IncomingLetterController::class, "index"])->name('incoming_letter.index')->middleware(['auth', EnsureIsUserBanned::class]);
 
 Route::get('/outgoing_letters', [OutgoingLetterController::class, "index"])->name('outgoing_letter.index')->middleware('auth');
 
