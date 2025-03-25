@@ -7,6 +7,7 @@ use App\Models\IncomingLetter;
 use App\Models\OutgoingLetter;
 use App\Models\User;
 use App\Models\Status;
+use App\Models\Role;
 use Illuminate\Support\Facades\DB;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -59,9 +60,43 @@ class DatabaseSeeder extends Seeder
         [
             "classificator_name" => "НТИ(филиал)"
         ]);
-        Status::factory(5)->create();
+        Role::firstOrCreate([
+            "role_name" => "Пользователь"
+        ],
+        [
+            "role_name" => "Пользователь"
+        ]);
+        Role::firstOrCreate([
+            "role_name" => "Админ"
+        ],
+        [
+            "role_name" => "Админ"
+        ]);
+        User::firstOrCreate([
+            "name" => "root",
+            "email" => "root@root.ru",
+        ],
+        [
+            "name" => "root",
+            "email" => "root@root.ru",
+            "password" => bcrypt("root"),
+            "role_id" => 2
+        ]);
+        Status::firstOrCreate([
+            "status_name" => "В процессе"
+        ],
+        [
+            "status_name" => "В процессе"
+        ]);
+        Status::firstOrCreate([
+            "status_name" => "Выполнено"
+        ],
+        [
+            "status_name" => "Выполнено"
+        ]);
+        // Status::factory(5)->create();
         // Classificators::factory(5)->create();
-        IncomingLetter::factory(100)->create();
-        OutgoingLetter::factory(100)->create();
+        // IncomingLetter::factory(100)->create();
+        // OutgoingLetter::factory(100)->create();
     }
 }

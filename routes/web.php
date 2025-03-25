@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\IncomingLetterController;
 use App\Http\Controllers\OutgoingLetterBinController;
 use App\Http\Controllers\OutgoingLetterController;
@@ -38,6 +39,11 @@ Route::delete('/incoming_letters/bin/{incoming_letter}', [IncomingLetterBinContr
 Route::get('/outgoing_letters/bin', [OutgoingLetterBinController::class, "index"])->name('outgoing_letter.bin')->middleware('auth');
 Route::post('/outgoing_letters/bin/{outgoing_letter}', [OutgoingLetterBinController::class, "restore"])->name('outgoing_letter.restore')->withTrashed()->middleware('auth');
 Route::delete('/outgoing_letters/bin/{outgoing_letter}', [OutgoingLetterBinController::class, "destroy"])->name('outgoing_letter.destroy')->withTrashed()->middleware('auth');
+
+Route::get('/admin', [AdminController::class,'index'])->name("admin")->middleware();
+Route::get('/admin/create', [AdminController::class,'create'])->name("admin.create")->middleware();
+
+Route::delete('/admin/{user}', [AdminController::class, "destroy"])->name('admin.destroy')->middleware('auth');
 
 Auth::routes(['register' => false,
 'reset' => false,
