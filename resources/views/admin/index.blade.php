@@ -21,10 +21,15 @@
                     <p>Имя: {{ $user->name }}</p>
                     <p>Логин: {{ $user->email }}</p>
                     <p>Роль: {{ $user->role->role_name }}</p>
+                    @if ($user->isbanned == true)
+                        <h5 class="text-danger">Забанен</h5>
+                    @endif
                 </div>
                 <div class="d-flex align-items-center gap-3">
                     <a title="Изменить" class="btn btn-secondary"><img src="" alt="edit"></a>
-                    <form action="">
+                    <form action="{{ route('admin.ban', $user->id) }}" method="post">
+                        @csrf
+                        @method('patch')
                         <button title="Забанить" class="btn btn-secondary"><img src="" alt="ban"></button>
                     </form>
                     <form action="{{ route("admin.destroy", $user->id) }}" method="post">

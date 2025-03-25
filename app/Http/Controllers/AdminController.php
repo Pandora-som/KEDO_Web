@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function index() {
-        $users = User::all();
+        $users = User::where('role_id', '=', 1)->get();
         return view("admin.index", compact("users"));
     }
 
@@ -29,7 +29,10 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function ban(Request $request){
-
+    public function ban(User $user){
+        $user->update([
+            "isbanned" => !$user->isbanned
+        ]);
+        return redirect()->back();
     }
 }

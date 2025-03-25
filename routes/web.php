@@ -44,6 +44,7 @@ Route::get('/admin', [AdminController::class,'index'])->name("admin")->middlewar
 Route::get('/admin/create', [AdminController::class,'create'])->name("admin.create")->middleware();
 
 Route::delete('/admin/{user}', [AdminController::class, "destroy"])->name('admin.destroy')->middleware('auth');
+Route::patch('/admin/{user}', [AdminController::class, "ban"])->name("admin.ban")->middleware("auth");
 
 Auth::routes(['register' => false,
 'reset' => false,
