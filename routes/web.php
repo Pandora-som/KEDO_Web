@@ -6,6 +6,8 @@ use App\Http\Controllers\OutgoingLetterBinController;
 use App\Http\Controllers\OutgoingLetterController;
 use App\Http\Controllers\AutorizationController;
 use App\Http\Controllers\IncomingLetterBinController;
+use App\Http\Middleware\EnsureIsUserAdmin;
+use App\Http\Middleware\EnsureIsUserBanned;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\Login;
@@ -40,11 +42,11 @@ Route::get('/outgoing_letters/bin', [OutgoingLetterBinController::class, "index"
 Route::post('/outgoing_letters/bin/{outgoing_letter}', [OutgoingLetterBinController::class, "restore"])->name('outgoing_letter.restore')->withTrashed()->middleware('auth');
 Route::delete('/outgoing_letters/bin/{outgoing_letter}', [OutgoingLetterBinController::class, "destroy"])->name('outgoing_letter.destroy')->withTrashed()->middleware('auth');
 
-Route::get('/admin', [AdminController::class,'index'])->name("admin")->middleware();
-Route::get('/admin/create', [AdminController::class,'create'])->name("admin.create")->middleware();
+Route::get('/admin', [AdminController::class,'index'])->name("admin")->middleware(["auth", EnsureIsUserAdmin::class]);
+Route::get('/admin/create', [AdminController::class,'create'])->name("admin.create")->middleware(["auth", EnsureIsUserAdmin::class]);
 
-Route::delete('/admin/{user}', [AdminController::class, "destroy"])->name('admin.destroy')->middleware('auth');
-Route::patch('/admin/{user}', [AdminController::class, "ban"])->name("admin.ban")->middleware("auth");
+Route::delete('/admin/{user}', [AdminController::class, "destroy"])->name('admin.destroy')->middleware(["auth", EnsureIsUserAdmin::class]);
+Route::patch('/admin/{user}', [AdminController::class, "ban"])->name("admin.ban")->middleware(["auth", EnsureIsUserAdmin::class]);
 
 Auth::routes(['register' => false,
 'reset' => false,
