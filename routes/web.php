@@ -48,6 +48,12 @@ Route::get('/admin/create', [AdminController::class,'create'])->name("admin.crea
 Route::delete('/admin/{user}', [AdminController::class, "destroy"])->name('admin.destroy')->middleware(["auth", EnsureIsUserAdmin::class]);
 Route::patch('/admin/{user}', [AdminController::class, "ban"])->name("admin.ban")->middleware(["auth", EnsureIsUserAdmin::class]);
 
+Route::get("/admin/create", [AdminController::class, "create"])->name("admin.create")->middleware(["auth", EnsureIsUserAdmin::class]);
+Route::post("/admin", [AdminController::class, "store"])->name("admin.store")->middleware(["auth", EnsureIsUserAdmin::class]);
+
+Route::get("/admin/{user}/edit", [AdminController::class, "edit"])->name("admin.edit")->middleware(["auth", EnsureIsUserAdmin::class]);
+Route::post("/admin/{user}", [AdminController::class, "update"])->name("admin.update")->middleware(["auth", EnsureIsUserAdmin::class]);
+
 Auth::routes(['register' => false,
 'reset' => false,
 'verify' => false,]);

@@ -13,20 +13,20 @@
 @section('content')
 <body>
     <div class="list-group mt-3 container d-flex flex-column align-items-end">
-        <a class="btn btn-primary" href="#">Добавить пользователя</a>
+        <a class="btn btn-primary" href="{{ route('admin.create') }}">Добавить пользователя</a>
         <div class="container">
             @foreach ($users as $user)
-            <li href="#" class="list-group-item list-group-item-action mt-3 rounded d-flex align-items-center justify-content-between" aria-current="true">
+            <li class="list-group-item list-group-item-action mt-3 rounded d-flex align-items-center justify-content-between" aria-current="true">
                 <div>
                     <p>Имя: {{ $user->name }}</p>
                     <p>Логин: {{ $user->email }}</p>
                     <p>Роль: {{ $user->role->role_name }}</p>
                     @if ($user->isbanned == true)
-                        <h5 class="text-danger">Забанен</h5>
+                        <h5 class="text-danger">Заблокирован</h5>
                     @endif
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                    <a title="Изменить" class="btn btn-secondary"><img src="" alt="edit"></a>
+                    <a href="{{ route('admin.edit', $user->id) }}" title="Изменить" class="btn btn-secondary"><img src="" alt="edit"></a>
                     <form action="{{ route('admin.ban', $user->id) }}" method="post">
                         @csrf
                         @method('patch')
