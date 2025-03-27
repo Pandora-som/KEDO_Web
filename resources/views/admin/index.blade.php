@@ -26,16 +26,16 @@
                     @endif
                 </div>
                 <div class="d-flex align-items-center gap-3">
-                    <a href="{{ route('admin.edit', $user->id) }}" title="Изменить" class="btn btn-secondary"><img src="" alt="edit"></a>
+                    <a href="{{ route('admin.edit', $user->id) }}" title="Изменить"><img src="/img/edit-img.svg" alt="edit"></a>
                     <form action="{{ route('admin.ban', $user->id) }}" method="post">
                         @csrf
                         @method('patch')
-                        <button title="Забанить" class="btn btn-secondary"><img src="" alt="ban"></button>
+                        <button title="Забанить" class="btn btn-light delete_button"><img src="/img/ban.svg" alt="ban"></button>
                     </form>
                     <form action="{{ route("admin.destroy", $user->id) }}" method="post">
                         @csrf
                         @method('delete')
-                        <button title="Удалить" type="submit" class="btn btn-secondary"><img src="" alt="delete"></button>
+                        <button title="Удалить" type="submit" class="btn btn-light delete_button"><img src="/img/delete-imf.svg" alt="delete"></button>
                     </form>
                 </div>
             </li>
