@@ -63,7 +63,6 @@ class IncomingLetterController extends Controller
 
     public function store(StoreRequestFilter $request) {
         $data = $request->validated();
-
         $document_from = request()->validate([
             'document_from' => 'string'
         ]);

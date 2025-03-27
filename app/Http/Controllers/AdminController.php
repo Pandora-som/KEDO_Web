@@ -24,7 +24,7 @@ class AdminController extends Controller
             "name" => "required|string",
             "email" => "required|email",
             "password" => "required",
-            "role_id" => "integer",
+            "role_id" => "required|integer",
         ]);
         User::firstOrCreate([
             "name" => $data["name"],
@@ -50,7 +50,12 @@ class AdminController extends Controller
             "password" => "required",
             "role_id" => "integer",
         ]);
-        User::update($data);
+        $user->update([
+            "name" => $data['name'],
+            "email" => $data["email"],
+            "password" => bcrypt($data["password"]),
+            "role_id" => $data["role_id"],
+        ]);
         return redirect()->route('admin');
     }
 

@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset(path: 'css/main.css') }}">
     {{-- <link rel="stylesheet" href="{{ asset('css/dropdown.css') }}"> --}}
+    <link rel="stylesheet" href="/autocomplete/css/autoComplete.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 </head>
 @extends('layouts.header')
@@ -177,7 +177,8 @@
         {{ $incomingLetters->withQueryString()->links() }}
     </div>
     <script src="/autocomplete/autoComplete.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    {{-- <script src="/bootstrap/js/bootstrap.min.js"></script> --}}
+    <script src="/js/search.js"></script>
 </body>
 @endsection
 

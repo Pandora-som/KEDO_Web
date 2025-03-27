@@ -50,6 +50,11 @@
                 <option value="{{ $role->id }}" {{ $role->id == $user->role_id ? 'selected' : '' }}>{{ $role->role_name }}</option>
             @endforeach
         </select>
+        @error('role_id')
+            <div class="text-danger">
+                {{ $message }}
+            </div>
+        @enderror
 
         <button type="submit" class="btn btn-primary">Изменить</button>
     </form>

@@ -43,16 +43,15 @@ Route::post('/outgoing_letters/bin/{outgoing_letter}', [OutgoingLetterBinControl
 Route::delete('/outgoing_letters/bin/{outgoing_letter}', [OutgoingLetterBinController::class, "destroy"])->name('outgoing_letter.destroy')->withTrashed()->middleware('auth');
 
 Route::get('/admin', [AdminController::class,'index'])->name("admin")->middleware(["auth", EnsureIsUserAdmin::class]);
-Route::get('/admin/create', [AdminController::class,'create'])->name("admin.create")->middleware(["auth", EnsureIsUserAdmin::class]);
 
 Route::delete('/admin/{user}', [AdminController::class, "destroy"])->name('admin.destroy')->middleware(["auth", EnsureIsUserAdmin::class]);
-Route::patch('/admin/{user}', [AdminController::class, "ban"])->name("admin.ban")->middleware(["auth", EnsureIsUserAdmin::class]);
+Route::patch('/admin/{user}/ban', [AdminController::class, "ban"])->name("admin.ban")->middleware(["auth", EnsureIsUserAdmin::class]);
 
 Route::get("/admin/create", [AdminController::class, "create"])->name("admin.create")->middleware(["auth", EnsureIsUserAdmin::class]);
 Route::post("/admin", [AdminController::class, "store"])->name("admin.store")->middleware(["auth", EnsureIsUserAdmin::class]);
 
 Route::get("/admin/{user}/edit", [AdminController::class, "edit"])->name("admin.edit")->middleware(["auth", EnsureIsUserAdmin::class]);
-Route::post("/admin/{user}", [AdminController::class, "update"])->name("admin.update")->middleware(["auth", EnsureIsUserAdmin::class]);
+Route::patch("/admin/{user}", [AdminController::class, "update"])->name("admin.update")->middleware(["auth", EnsureIsUserAdmin::class]);
 
 Auth::routes(['register' => false,
 'reset' => false,
