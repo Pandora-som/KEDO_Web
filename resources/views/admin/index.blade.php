@@ -30,12 +30,17 @@
                     <form action="{{ route('admin.ban', $user->id) }}" method="post">
                         @csrf
                         @method('patch')
-                        <button title="Забанить" class="btn btn-light delete_button"><img src="/img/ban.svg" alt="ban"></button>
+                        <button title="Заблокировать" class="btn btn-light delete_button"
+                            onclick="return confirm('Вы уверены, что хотите заблокировать пользователя?')">
+                            <img src="/img/ban.svg" alt="ban"></button>
                     </form>
                     <form action="{{ route("admin.destroy", $user->id) }}" method="post">
                         @csrf
                         @method('delete')
-                        <button title="Удалить" type="submit" class="btn btn-light delete_button"><img src="/img/delete-imf.svg" alt="delete"></button>
+                        <button title="Удалить" type="submit"
+                            class="btn btn-light delete_button"
+                            onclick="return confirm('Вы уверены, что хотите удалить пользователя?')">
+                            <img src="/img/delete-imf.svg" alt="delete"></button>
                     </form>
                 </div>
             </li>
