@@ -72,6 +72,12 @@ class DatabaseSeeder extends Seeder
         [
             "role_name" => "Админ"
         ]);
+        Role::firstOrCreate([
+            "role_name" => "Наблюдатель"
+        ],
+        [
+            "role_name" => "Наблюдатель"
+        ]);
         User::firstOrCreate([
             "name" => "root",
             "email" => "root@root.ru",

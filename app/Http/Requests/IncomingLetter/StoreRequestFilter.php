@@ -25,14 +25,15 @@ class StoreRequestFilter extends FormRequest
             'registration_date' => 'required|date',
             'document_from' => 'required|string',
             'document_name' => 'required|string',
-            'document_number' => 'required|integer',
+            'document_number' => 'required|string',
             'document_date' => 'required|date',
             'document_subject' => 'required|string',
             'resolution' => 'required|string',
             'performer' => 'required|string',
             'deadline' => 'nullable|date|after_or_equal:document_date',
             'status_id' => 'required|integer',
-            'classificator_id' => 'required|integer'
+            'classificator_id' => 'required|integer',
+            "registration_number" => 'required|string'
         ];
     }
 

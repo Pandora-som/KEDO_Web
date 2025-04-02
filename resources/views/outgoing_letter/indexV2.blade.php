@@ -103,7 +103,7 @@
                 </tr>
                 @foreach ($outgoingLetters as $outgoingLetter)
                 <tr>
-                    <td>{{$outgoingLetter->id}}</td>
+                    <td>{{$outgoingLetter->registration_number}}</td>
                     <td>{{date('d-m-Y G:i ', strtotime($outgoingLetter->registration_date))}}</td>
                     <td>{{$outgoingLetter->destination}}</td>
                     <td>{{$outgoingLetter->document_name}}</td>

@@ -30,6 +30,7 @@ class StoreFilterRequest extends FormRequest
             'signer' => 'required|string',
             'incoming_number' => 'required|integer',
             'classificator_id' => 'required|integer',
+            'registration_number'=> 'required|string',
         ];
     }
 

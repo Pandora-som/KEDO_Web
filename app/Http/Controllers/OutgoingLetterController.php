@@ -35,7 +35,7 @@ class OutgoingLetterController extends Controller
         }
 
         if (isset($data['find'])) {
-            $query->whereAny(['destination', 'document_name', 'document_subject', 'incoming_number', 'performer', 'signer'],
+            $query->whereAny(['registration_number', 'destination', 'document_name', 'document_subject', 'incoming_number', 'performer', 'signer'],
             'LIKE', "%{$data['find']}%");
         }
         $outgoingLetters = $query->paginate(10);

@@ -18,12 +18,19 @@
             @csrf
                 <div class="form-div">
                     <div class="form-floating mb-3">
+                        <input class="form-control" name="registration_number" id="registration_number">
+                        <label for="registration_number">Регистрационный номер</label>
+                        @error('registration_number')
+                        <div class="error">{{ $message }}</div>
+                    @enderror
+                    </div>
+
+                    <div class="form-floating mb-3">
                         <input type="datetime-local" class="form-control" name="registration_date" id="registration_date">
                         <label for="registration_date">Дата регистрации</label>
                         @error('registration_date')
                         <div class="error">{{ $message }}</div>
                     @enderror
-
                     </div>
 
                     <div class="form-floating mb-3">

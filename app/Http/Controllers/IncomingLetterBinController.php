@@ -46,7 +46,7 @@ class IncomingLetterBinController extends Controller
         }
 
         if (isset($data['find'])) {
-            $query->whereAny(['document_from', 'document_name', 'document_number', 'document_subject', 'performer', 'resolution'],
+            $query->whereAny(['registration_number', 'document_from', 'document_name', 'document_number', 'document_subject', 'performer', 'resolution'],
             'like', "%{$data['find']}%");
         }
         $incomingLetters = $query->onlyTrashed()->orderBy('deadline', 'ASC')->paginate(10);
