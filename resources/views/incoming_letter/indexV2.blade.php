@@ -93,8 +93,10 @@
                         </div>
                     </div>
                 </div>
+                @if (auth()->user()->role_id !== 3)
                 <a class="btn btn-primary" href="{{ route('incoming_letter.bin') }}" role="button">Корзина</a>
                 <a class="btn btn-primary" href="{{ route('incoming_letter.create') }}" role="button">Создать</a>
+                @endif
         </div>
     </div>
     <div class="letters_group_pagination_div">
@@ -131,7 +133,9 @@
                     <th>Ответственный исполнитель </th>
                     <th>Срок исполнения</th>
                     <th>Отметка об исполнении</th>
+                    @if (auth()->user()->role_id !== 3)
                     <th>Действия</th>
+                    @endif
                 </tr>
                 @foreach ($incomingLetters as $incomingLetter)
                 <tr
@@ -147,6 +151,7 @@
                     <td>{{$incomingLetter->performer}}</td>
                     <td>{{$incomingLetter->deadline ? date('d-m-Y', strtotime($incomingLetter->deadline)) : ''}}</td>
                     <td>{{$incomingLetter->status->status_name}}</td>
+                    @if (auth()->user()->role_id !== 3)
                     <td>
                         <div class="actions">
                             <a title="Изменить" href="{{ route('incoming_letter.edit', $incomingLetter->id) }}"><img
@@ -161,6 +166,7 @@
                             </form>
                         </div>
                     </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>

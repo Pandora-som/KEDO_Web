@@ -73,10 +73,10 @@ class DatabaseSeeder extends Seeder
             "role_name" => "Админ"
         ]);
         Role::firstOrCreate([
-            "role_name" => "Наблюдатель"
+            "role_name" => "Гость"
         ],
         [
-            "role_name" => "Наблюдатель"
+            "role_name" => "Гость"
         ]);
         User::firstOrCreate([
             "name" => "root",

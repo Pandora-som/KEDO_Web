@@ -80,8 +80,10 @@
                     </div>
                 </div>
             </form>
+            @if (auth()->user()->role_id !== 3)
             <a class="btn btn-primary" href="{{ route('outgoing_letter.bin') }}" role="button">Корзина</a>
             <a class="btn btn-primary" href="{{ route('outgoing_letter.create') }}" role="button">Создать</a>
+            @endif
         </div>
     </div>
     <div class="pagination__div">
@@ -99,7 +101,9 @@
                     <th>Подписант</th>
                     <th>Исполнитель</h>
                     <th>Отметка об исполнении (на вх. №)</th>
+                    @if (auth()->user()->role_id !== 3)
                     <th>Действия</th>
+                    @endif
                 </tr>
                 @foreach ($outgoingLetters as $outgoingLetter)
                 <tr>
@@ -111,6 +115,7 @@
                     <td>{{$outgoingLetter->signer}}</td>
                     <td>{{$outgoingLetter->performer}}</td>
                     <td>{{$outgoingLetter->incoming_number}}</td>
+                    @if (auth()->user()->role_id !== 3)
                     <td>
                         <div class="actions">
                             <a title="Изменить" href="{{ route('outgoing_letter.edit', $outgoingLetter->id) }}"><img
@@ -125,6 +130,7 @@
                             </form>
                         </div>
                     </td>
+                    @endif
                 </tr>
                 @endforeach
             </tbody>

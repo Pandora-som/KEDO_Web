@@ -19,7 +19,7 @@
             @method('patch')
                 <div class="form-div">
                     <div class="form-floating mb-3">
-                        <input class="form-control" name="registration_number" id="registration_number">
+                        <input class="form-control" name="registration_number" id="registration_number" value="{{ $incomingLetter->registration_number }}">
                         <label for="registration_number">Регистрационный номер</label>
                         @error('registration_number')
                         <div class="error">{{ $message }}</div>
