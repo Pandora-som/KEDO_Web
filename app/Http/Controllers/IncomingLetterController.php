@@ -33,6 +33,10 @@ class IncomingLetterController extends Controller
                 $query->whereDate('deadline', '<', now()->format('Y-m-d'));
             } else if ($data['lettersGroup'] == 'endless') {
                 $query = $queryEndless;
+                if (isset($data['start_date']) and isset($data['end_date'])) {
+                    $query->whereDate('registration_date', '>=', $data['start_date'])
+                    ->whereDate('registration_date', '<=', $data['end_date']);
+                };
             } else {
                 $query->whereDate('deadline', '>=', now()->format('Y-m-d'));
             };

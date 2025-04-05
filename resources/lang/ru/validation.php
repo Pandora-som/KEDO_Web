@@ -17,6 +17,7 @@ return [
         'incoming_number' => 'Отметка об исполнении',
         'email' => 'Почта',
         'password' => 'Пароль',
-        'name' => 'Имя'
+        'name' => 'Имя',
+        'registration_number' => 'Регистрационный номер'
     ]
 ];
