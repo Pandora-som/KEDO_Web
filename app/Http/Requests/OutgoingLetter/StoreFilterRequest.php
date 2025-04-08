@@ -28,7 +28,7 @@ class StoreFilterRequest extends FormRequest
             'document_subject' => 'required|string',
             'performer' => 'required|string',
             'signer' => 'required|string',
-            'incoming_number' => 'required|integer',
+            'incoming_number' => 'string',
             'classificator_id' => 'required|integer',
             'registration_number'=> 'required|string',
         ];
